@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T06:20:48.862Z">
+<meta property="og:updated_time" content="2018-04-01T11:17:42.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocoapods私有库处理">
 <meta name="twitter:description" content="最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到">
@@ -416,8 +416,8 @@ $ pod repo lint .
 </code></pre><h2 id="podSpec文件引用其他私有库情况"><a href="#podSpec文件引用其他私有库情况" class="headerlink" title=".podSpec文件引用其他私有库情况"></a>.podSpec文件引用其他私有库情况</h2><p>项目中需要引用到私有库的library,这个时候需要用到 sources</p>
 <pre><code>s.dependency &apos;THLTencentOpenAPI&apos;
 
-$ pod lib lint --sources=https://gitlab.taihaoli.com/ios-module-pod/ThirdSDK.git
-$ pod repo push ThirdSDK --sources=https://gitlab.taihaoli.com/ios-module-pod/ThirdSDK.git
+$ pod lib lint --sources=https://xx/ThirdSDK.git
+$ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git
 </code></pre><h2 id="包含静态库情况"><a href="#包含静态库情况" class="headerlink" title="包含静态库情况"></a>包含静态库情况</h2><pre><code>添加 --use-libraries 忽略掉相关检查
 </code></pre>
       

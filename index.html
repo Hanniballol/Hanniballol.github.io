@@ -416,8 +416,8 @@ $ pod repo lint .
 </code></pre><h2 id="podSpec文件引用其他私有库情况"><a href="#podSpec文件引用其他私有库情况" class="headerlink" title=".podSpec文件引用其他私有库情况"></a>.podSpec文件引用其他私有库情况</h2><p>项目中需要引用到私有库的library,这个时候需要用到 sources</p>
 <pre><code>s.dependency &apos;THLTencentOpenAPI&apos;
 
-$ pod lib lint --sources=https://gitlab.taihaoli.com/ios-module-pod/ThirdSDK.git
-$ pod repo push ThirdSDK --sources=https://gitlab.taihaoli.com/ios-module-pod/ThirdSDK.git
+$ pod lib lint --sources=https://xx/ThirdSDK.git
+$ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git
 </code></pre><h2 id="包含静态库情况"><a href="#包含静态库情况" class="headerlink" title="包含静态库情况"></a>包含静态库情况</h2><pre><code>添加 --use-libraries 忽略掉相关检查
 </code></pre>
           
