@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-01T11:17:42.105Z">
+<meta property="og:updated_time" content="2018-04-03T02:47:00.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cocoapods私有库处理">
 <meta name="twitter:description" content="最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到">
@@ -419,6 +419,8 @@ $ pod repo lint .
 $ pod lib lint --sources=https://xx/ThirdSDK.git
 $ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git
 </code></pre><h2 id="包含静态库情况"><a href="#包含静态库情况" class="headerlink" title="包含静态库情况"></a>包含静态库情况</h2><pre><code>添加 --use-libraries 忽略掉相关检查
+</code></pre><h2 id="部分问题处理"><a href="#部分问题处理" class="headerlink" title="部分问题处理"></a>部分问题处理</h2><pre><code> The repo `MyRepo` at `../.cocoapods/repos/ThirdSDK` is not clean
+$ pod repo update ThirdSDK
 </code></pre>
       
     </div>
@@ -646,7 +648,7 @@ $ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库使用流程"><span class="nav-number">1.</span> <span class="nav-text">私有库使用流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建私有库"><span class="nav-number">1.1.</span> <span class="nav-text">创建私有库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查repo安装成功"><span class="nav-number">1.2.</span> <span class="nav-text">检查repo安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把准备好的代码库spec加入到私有库中"><span class="nav-number">1.3.</span> <span class="nav-text">把准备好的代码库spec加入到私有库中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#podSpec文件引用其他私有库情况"><span class="nav-number">2.</span> <span class="nav-text">.podSpec文件引用其他私有库情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包含静态库情况"><span class="nav-number">3.</span> <span class="nav-text">包含静态库情况</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库使用流程"><span class="nav-number">1.</span> <span class="nav-text">私有库使用流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建私有库"><span class="nav-number">1.1.</span> <span class="nav-text">创建私有库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查repo安装成功"><span class="nav-number">1.2.</span> <span class="nav-text">检查repo安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#把准备好的代码库spec加入到私有库中"><span class="nav-number">1.3.</span> <span class="nav-text">把准备好的代码库spec加入到私有库中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#podSpec文件引用其他私有库情况"><span class="nav-number">2.</span> <span class="nav-text">.podSpec文件引用其他私有库情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包含静态库情况"><span class="nav-number">3.</span> <span class="nav-text">包含静态库情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分问题处理"><span class="nav-number">4.</span> <span class="nav-text">部分问题处理</span></a></li></ol></div>
             
 
           </div>
