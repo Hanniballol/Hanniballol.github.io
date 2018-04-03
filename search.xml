@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[cocoapods私有库处理]]></title>
     <url>%2F2018%2F03%2F29%2Fcocoapods%E7%A7%81%E6%9C%89%E5%BA%93%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到远程git代码库 $ pod repo push REPO_NAME SPEC_NAME.podspec .podSpec文件引用其他私有库情况项目中需要引用到私有库的library,这个时候需要用到 sources s.dependency &apos;THLTencentOpenAPI&apos; $ pod lib lint --sources=https://xx/ThirdSDK.git $ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git 包含静态库情况添加 --use-libraries 忽略掉相关检查 部分问题处理 The repo `MyRepo` at `../.cocoapods/repos/ThirdSDK` is not clean $ pod repo update ThirdSDK]]></content>
+    <content type="text"><![CDATA[最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。 私有库使用流程为私有库添加repo$ pod repo add REPO_NAME git@github:artsy/Specs.git 创建私有库$ pod repo add REPO_NAME SOURCE_URL 检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME $ pod repo lint . 把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到远程git代码库 $ pod repo push REPO_NAME SPEC_NAME.podspec .podSpec文件引用其他私有库情况项目中需要引用到私有库的library,这个时候需要用到 sources s.dependency &apos;THLTencentOpenAPI&apos; $ pod lib lint --sources=https://xx/ThirdSDK.git $ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git 包含静态库情况添加 --use-libraries 忽略掉相关检查 部分问题处理The repo `MyRepo` at `../.cocoapods/repos/ThirdSDK` is not clean $ pod repo update ThirdSDK]]></content>
       <categories>
         <category>iOS</category>
       </categories>

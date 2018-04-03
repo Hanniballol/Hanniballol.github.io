@@ -408,7 +408,8 @@
         
           
             <p>最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。</p>
-<h2 id="私有库使用流程"><a href="#私有库使用流程" class="headerlink" title="私有库使用流程"></a>私有库使用流程</h2><h3 id="创建私有库"><a href="#创建私有库" class="headerlink" title="创建私有库"></a>创建私有库</h3><pre><code>$ pod repo add REPO_NAME SOURCE_URL
+<h2 id="私有库使用流程"><a href="#私有库使用流程" class="headerlink" title="私有库使用流程"></a>私有库使用流程</h2><h3 id="为私有库添加repo"><a href="#为私有库添加repo" class="headerlink" title="为私有库添加repo"></a>为私有库添加repo</h3><pre><code>$ pod repo add REPO_NAME git@github:artsy/Specs.git
+</code></pre><h3 id="创建私有库"><a href="#创建私有库" class="headerlink" title="创建私有库"></a>创建私有库</h3><pre><code>$ pod repo add REPO_NAME SOURCE_URL
 </code></pre><h3 id="检查repo安装成功"><a href="#检查repo安装成功" class="headerlink" title="检查repo安装成功"></a>检查repo安装成功</h3><pre><code>$ cd ~/.cocoapods/repos/REPO_NAME
 $ pod repo lint .
 </code></pre><h3 id="把准备好的代码库spec加入到私有库中"><a href="#把准备好的代码库spec加入到私有库中" class="headerlink" title="把准备好的代码库spec加入到私有库中"></a>把准备好的代码库spec加入到私有库中</h3><p>该命令会把此版本的.podSpec拷贝到私有库中并push到远程git代码库</p>
@@ -419,7 +420,8 @@ $ pod repo lint .
 $ pod lib lint --sources=https://xx/ThirdSDK.git
 $ pod repo push ThirdSDK --sources=https://xx/ThirdSDK.git
 </code></pre><h2 id="包含静态库情况"><a href="#包含静态库情况" class="headerlink" title="包含静态库情况"></a>包含静态库情况</h2><pre><code>添加 --use-libraries 忽略掉相关检查
-</code></pre><h2 id="部分问题处理"><a href="#部分问题处理" class="headerlink" title="部分问题处理"></a>部分问题处理</h2><pre><code> The repo `MyRepo` at `../.cocoapods/repos/ThirdSDK` is not clean
+</code></pre><h2 id="部分问题处理"><a href="#部分问题处理" class="headerlink" title="部分问题处理"></a>部分问题处理</h2><pre><code>The repo `MyRepo` at `../.cocoapods/repos/ThirdSDK` is not clean
+
 $ pod repo update ThirdSDK
 </code></pre>
           
