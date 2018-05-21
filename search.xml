@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[android studio支持系统签名]]></title>
+    <url>%2F2018%2F05%2F21%2Fandroid-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D%2F</url>
+    <content type="text"><![CDATA[如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性： android:sharedUserId=&quot;android.uid.system&quot; android:sharedUserId=&quot;android.uid.shared&quot; android:sharedUserId=&quot;android.media&quot; 这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。 常用系统签名方式Android源码环境下签名这种方式比较麻烦，你需要有编译过的源码环境，并按如下步骤： 1、拷贝App源码到Android源码的packages/apps/目录下，且App源码是普通(Eclipse)格式的2、配置Android.mk，在其中添加 LOCAL_CERTIFICATE := platform 或 shared 或 media 3、使用mm编译App，生成的apk即系统签名 手动重新签名这种方式比在源码环境下签名简单，App可以在Eclipse或Android Studio下编译，然后给apk重新签名即可。但这种方式在频繁调试的时候比较痛苦，即使写成脚本，也需要重复一样的操作。 相关文件platform.x509.pem、platform.pk8、signapk.jar 文件位置platform.x509.pem、platform.pk8: ../build/target/product/security signapk.jar: ../out/host/linux-x86/framework signapk源码路径: ../build/tools/signapk 签名命令java -jar signapk.jar platform.x509.pem platform.pk8 old.apk new.apk 步骤1、将相关文件及源apk文件置于同一路径下2、检查源apk包，去掉META-INF/CERT.SF 和 META-INF/CERT.RSA 文件3、执行签名命令即可 Android Studio系统签名让Android Studio集成系统签名，需要用到一个工具keytool-importkeypair，详见下文。 keytool-importkeypairkeytool-importkeypair – A shell script to import key/certificate pairs into an existing Java keystore 相关文件platform.x509.pem、platform.pk8、keytool-importkeypair、demo.jks、signature.sh我的做法是在App根目录新建Signature文件夹专门存放签名相关文件。1.生成签名文件xx.jks2.编写签名脚本signature.sh，内容如下: #!/bin/sh 转换系统签名命令./keytool-importkeypair -k demo.jks -p 123456 -pk8 platform.pk8 -cert platform.x509.pem -alias demo # demo.jks : 签名文件 # 123456 : 签名文件密码 # platform.pk8、platform.x509.pem : 系统签名文件 # demo : 签名文件别名 为脚本文件添加可执行权限： $ sudo chmod a+x signature.sh 执行脚本： $ ./signature.sh 3.配置builde.gradle signingConfigs { release { storeFile file(&quot;../signature/demo.jks&quot;) storePassword &apos;123456&apos; keyAlias &apos;demo&apos; keyPassword &apos;123456&apos; } debug { storeFile file(&quot;../signature/demo.jks&quot;) storePassword &apos;123456&apos; keyAlias &apos;demo&apos; keyPassword &apos;123456&apos; } } 这样debug或release apk就带有系统签名了。]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>System权限</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Task :app:compileDebugJavaWithJavac Failed处理]]></title>
     <url>%2F2018%2F05%2F09%2FTask-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用 $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入 $ chmod +x gradlew 来解决权限问题，不过gradlew comileDebug 并不能看到有价值的信息，根据提示，输入 $ gradlew compileDebugSources --stacktrace -info 解决问题，原来是某个.java文件没push导致。]]></content>
