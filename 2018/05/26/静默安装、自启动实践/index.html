@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Pla">
+<meta name="description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为 ，因此静默安装不会开发给开发者，不过在Google Pl">
 <meta name="keywords" content="system">
 <meta property="og:type" content="article">
 <meta property="og:title" content="静默安装、自启动实践">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/静默安装、自启动实践/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要性，自家的系统想咋">
+<meta property="og:description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为 ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要 性，自家的系统">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-26T02:21:32.776Z">
+<meta property="og:updated_time" content="2018-05-26T02:23:38.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静默安装、自启动实践">
-<meta name="twitter:description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要性，自家的系统想咋">
+<meta name="twitter:description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为 ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要 性，自家的系统">
 
 
 
@@ -408,7 +408,9 @@
 
       
         <p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
-<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要性，自家的系统想咋样就咋样。
+<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
+，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
+性，自家的系统想咋样就咋样。
 </code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
 </code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
 <pre><code>        pm install -r
