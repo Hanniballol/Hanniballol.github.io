@@ -413,9 +413,9 @@
 性，自家的系统想咋样就咋样。
 </code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
 </code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
-<pre><code>        pm install -r
-
-/**
+<pre><code>pm install -r
+</code></pre><p>实现代码</p>
+<pre><code>/**
 * install slient
 * 
 * @param context
