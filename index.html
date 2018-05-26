@@ -482,7 +482,7 @@ public static int installSlient(Context context, String filePath) {
     Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
     return result;
 }
-</code></pre><h3 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h3><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
+</code></pre><h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
 <p>参考:<br><a href="http://www.trinea.cn/android/android-install-silent/" target="_blank" rel="noopener">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java" target="_blank" rel="noopener">pm.java</a></p>
 
           
