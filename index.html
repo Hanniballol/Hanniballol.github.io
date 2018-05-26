@@ -303,6 +303,233 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/静默安装、自启动实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="8MilesRD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head_icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanniballol's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/26/静默安装、自启动实践/" itemprop="url">静默安装、自启动实践</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T09:41:39+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/26/静默安装、自启动实践/" class="leancloud_visitors" data-flag-title="静默安装、自启动实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
+<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要性，自家的系统想咋样就咋样。
+</code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
+</code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
+<pre><code>        pm install -r
+
+/**
+* install slient
+* 
+* @param context
+* @param filePath
+* @return 0 means normal, 1 means file not exist, 2 means other exception error
+*/
+public static int installSlient(Context context, String filePath) {
+    File file = new File(filePath);
+    if (filePath == null || filePath.length() == 0 || (file = new File(filePath)) == null || file.length() &lt;= 0
+    || !file.exists() || !file.isFile()) {
+        return 1;
+    }
+
+    String[] args = { &quot;pm&quot;, &quot;install&quot;, &quot;-r&quot;, filePath };
+    ProcessBuilder processBuilder = new ProcessBuilder(args);
+
+    Process process = null;
+    BufferedReader successResult = null;
+    BufferedReader errorResult = null;
+    StringBuilder successMsg = new StringBuilder();
+    StringBuilder errorMsg = new StringBuilder();
+    int result;
+    try {
+        process = processBuilder.start();
+        successResult = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        errorResult = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        String s;
+
+        while ((s = successResult.readLine()) != null) {
+        successMsg.append(s);
+        }
+
+        while ((s = errorResult.readLine()) != null) {
+        errorMsg.append(s);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        result = 2;
+    } catch (Exception e) {
+        e.printStackTrace();
+        result = 2;
+    } finally {
+        try {
+        if (successResult != null) {
+            successResult.close();
+            }
+            if (errorResult != null) {
+            errorResult.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (process != null) {
+        process.destroy();
+        }
+    }
+
+    // TODO should add memory is not enough here
+    if (successMsg.toString().contains(&quot;Success&quot;) || successMsg.toString().contains(&quot;success&quot;)) {
+        result = 0;
+    } else {
+        result = 2;
+    }
+    Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
+    return result;
+}
+</code></pre><h3 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h3><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
+<p>参考:<br><a href="http://www.trinea.cn/android/android-install-silent/" target="_blank" rel="noopener">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java" target="_blank" rel="noopener">pm.java</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/android-studio支持系统签名/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1627,7 +1854,7 @@ $ pod repo update ThirdSDK
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

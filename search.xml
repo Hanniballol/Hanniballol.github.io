@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[静默安装、自启动实践]]></title>
+    <url>%2F2018%2F05%2F26%2F%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5%2F</url>
+    <content type="text"><![CDATA[最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要性，自家的系统想咋样就咋样。 权限&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt; 安装代码有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）： pm install -r /** * install slient * * @param context * @param filePath * @return 0 means normal, 1 means file not exist, 2 means other exception error */ public static int installSlient(Context context, String filePath) { File file = new File(filePath); if (filePath == null || filePath.length() == 0 || (file = new File(filePath)) == null || file.length() &lt;= 0 || !file.exists() || !file.isFile()) { return 1; } String[] args = { &quot;pm&quot;, &quot;install&quot;, &quot;-r&quot;, filePath }; ProcessBuilder processBuilder = new ProcessBuilder(args); Process process = null; BufferedReader successResult = null; BufferedReader errorResult = null; StringBuilder successMsg = new StringBuilder(); StringBuilder errorMsg = new StringBuilder(); int result; try { process = processBuilder.start(); successResult = new BufferedReader(new InputStreamReader(process.getInputStream())); errorResult = new BufferedReader(new InputStreamReader(process.getErrorStream())); String s; while ((s = successResult.readLine()) != null) { successMsg.append(s); } while ((s = errorResult.readLine()) != null) { errorMsg.append(s); } } catch (IOException e) { e.printStackTrace(); result = 2; } catch (Exception e) { e.printStackTrace(); result = 2; } finally { try { if (successResult != null) { successResult.close(); } if (errorResult != null) { errorResult.close(); } } catch (IOException e) { e.printStackTrace(); } if (process != null) { process.destroy(); } } // TODO should add memory is not enough here if (successMsg.toString().contains(&quot;Success&quot;) || successMsg.toString().contains(&quot;success&quot;)) { result = 0; } else { result = 2; } Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg); return result; } 自启动无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写… 参考:Trinea-Android常用代码之普通及系统权限静默安装APKpm.java]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>system</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[android studio支持系统签名]]></title>
     <url>%2F2018%2F05%2F21%2Fandroid-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D%2F</url>
     <content type="text"><![CDATA[如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性： android:sharedUserId=&quot;android.uid.system&quot; android:sharedUserId=&quot;android.uid.shared&quot; android:sharedUserId=&quot;android.media&quot; 这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。 常用系统签名方式Android源码环境下签名这种方式比较麻烦，你需要有编译过的源码环境，并按如下步骤： 1、拷贝App源码到Android源码的packages/apps/目录下，且App源码是普通(Eclipse)格式的2、配置Android.mk，在其中添加 LOCAL_CERTIFICATE := platform 或 shared 或 media 3、使用mm编译App，生成的apk即系统签名 手动重新签名这种方式比在源码环境下签名简单，App可以在Eclipse或Android Studio下编译，然后给apk重新签名即可。但这种方式在频繁调试的时候比较痛苦，即使写成脚本，也需要重复一样的操作。 相关文件platform.x509.pem、platform.pk8、signapk.jar 文件位置platform.x509.pem、platform.pk8: ../build/target/product/security signapk.jar: ../out/host/linux-x86/framework signapk源码路径: ../build/tools/signapk 签名命令java -jar signapk.jar platform.x509.pem platform.pk8 old.apk new.apk 步骤1、将相关文件及源apk文件置于同一路径下2、检查源apk包，去掉META-INF/CERT.SF 和 META-INF/CERT.RSA 文件3、执行签名命令即可 Android Studio系统签名让Android Studio集成系统签名，需要用到一个工具keytool-importkeypair，详见下文。 keytool-importkeypairkeytool-importkeypair – A shell script to import key/certificate pairs into an existing Java keystore 相关文件platform.x509.pem、platform.pk8、keytool-importkeypair、demo.jks、signature.sh我的做法是在App根目录新建Signature文件夹专门存放签名相关文件。1.生成签名文件xx.jks2.编写签名脚本signature.sh，内容如下: #!/bin/sh 转换系统签名命令./keytool-importkeypair -k demo.jks -p 123456 -pk8 platform.pk8 -cert platform.x509.pem -alias demo # demo.jks : 签名文件 # 123456 : 签名文件密码 # platform.pk8、platform.x509.pem : 系统签名文件 # demo : 签名文件别名 为脚本文件添加可执行权限： $ sudo chmod a+x signature.sh 执行脚本： $ ./signature.sh 3.配置builde.gradle signingConfigs { release { storeFile file(&quot;../signature/demo.jks&quot;) storePassword &apos;123456&apos; keyAlias &apos;demo&apos; keyPassword &apos;123456&apos; } debug { storeFile file(&quot;../signature/demo.jks&quot;) storePassword &apos;123456&apos; keyAlias &apos;demo&apos; keyPassword &apos;123456&apos; } } 这样debug或release apk就带有系统签名了。]]></content>
@@ -8,7 +19,7 @@
         <category>Android</category>
       </categories>
       <tags>
-        <tag>System权限</tag>
+        <tag>system</tag>
       </tags>
   </entry>
   <entry>
