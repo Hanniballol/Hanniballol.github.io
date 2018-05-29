@@ -303,6 +303,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/MAC-adb无线连接Android真机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="8MilesRD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head_icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanniballol's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/MAC-adb无线连接Android真机/" itemprop="url">MAC adb无线连接Android真机</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T09:49:13+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/29/MAC-adb无线连接Android真机/" class="leancloud_visitors" data-flag-title="MAC adb无线连接Android真机">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直懒得搞，因为用不上，最近配置了双屏，瞬间usb插口不够用了，于是就有了下文。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>手机和电脑需要再同一个局域网</li>
+<li>电脑上已经安装adb工具。</li>
+</ul>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="打开手机端口"><a href="#打开手机端口" class="headerlink" title="打开手机端口"></a>打开手机端口</h2><p>让手机在指定的端口可以接收到TCP/IP连接</p>
+<ul>
+<li>确保手机开启usb调试</li>
+<li>用usb线把手机和电脑连接起来</li>
+<li>执行命令：’adb tcpip 5555’</li>
+</ul>
+<p>执行成功后拔掉usb线，端口可以不用5555，这个官方默认使用的。</p>
+<h2 id="找到手机的IP地址"><a href="#找到手机的IP地址" class="headerlink" title="找到手机的IP地址"></a>找到手机的IP地址</h2><p>一般在 设置-我得设备-全部参数-状态信息-IP地址</p>
+<h2 id="通过IP地址连接手机"><a href="#通过IP地址连接手机" class="headerlink" title="通过IP地址连接手机"></a>通过IP地址连接手机</h2><p>执行命令：</p>
+<pre><code>&gt; adb connect 192.168.26.58:5555
+</code></pre><p>若端口号是5555，则可以省略，直接：</p>
+<pre><code>&gt; adb connect 192.168.26.58
+</code></pre><h2 id="如果没有连接成功"><a href="#如果没有连接成功" class="headerlink" title="如果没有连接成功"></a>如果没有连接成功</h2><p>如果确定网络与端口没有问题，可以尝试重启adb服务：</p>
+<pre><code>&gt; adb kill-server
+</code></pre><h2 id="连接成功"><a href="#连接成功" class="headerlink" title="连接成功"></a>连接成功</h2><p>如果连接成功，可以执行以下命令查看当前连接的设备列表：</p>
+<pre><code>&gt; adb devices
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/静默安装、自启动实践/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1856,7 +2029,7 @@ $ pod repo update ThirdSDK
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1878,7 +2051,7 @@ $ pod repo update ThirdSDK
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
