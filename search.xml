@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MAC android studio3.1.2无比卡，解决方案]]></title>
+    <url>%2F2018%2F06%2F01%2FMAC-android-studio3-1-2%E6%97%A0%E6%AF%94%E5%8D%A1%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[升级Android Studio3.1.2以后，真是java文件写一个字卡三个字，xml文件根本不敢打开。在V2ex找到的解决办法是强制使用独显。会有一定的效果，不过治标不治标，长久的跑还是会卡，并且电量消耗奇快。分享一个下command line sudo pmset -a GPUSwitch 1 0 - 强制使用核显 1 - 强制使用独显（相当于在偏好设置-节能 里去掉自动切换显卡这个选项） 2 - 自动切换显卡 其实时间是最好的老师，公司赶项目，只能忍，今天忙完找了一下，如下解决方案正合适 Help -&gt; Edit Custom VM Options… 修改如下部分 -Xms956m -Xmx3280m -XX:ReservedCodeCacheSize=240m -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=50 -Dsun.io.useCanonCaches=false -Djava.net.preferIPv4Stack=true -Djna.nosys=true -Djna.boot.library.path= -da Settings -&gt; Appearance -&gt; Show memory indicator然后你就可以在idea右下角看到内存使用情况了 参考:官方提供的开发工具调优策略]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Android Studio</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MAC adb无线连接Android真机]]></title>
     <url>%2F2018%2F05%2F29%2FMAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA%2F</url>
     <content type="text"><![CDATA[一直懒得搞，因为用不上，最近配置了双屏，瞬间usb插口不够用了，于是就有了下文。 准备工作 手机和电脑需要再同一个局域网 电脑上已经安装adb工具。 开始打开手机端口让手机在指定的端口可以接收到TCP/IP连接 确保手机开启usb调试 用usb线把手机和电脑连接起来 执行命令：’adb tcpip 5555’ 执行成功后拔掉usb线，端口可以不用5555，这个官方默认使用的。 找到手机的IP地址一般在 设置-我得设备-全部参数-状态信息-IP地址 通过IP地址连接手机执行命令： &gt; adb connect 192.168.26.58:5555 若端口号是5555，则可以省略，直接： &gt; adb connect 192.168.26.58 如果没有连接成功如果确定网络与端口没有问题，可以尝试重启adb服务： &gt; adb kill-server 连接成功如果连接成功，可以执行以下命令查看当前连接的设备列表： &gt; adb devices]]></content>
