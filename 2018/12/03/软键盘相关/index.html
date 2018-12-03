@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="项目中有类似陌陌输入框的UI，因为Edittext不在输入框底部，导致软键盘弹出时显示在Edittext底部而遮挡掉输入框部分UI，目前采用的方法是对Viewtree进行监听，软键盘弹起来时，进行scrollTo移动输入框 12345678910final Rect r = new Rect();//获取到界面可见区域的矩形activityRootView.getWindowVisibleDisp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-03T08:14:20.328Z">
+<meta property="og:updated_time" content="2018-12-03T08:18:24.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软键盘相关">
 <meta name="twitter:description" content="项目中有类似陌陌输入框的UI，因为Edittext不在输入框底部，导致软键盘弹出时显示在Edittext底部而遮挡掉输入框部分UI，目前采用的方法是对Viewtree进行监听，软键盘弹起来时，进行scrollTo移动输入框 12345678910final Rect r = new Rect();//获取到界面可见区域的矩形activityRootView.getWindowVisibleDisp">
@@ -428,7 +428,15 @@
 <li>adjustPan：当前窗口的内容将自动移动以便当前焦点从不被键盘覆盖和用户能总是看到输入内容的部分</li>
 </ul>
 <p>##android:imeOptinos属性<br>Android在横屏时唤起软键盘会默认全屏展示，当使用imeOptions时可以解决问题。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Edittext android:imeOptions=<span class="string">"flagNoExtractUi"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>android:imeOptions=”flagNoExtractUi” //使软键盘不全屏显示，只占用一部分屏幕 同时,这个属性还能控件软键盘右下角按键的显示内容,默认情况下为回车键 android:imeOptions=”actionNone” //输入框右侧不带任何提示 android:imeOptions=”actionGo” //右下角按键内容为’开始’ android:imeOptions=”actionSearch” //右下角按键为放大镜图片，搜索 android:imeOptions=”actionSend” //右下角按键内容为’发送’ android:imeOptions=”actionNext” //右下角按键内容为’下一步’ android:imeOptions=”actionDone” //右下角按键内容为’完成’  </p>
+<ul>
+<li>android:imeOptions=”flagNoExtractUi” //使软键盘不全屏显示，只占用一部分屏幕 同时,这个属性还能控件软键盘右下角按键的显示内容,默认情况下为回车键 </li>
+<li>android:imeOptions=”actionNone” //输入框右侧不带任何提示 </li>
+<li>android:imeOptions=”actionGo” //右下角按键内容为’开始’ </li>
+<li>android:imeOptions=”actionSearch” //右下角按键为放大镜图片，搜索 </li>
+<li>android:imeOptions=”actionSend” //右下角按键内容为’发送’ </li>
+<li>android:imeOptions=”actionNext” //右下角按键内容为’下一步’ </li>
+<li>android:imeOptions=”actionDone” //右下角按键内容为’完成’  </li>
+</ul>
 
       
     </div>
