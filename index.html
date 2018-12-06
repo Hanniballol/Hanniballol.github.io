@@ -758,6 +758,12 @@
 <h3 id="弹窗位于软键盘之下，其他视图之上"><a href="#弹窗位于软键盘之下，其他视图之上" class="headerlink" title="弹窗位于软键盘之下，其他视图之上"></a>弹窗位于软键盘之下，其他视图之上</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getWindow().addFlags( WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);</span><br></pre></td></tr></table></figure>
 <p>FLAG_ALT_FOCUSABLE_IM|FLAG_NOT_FOCUSABLE可以实现UI，不过弹窗上的edittext不会接受到软键盘上的输入事件，FLAG_NOT_FOCUSABLE已经拒绝接受了。那可以在dialog onCreate的时候完成以上UI FLAG设置，在show的时候清除flag即可接受到输入事件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);</span><br><span class="line">getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);</span><br></pre></td></tr></table></figure>
+<h3 id="Dialog全屏显示"><a href="#Dialog全屏显示" class="headerlink" title="Dialog全屏显示"></a>Dialog全屏显示</h3><ul>
+<li>Phonewindow中对windowIsFloating进行判断，activity默认主题为false，generateLayout方法中对该参数进行判断设置LayoutParams为MATCH_PARENT或WRAP_CONTENNT。</li>
+<li>windowBackground主要是默认背景的问题，默认采用了有padding的InsetDrawable,设置了一些边距，导致上面的状态栏，底部的导航栏，左右都有一定的边距。</li>
+<li>windowNoTitle去除toolbar等顶部UI。<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=<span class="string">"Dialog.FullScreen"</span> parent=<span class="string">"Theme.AppCompat.Dialog"</span>&gt;</span><br><span class="line">    &lt;item name="android:windowNoTitle"&gt;true&lt;/item&gt;</span><br><span class="line">    &lt;item name="android:windowBackground"&gt;@color/transparent&lt;/item&gt;</span><br><span class="line">    &lt;item name="android:windowIsFloating"&gt;false&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
           
         
