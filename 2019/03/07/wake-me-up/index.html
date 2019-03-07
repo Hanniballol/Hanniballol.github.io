@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="system," />
+  <meta name="keywords" content="life," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性： android:sharedUserId=&amp;quot;android.uid.system&amp;quot; android:sharedUserId=&amp;quot;android.uid.shared&a">
-<meta name="keywords" content="system">
+<meta name="description" content="Wake Me up -AviciiFeeling my way through the darkness Guided by a beating heart I can’t tell where the journey will end But i know where to start They tell me I">
+<meta name="keywords" content="life">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android studio支持系统签名">
-<meta property="og:url" content="http://yoursite.com/2018/05/21/android-studio支持系统签名/index.html">
+<meta property="og:title" content="wake me up">
+<meta property="og:url" content="http://yoursite.com/2019/03/07/wake-me-up/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性： android:sharedUserId=&amp;quot;android.uid.system&amp;quot; android:sharedUserId=&amp;quot;android.uid.shared&amp;quot; android:sharedUserId=&amp;quot;android.media&amp;quot;">
+<meta property="og:description" content="Wake Me up -AviciiFeeling my way through the darkness Guided by a beating heart I can’t tell where the journey will end But i know where to start They tell me I’m too young to understand They say I’m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-26T01:42:56.105Z">
+<meta property="og:updated_time" content="2019-03-07T12:17:20.861Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android studio支持系统签名">
-<meta name="twitter:description" content="如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性： android:sharedUserId=&amp;quot;android.uid.system&amp;quot; android:sharedUserId=&amp;quot;android.uid.shared&amp;quot; android:sharedUserId=&amp;quot;android.media&amp;quot;">
+<meta name="twitter:title" content="wake me up">
+<meta name="twitter:description" content="Wake Me up -AviciiFeeling my way through the darkness Guided by a beating heart I can’t tell where the journey will end But i know where to start They tell me I’m too young to understand They say I’m">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/21/android-studio支持系统签名/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/07/wake-me-up/"/>
 
 
 
 
 
-  <title>android studio支持系统签名 | Hanniballol's Blog</title>
+  <title>wake me up | Hanniballol's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/android-studio支持系统签名/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/wake-me-up/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="8MilesRD">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">android studio支持系统签名</h1>
+          <h1 class="post-title" itemprop="name headline">wake me up</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-21T18:36:38+08:00">
-                2018-05-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-07T20:05:22+08:00">
+                2019-03-07
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
                   </a>
                 </span>
 
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2018/05/21/android-studio支持系统签名/" class="leancloud_visitors" data-flag-title="android studio支持系统签名">
+             <span id="/2019/03/07/wake-me-up/" class="leancloud_visitors" data-flag-title="wake me up">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -407,55 +407,51 @@
       
 
       
-        <p>如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性：</p>
-<pre><code>android:sharedUserId=&quot;android.uid.system&quot;
-android:sharedUserId=&quot;android.uid.shared&quot;
-android:sharedUserId=&quot;android.media&quot;
-</code></pre><p>这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。</p>
-<h2 id="常用系统签名方式"><a href="#常用系统签名方式" class="headerlink" title="常用系统签名方式"></a>常用系统签名方式</h2><h3 id="Android源码环境下签名"><a href="#Android源码环境下签名" class="headerlink" title="Android源码环境下签名"></a>Android源码环境下签名</h3><p>这种方式比较麻烦，你需要有编译过的源码环境，并按如下步骤：</p>
-<p>1、拷贝App源码到Android源码的packages/apps/目录下，且App源码是普通(Eclipse)格式的<br>2、配置Android.mk，在其中添加</p>
-<pre><code>LOCAL_CERTIFICATE := platform 或 shared 或 media
-</code></pre><p>3、使用mm编译App，生成的apk即系统签名</p>
-<h3 id="手动重新签名"><a href="#手动重新签名" class="headerlink" title="手动重新签名"></a>手动重新签名</h3><p>这种方式比在源码环境下签名简单，App可以在Eclipse或Android Studio下编译，然后给apk重新签名即可。<br>但这种方式在频繁调试的时候比较痛苦，即使写成脚本，也需要重复一样的操作。</p>
-<h4 id="相关文件"><a href="#相关文件" class="headerlink" title="相关文件"></a>相关文件</h4><p>platform.x509.pem、platform.pk8、signapk.jar</p>
-<h4 id="文件位置"><a href="#文件位置" class="headerlink" title="文件位置"></a>文件位置</h4><p>platform.x509.pem、platform.pk8:</p>
-<pre><code>../build/target/product/security
-</code></pre><p>signapk.jar:</p>
-<pre><code>../out/host/linux-x86/framework
-</code></pre><p>signapk源码路径:</p>
-<pre><code>../build/tools/signapk
-</code></pre><h4 id="签名命令"><a href="#签名命令" class="headerlink" title="签名命令"></a>签名命令</h4><p>java -jar signapk.jar platform.x509.pem platform.pk8 old.apk new.apk</p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><p>1、将相关文件及源apk文件置于同一路径下<br>2、检查源apk包，去掉META-INF/CERT.SF 和 META-INF/CERT.RSA 文件<br>3、执行签名命令即可</p>
-<h2 id="Android-Studio系统签名"><a href="#Android-Studio系统签名" class="headerlink" title="Android Studio系统签名"></a>Android Studio系统签名</h2><p>让Android Studio集成系统签名，需要用到一个工具keytool-importkeypair，详见下文。</p>
-<h3 id="keytool-importkeypair"><a href="#keytool-importkeypair" class="headerlink" title="keytool-importkeypair"></a>keytool-importkeypair</h3><pre><code>keytool-importkeypair – A shell script to import key/certificate pairs into an existing Java keystore
-</code></pre><h3 id="相关文件-1"><a href="#相关文件-1" class="headerlink" title="相关文件"></a>相关文件</h3><p>platform.x509.pem、platform.pk8、keytool-importkeypair、demo.jks、signature.sh<br>我的做法是在App根目录新建Signature文件夹专门存放签名相关文件。<br>1.生成签名文件xx.jks<br>2.编写签名脚本signature.sh，内容如下:</p>
-<p>#!/bin/sh</p>
-<h1 id="转换系统签名命令"><a href="#转换系统签名命令" class="headerlink" title="转换系统签名命令"></a>转换系统签名命令</h1><p>./keytool-importkeypair -k demo.jks -p 123456 -pk8 platform.pk8 -cert platform.x509.pem -alias demo</p>
-<pre><code># demo.jks : 签名文件
-# 123456 : 签名文件密码
-# platform.pk8、platform.x509.pem : 系统签名文件
-# demo : 签名文件别名
-</code></pre><p>为脚本文件添加可执行权限：</p>
-<pre><code>$ sudo chmod a+x signature.sh
-</code></pre><p>执行脚本：</p>
-<pre><code>$ ./signature.sh
-</code></pre><p>3.配置builde.gradle</p>
-<pre><code>signingConfigs {
-    release {
-    storeFile file(&quot;../signature/demo.jks&quot;)
-    storePassword &apos;123456&apos;
-    keyAlias &apos;demo&apos;
-    keyPassword &apos;123456&apos;
-    }
-
-    debug {
-    storeFile file(&quot;../signature/demo.jks&quot;)
-    storePassword &apos;123456&apos;
-    keyAlias &apos;demo&apos;
-    keyPassword &apos;123456&apos;
-    }
-}
-</code></pre><p>这样debug或release apk就带有系统签名了。</p>
+        <h2 id="Wake-Me-up-Avicii"><a href="#Wake-Me-up-Avicii" class="headerlink" title="Wake Me up -Avicii"></a>Wake Me up -Avicii</h2><p>Feeling my way through the darkness</p>
+<p>Guided by a beating heart</p>
+<p>I can’t tell where the journey will end</p>
+<p>But i know where to start</p>
+<p>They tell me I’m too young to understand</p>
+<p>They say I’m caught up in a dream</p>
+<p>Well life will pass me by if i don’t open up my eyes</p>
+<p>Well that’s fine by me</p>
+<p>So wake me up when it’s all over</p>
+<p>When I’m wiser and I’m older</p>
+<p>All this time I was finding myself</p>
+<p>And I did’t know I was lost</p>
+<p>I tried carrying the weight of the world</p>
+<p>But I only hava two hands</p>
+<p>All this time I was finding myself</p>
+<p>And I didn’t know I was lost</p>
+<p>I tried carrying the weight of the world</p>
+<p>But I only have two hands</p>
+<p>I hope I get the chance to travel the world</p>
+<p>But I don’t have any plans</p>
+<p>I wish that I could stay forever this young</p>
+<p>Not afraid to close my eyes</p>
+<p>Life’s a game made for everyone</p>
+<p>And love is the prize</p>
+<p>So wake me up when it’s all over</p>
+<p>When I’m wiser and I’m older</p>
+<p>All this time I was finding myself</p>
+<p>And I didn’t know I was lost</p>
+<p>So wake me up when it’s all over</p>
+<p>When I’m wiser and I’m older</p>
+<p>All this time I was finding myself</p>
+<p>And I didn’t know I was lost</p>
+<p>So wake me up when it’s all over</p>
+<p>When I’m wiser and I’m older</p>
+<p>All this time I was finding myself</p>
+<p>And I didn’t know I was lost</p>
+<p>I didn’t know I was lost</p>
+<p>I didn’t know I was lost</p>
+<p>I didn’t know I was lost</p>
+<p>I didn’t know I was lost</p>
+<p>I didn’t know I was lost</p>
+<p>So wake me up when it’s all over</p>
+<p>When I’m wiser and I’m older</p>
+<p>All this time I was finding myself</p>
+<p>And I didn’t know I was lost</p>
 
       
     </div>
@@ -502,7 +498,7 @@ android:sharedUserId=&quot;android.media&quot;
       
         <div class="post-tags">
           
-            <a href="/tags/system/" rel="tag"># system</a>
+            <a href="/tags/life/" rel="tag"># life</a>
           
         </div>
       
@@ -515,8 +511,8 @@ android:sharedUserId=&quot;android.media&quot;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/" rel="next" title="Task :app:compileDebugJavaWithJavac Failed处理">
-                <i class="fa fa-chevron-left"></i> Task :app:compileDebugJavaWithJavac Failed处理
+              <a href="/2019/01/27/生而为人，对不起/" rel="next" title="生而为人，对不起">
+                <i class="fa fa-chevron-left"></i> 生而为人，对不起
               </a>
             
           </div>
@@ -524,10 +520,6 @@ android:sharedUserId=&quot;android.media&quot;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/26/静默安装、自启动实践/" rel="prev" title="静默安装、自启动实践">
-                静默安装、自启动实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -687,7 +679,7 @@ android:sharedUserId=&quot;android.media&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用系统签名方式"><span class="nav-number">1.</span> <span class="nav-text">常用系统签名方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android源码环境下签名"><span class="nav-number">1.1.</span> <span class="nav-text">Android源码环境下签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动重新签名"><span class="nav-number">1.2.</span> <span class="nav-text">手动重新签名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相关文件"><span class="nav-number">1.2.1.</span> <span class="nav-text">相关文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件位置"><span class="nav-number">1.2.2.</span> <span class="nav-text">文件位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#签名命令"><span class="nav-number">1.2.3.</span> <span class="nav-text">签名命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">1.2.4.</span> <span class="nav-text">步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio系统签名"><span class="nav-number">2.</span> <span class="nav-text">Android Studio系统签名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keytool-importkeypair"><span class="nav-number">2.1.</span> <span class="nav-text">keytool-importkeypair</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关文件-1"><span class="nav-number">2.2.</span> <span class="nav-text">相关文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转换系统签名命令"><span class="nav-number"></span> <span class="nav-text">转换系统签名命令</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wake-Me-up-Avicii"><span class="nav-number">1.</span> <span class="nav-text">Wake Me up -Avicii</span></a></li></ol></div>
             
 
           </div>
