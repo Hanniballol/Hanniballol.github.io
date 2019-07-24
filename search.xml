@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[部分地区github拉取代码奇满问题]]></title>
     <url>%2F2019%2F07%2F16%2F%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%BB%A1%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[#前言Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不了，所以有了这篇文章 #具体逻辑 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置 12git config --global http.https://github.com.proxy https://127.0.0.1:1087git config --global https.https://github.com.proxy https://127.0.0.1:1087 其中端口号，可以在ShadowSocks上查到，然后就享受40M/s的畅快吧]]></content>
+    <content type="text"><![CDATA[前言Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不了，所以有了这篇文章 具体逻辑 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置 12git config --global http.https://github.com.proxy https://127.0.0.1:1087git config --global https.https://github.com.proxy https://127.0.0.1:1087 其中端口号，可以在ShadowSocks上查到，然后就享受40M/s的畅快吧]]></content>
       <categories>
         <category>Tools</category>
       </categories>

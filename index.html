@@ -407,8 +407,8 @@
       
         
           
-            <p>#前言<br>Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。<br>git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。<br>在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不了，所以有了这篇文章</p>
-<p>#具体逻辑<br> 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置</p>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。<br>git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。<br>在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不了，所以有了这篇文章</p>
+<h2 id="具体逻辑"><a href="#具体逻辑" class="headerlink" title="具体逻辑"></a>具体逻辑</h2><p> 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.https:<span class="comment">//github.com.proxy https://127.0.0.1:1087</span></span><br><span class="line">git config --global https.https:<span class="comment">//github.com.proxy https://127.0.0.1:1087</span></span><br></pre></td></tr></table></figure>
 <p>其中端口号，可以在ShadowSocks上查到，然后就享受40M/s的畅快吧</p>
 
