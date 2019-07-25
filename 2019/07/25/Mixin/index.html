@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Kotlin," />
+  <meta name="keywords" content="dart," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#前记    今天开始接手公司Kotlin项目，借此对遇到的Kotlin实践问题做个归总。">
-<meta name="keywords" content="Kotlin">
+<meta name="description" content="Tip当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：  一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫">
+<meta name="keywords" content="dart">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin在Android的运用">
-<meta property="og:url" content="http://yoursite.com/2018/07/04/Kotlin在Android的运用/index.html">
+<meta property="og:title" content="Mixin">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/Mixin/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="#前记    今天开始接手公司Kotlin项目，借此对遇到的Kotlin实践问题做个归总。">
+<meta property="og:description" content="Tip当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：  一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫的动物。如果你想让这个动物叫起来像猫而不是狗，那么重写即可，子类里重新定义“叫”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-04T06:35:51.575Z">
+<meta property="og:updated_time" content="2019-07-25T08:31:07.025Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin在Android的运用">
-<meta name="twitter:description" content="#前记    今天开始接手公司Kotlin项目，借此对遇到的Kotlin实践问题做个归总。">
+<meta name="twitter:title" content="Mixin">
+<meta name="twitter:description" content="Tip当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：  一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫的动物。如果你想让这个动物叫起来像猫而不是狗，那么重写即可，子类里重新定义“叫”">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/04/Kotlin在Android的运用/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/07/25/Mixin/"/>
 
 
 
 
 
-  <title>Kotlin在Android的运用 | Hanniballol's Blog</title>
+  <title>Mixin | Hanniballol's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/Kotlin在Android的运用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/Mixin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="8MilesRD">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin在Android的运用</h1>
+          <h1 class="post-title" itemprop="name headline">Mixin</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-04T13:52:15+08:00">
-                2018-07-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T11:54:15+08:00">
+                2019-07-25
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
                   </a>
                 </span>
 
@@ -376,7 +376,7 @@
 
           
           
-             <span id="/2018/07/04/Kotlin在Android的运用/" class="leancloud_visitors" data-flag-title="Kotlin在Android的运用">
+             <span id="/2019/07/25/Mixin/" class="leancloud_visitors" data-flag-title="Mixin">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -407,7 +407,47 @@
       
 
       
-        <p>#前记<br>    今天开始接手公司Kotlin项目，借此对遇到的Kotlin实践问题做个归总。</p>
+        <h3 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h3><p>当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：</p>
+<blockquote>
+<p>一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫的动物。如果你想让这个动物叫起来像猫而不是狗，那么重写即可，子类里重新定义“叫”这个行为即可。但无论如何，这样得到的类是绝对不会有多重继承的冲突的。</p>
+</blockquote>
+<p>对于Mixin并没有一个准确的概念，有人理解为Mix in混入。它类似于多继承，但通常混入Mixin的类和Mixin类本身斌那个不是is-a的关系。实质上Mixin是通过语言特性，来更简洁地实现组合模式。因此，Mixin可以灵活地添加某些功能。传统的接口概念中，并不包含实现部分，而Mixin包含实现。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p> <a href="http://www.bracha.org/mixins-paper.pdf" target="_blank" rel="noopener">Mixins in Strongtalk</a>建议了解一下Mixin学术文献资料，因为它定义了重要概念和注解。</p>
+<blockquote>
+<p><strong>注：</strong>Smalltalk被公认历史上第二个面向对象的程序设计语言和第一个真正的集成开发环境（IDE）。并且它对其它众多的程序设计语言的产生起到了极大的推动作用，主要有：Objective-c,Actor,Java和Ruby等，90年代的许多软件开发思想得利于Smalltalk，例如Design Patterns,Extreme Programming(XP)和Refactoring等。Strongtalk的最独特之处是支持渐进式的类型注解，这种思想在Dart,PHP,Python 3和TypeScript等语言中都有体现。Gilad Bracha是Dart开发团队的一员，在20世纪90年代，Gilad同Urs Hölzle和Lars Bak等人一起创建了语言Smalltalk的一个高性能版本即Strongtalk。但随着Java的流行，Sun停止了Strongtalk的投入，并将团队成员重新分配来优化Java的性能，而Strongtalk演变成了官方JVM即Hotspot. – <a href="https://zh.wikipedia.org/wiki/Smalltalk" target="_blank" rel="noopener">维基百科</a></p>
+</blockquote>
+<p> 作为一个支持类和继承的语言，类隐式地定义了Mixin。Mixin隐式地通过类主体（Class Body）进行定义，并建立子类和父类之间的变量增量（Delta）。而Class类实际上则是一个Mixin应用，即是通过隐式定义的Mixin应用于父类的结果。</p>
+<p> <code>Mixin Application</code>混合应用类似于Function Application函数应用。在数学中，混合类M可以视作从父类到子类新增的一个功能，将M注入超类S，并且返回一个S的子类。在研究文献中，这通常写作 <code>M |&gt; S</code>。</p>
+<p> 基于函数应用的概念，可以定义<strong>复合函数</strong>（即函数组合）。该概念贯穿于混合组合中。我们定义混合M1和M2的组合，写作<code>M1*M2</code>,如<code>(M1 * M2) |&gt; S = M1 |&gt; (M2 |&gt; S)</code>。</p>
+<p> 函数非常有用，因为他们可以应用于不同的参数。同样，Class隐式定义的Mixin，通常仅在类声明给出的父类中应用一次。为允许Mixin应用于不同的父类，我们要么声明Mixin不依赖于特定的父类，要么脱离于Class隐式的Mixin，然后重用外部的原始定义。</p>
+<h3 id="语法和语义"><a href="#语法和语义" class="headerlink" title="语法和语义"></a>语法和语义</h3><p> Mixin通过正常的类声明被隐式定义。原则上，每个类都定义了一个Mixin，并可以从类中提取出来。然而，Mixin只能从未定义构造函数的类中提取。由于沿着继承链传递构造函数参数的需要，该约束能避免出现新的连锁问题。</p>
+<p> <strong>举一个🌰:</strong></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    Collection&lt;E&gt; newInstance();</span><br><span class="line">    <span class="keyword">void</span> forEach(<span class="keyword">void</span> f(E element)) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> add(E element) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br><span class="line"><span class="class"><span class="title">abstract</span> <span class="title">class</span> <span class="title">DOMElementSet</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Collection<e></e></strong>是一个标准类，并用来声明一个Mixin。另外，<strong>DOMElementList</strong>和<strong>DOMElementSet</strong>也是混合应用。这两个Mixin在类声明的时候，通过特殊的形式来定义。在类声明中包含一个名字，并用<strong>with</strong>语句来声明他们与父类中的混合应用相同。<strong>Collection<e></e></strong>是抽象类，因为它并没有实现类中年定义的抽象方法<strong>newInstance()</strong>。</p>
+<p>上述中，事实上<strong>DOMElementList</strong>混合Collection mixin |&gt; DOMList，而DOMElementSet则是Collection mixin |&gt; DOMSet。</p>
+<p>这样做的好处是，Collection中的代码可以在类的多个继承层次中被共享。因此，无论<code>DOMList</code>还是<code>DOMSet</code>，都不需要重复、复制Collection中的代码，并且任何变化都会使Collection传递到这两个继承结构中，大大简化了维护代码。上面的代码介绍了Mixin应用的一种方式：混合应用指定应用的Mixin和父类，以及混合应用的名称。</p>
+<p>另外一种情况，混合应用出现在类声明的<code>with</code>语句中，以逗号来分隔标识符列表的时候。此时，所有的标识符代表Class。在这种情况下，多混合在<code>extends</code>语句中可以构成及应用于父类名称，生成一个匿名的父类。再以同样的🌰：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementSet&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementSet&lt;E&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里，<code>DOMElementList</code>并不是应用Collection mixin |&gt; DOMList。相反，它是一个父类为应用的新定义的类（注意extends关键字），DOMElementSet同样如此。注意，在每一种情况下，抽象函数<code>newInstance()</code>必须单独实现，以便能够直接被实例化。</p>
+<p>想象一下，如果<code>DOMList</code>有一个带参数的构造函数：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;(<span class="number">0</span>);</span><br><span class="line">    DOMElementList(size):<span class="keyword">super</span>(size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造函数可以为各个字段以及泛型参数设置值。每个Mixin都有一个自定义的构造函数被单独调用，父类也是如此。因为Mixin的构造函数不能够被声明，所以调用函数可以省略。在底层的实现中，调用总是放在初始列表之前。</p>
+<p>第二种是以方便实用的语法糖形式，将多个Mixin混入类中，而不需要引入多个中间声明。举一个🌰：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="built_in">String</span> name;</span><br><span class="line">    Person(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Maestro</span> <span class="keyword">extends</span> <span class="title">Person</span> <span class="title">with</span> <span class="title">Musical</span>, <span class="title">Aggressive</span>, <span class="title">Demented</span> </span>&#123;</span><br><span class="line">    Maestro(name):<span class="keyword">super</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里，父类是一个混合应用：Demented mixin |&gt; Aggressive mixin |&gt; Musical mixin |&gt; Person</p>
+<p>假设<code>Person</code>有带参数的构造函数，则Musical mixin |&gt; Person将继承Person的构造函数。以此类推，一直到<code>Maestro</code>实际的父类<code>Person</code>，它由一系列的Mixin应用组成。</p>
+<h3 id="细节描述"><a href="#细节描述" class="headerlink" title="细节描述"></a>细节描述</h3><ul>
+<li><p><strong>Privacy私有</strong></p>
+<p>  一个混合应用很可能是咋外部最初声明Class的库中被声明，这对访问混合应用的成员没有任何影响。根据混合应用的语义可知，访问成员取决于库最初声明的位置。这与普通的继承一样，是由底层语法（C++）的继承语义决定的。</p>
+</li>
+<li><p><strong>Statics静态</strong></p>
+<p>  是否可以通过混合应用使用最初Class的静态值？同样，由继承的语义进行分析，在Dart中静态成员不会被继承。</p>
+</li>
+<li><p><strong>Types类型</strong></p>
+<p>  混合应用的实例是什么类型？通常，它是父类的子类型，以及通过Mixin名称表示的子类型。换句话说，它与最初Class的类型相同。</p>
+<p>  最初的Class有它自身的父类。为确保特定的混合应用与最初进行混入的Class兼容，需要使用<code>with</code>语句。例如，如果通过<code>with</code>语句定义了Class A，并应用了一个混合M，M源自Class K，那么A必须支持K定义的接口。</p>
+</li>
+</ul>
 
       
     </div>
@@ -454,7 +494,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+            <a href="/tags/dart/" rel="tag"># dart</a>
           
         </div>
       
@@ -467,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/" rel="next" title="MAC android studio3.1.2无比卡，解决方案">
-                <i class="fa fa-chevron-left"></i> MAC android studio3.1.2无比卡，解决方案
+              <a href="/2019/07/16/部分地区github拉取代码奇满问题/" rel="next" title="部分地区github拉取代码奇满问题">
+                <i class="fa fa-chevron-left"></i> 部分地区github拉取代码奇满问题
               </a>
             
           </div>
@@ -476,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/WindowManager窗口管理/" rel="prev" title="WindowManager窗口管理">
-                WindowManager窗口管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,8 +569,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,7 +609,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,6 +665,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tip"><span class="nav-number">1.</span> <span class="nav-text">Tip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法和语义"><span class="nav-number">3.</span> <span class="nav-text">语法和语义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节描述"><span class="nav-number">4.</span> <span class="nav-text">细节描述</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
