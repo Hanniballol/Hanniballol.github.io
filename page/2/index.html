@@ -409,6 +409,21 @@
           
           升级Android Studio3.1.2以后，真是java文件写一个字卡三个字，xml文件根本不敢打开。在V2ex找到的解决办法是强制使用独显。会有一定的效果，不过治标不治标，长久的跑还是会卡，并且电量消耗奇快。分享一个下command line
 sudo pmset -a GPUSwitch 1
+0 - 强制使用核显
+1 - 强制使用独显（相当于在偏好设置-节能 里去掉自动切换显卡这个选项）
+2 - 自动切换显卡
+其实时间是最好的老师，公司赶项目，只能忍，今天忙完找了一下，如下解决方案正合适
+
+Help -&gt; Edit Custom VM Options… 修改如下部分
+-Xms956m
+-Xmx3280m
+-XX:ReservedCodeCacheSize=240m
+-XX:+UseConcMarkSweepGC
+-XX:SoftRefLRUPolicyMSPerMB=50
+-Dsun.io.useCanonCaches=false
+-Djava.net.preferIPv4Stack=true
+-Djna.nosys=true
+-Djna.boot.library.pat
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -576,8 +591,20 @@ sudo pmset -a GPUSwitch 1
 
 确保手机开启usb调试
 用usb线把手机和电脑连接起来
-执行命令：’adb tcpi
-          ...
+执行命令：’adb tcpip 5555’
+
+执行成功后拔掉usb线，端口可以不用5555，这个官方默认使用的。
+找到手机的IP地址一般在 设置-我得设备-全部参数-状态信息-IP地址
+通过IP地址连接手机执行命令：
+&gt; adb connect 192.168.26.58:5555
+若端口号是5555，则可以省略，直接：
+&gt; adb connect 192.168.26.58
+如果没有连接成功如果确定网络与端口没有问题，可以尝试重启adb服务：
+&gt; adb kill-server
+连接成功如果连接成功，可以执行以下命令查看当前连接的设备列表：
+&gt; adb devices
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/29/MAC-adb无线连接Android真机/#more" rel="contents">
@@ -737,7 +764,16 @@ sudo pmset -a GPUSwitch 1
           
           最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。
 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
-，因此静默安装不会开发给开发者，不过
+，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
+性，自家的系统想咋样就咋样。
+权限&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
+安装代码有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：
+pm install -r
+实现代码
+/**
+* install slient
+* 
+* @param cont
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -898,7 +934,14 @@ sudo pmset -a GPUSwitch 1
           
           如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性：
 android:sharedUserId=&quot;android.uid.system&quot;
-android:sharedUserId=&quot;android.uid.shared&quo
+android:sharedUserId=&quot;android.uid.shared&quot;
+android:sharedUserId=&quot;android.media&quot;
+这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。
+常用系统签名方式Android源码环境下签名这种方式比较麻烦，你需要有编译过的源码环境，并按如下步骤：
+1、拷贝App源码到Android源码的packages/apps/目录下，且App源码是普通(Eclipse)格式的2、配置Android.mk，在其中添加
+LOCAL_CERTIFICATE := platform 或 shared 或 media
+3、使用mm编译App，生成的apk即系统签名
+手动重新签名这种方式比在源码环境下签名简单，App可以在Eclipse或Android Studi
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1060,8 +1103,13 @@ android:sharedUserId=&quot;android.uid.shared&quo
           今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。
 该问题基本由于gradle编译导致，可以用
 $ gradlew compileDebug --stacktrace
-来跟踪gradle编译时的stacktrace信息
-          ...
+来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入
+$ chmod +x gradlew
+来解决权限问题，不过gradlew comileDebug 并不能看到有价值的信息，根据提示，输入
+$ gradlew compileDebugSources --stacktrace -info
+解决问题，原来是某个.java文件没push导致。
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/#more" rel="contents">
@@ -1222,6 +1270,15 @@ $ gradlew compileDebug --stacktrace
           最近在提取项目中的部分工具类，有用到cocoaPods私有库，所以把它记录下来。
 私有库使用流程为私有库添加repo$ pod repo add REPO_NAME git@github:artsy/Specs.git
 创建私有库$ pod repo add REPO_NAME SOURCE_URL
+检查repo安装成功$ cd ~/.cocoapods/repos/REPO_NAME
+$ pod repo lint .
+把准备好的代码库spec加入到私有库中该命令会把此版本的.podSpec拷贝到私有库中并push到远程git代码库
+$ pod repo push REPO_NAME SPEC_NAME.podspec
+.podSpec文件引用其他私有库情况项目中需要引用到私有库的library,这个时候需要用到 sources
+s.dependency &apos;THLTencentOpenAPI&apos;
+
+$ pod lib lint --sources=https://xx/ThirdSDK.git
+$ pod repo push ThirdSDK --sources=h
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1381,7 +1438,11 @@ $ gradlew compileDebug --stacktrace
         
           
           问题所在问题一定存在，没有完人，我常从自己身上找问题。问题常常存在，但不是非黑即白，不代表一方有问题，另一方就万事大吉，往往是一个巴掌拍不响的事实。可是结果往往是，方桌的那一边让自己高高在上，毫无污点，占领道德的至高峰，开始狂轰滥炸，每每善良的承认过失后，带来的结果往往不堪设想。
-为什么会出现这种局
+为什么会出现这种局面，问题所在何处？
+每个人都是一个完整的个体，人出现在这个世界上，就开始为了活四处奔波，为了喝到第一口奶拼命哭喊，为了摆脱现有阶级努力读书，为了繁育后代结婚生子，为了养活家人在世上受尽委屈。完整的个体应该有一套独特的自我防御机制，兵来将挡水来土掩。自我成长应该是隐藏在外壳里的，外壳应该是圆滑坚硬的，不应该透漏出任何弱点。因为一旦弱点出现，就会受到外部的猛烈攻击，这是丛林法则，不容质疑。
+那现在知道问题所在了，自我反省是不可或缺的，反省的过程，改正的过程正是自我成长的过程，也就是在外壳里的自我脱变。蜕变只属于自己，一旦被外界获知，特别是利益相关，轻则人格受到侮辱，失去信任，丢掉工作，重则自我防御机制被攻破，无法自我修复，终生抑郁不得志。
+那么得到的是一个世俗的结果：
+披着虚伪的皮在这世间行走，
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1540,8 +1601,9 @@ $ gradlew compileDebug --stacktrace
       
         
           
-          &emsp;&emsp;演员这个职业特别残忍，因为你是被挑选的，人家没人来找你，你就没活干。因为我做了37年的演员，大概从三十四五岁开始，就没有人找我演戏了，然后你眼看着你周围的朋友，这个红了，那个红了。一点不重要，因为你要从事的行业不是一年两年，你要从事一生。&emsp;&emsp;所以，能够做一
-          ...
+          &emsp;&emsp;演员这个职业特别残忍，因为你是被挑选的，人家没人来找你，你就没活干。因为我做了37年的演员，大概从三十四五岁开始，就没有人找我演戏了，然后你眼看着你周围的朋友，这个红了，那个红了。一点不重要，因为你要从事的行业不是一年两年，你要从事一生。&emsp;&emsp;所以，能够做一个不急不躁的演员，永远谦逊，看得见真正棒的人，欣赏得了真正好的表演，永远不去比拼粉丝，你一定会成为一个大演员的，你很棒!
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/26/教诲/#more" rel="contents">
@@ -1700,7 +1762,11 @@ $ gradlew compileDebug --stacktrace
         
           
           冲突每个个体之间必然存在冲突，对每件事物的理解，处理每件事情的方式，一万个人心中有一万个哈姆雷特，这才是有趣的地方，不一样才是有趣的部分，如果都一样岂不是机器。
-我们把关注点放在了个体不同造成的冲突上，紧接着看到的是冲突升级，如果我们不够强大，往往会成为千夫所指，因为允许冲突存在才是社会的游戏规则，
+我们把关注点放在了个体不同造成的冲突上，紧接着看到的是冲突升级，如果我们不够强大，往往会成为千夫所指，因为允许冲突存在才是社会的游戏规则，每个人都在试图隐藏自己的不幸，并用各种方式去强调自己的长处，他们所认为自己拥有的长处，所用的手段更是千奇百怪。只要是不损害他人利益，手段就算是合理的，被默许，双方相安无事，各安其位。突然有一天出现一个人，指出这些手段是不合理的，并告诉大家这算不上是长处。然后静默被打破，每个人都担心自己的手段被挑明，大家人心惶惶…
+不用多久,大家就会找到自己的方式去保护自己，所以千夫所指是必然。
+观察并思考，然后实践。
+进入这个团体，遵守所谓的规则，保护好自己的不同，任风雨袭来，我自巍然不动。
+中规中矩&quot;选择生活，选择工作，选择职业，选择家庭。选择他妈的一个大电视。选择洗衣机，汽车，雷射唱机，电动开罐机。选择健康，低卡里路，低糖。选择固定利率房贷。选择起点，选择朋友，选择运动服和皮箱。选择一套他妈的
           ...
           <!--noindex-->
           <div class="post-button text-center">

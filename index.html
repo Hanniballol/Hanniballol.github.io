@@ -548,7 +548,9 @@
 ####intended/intending
 intended
 
-Asserts that the given matcher matches one and only one intent sent
+Asserts that the given matcher matches one and only one intent sent by the application under test. This is an equivalent of verify(mock, times(1)) in Mockito. Verification does not have to occur in the same order as the intents were sent. Intents are recorded from the time that Intents.init is called.
+
+断言只会给matcher匹配一个且只有一个由application发来的intent。类似于Mockito中的verify(mock,times(1))函数,验证过程不需要按照发送intent的相同顺序进行，从Intent.i
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -709,7 +711,11 @@ Asserts that the given matcher matches one and only one intent sent
           
           ###概念单元测试只是测试一个方法单元，它不是测试一个整个流程。举一个🌰
 
-一个Login页面，上面有两个EditText和一个Button。两个EditText分别用于输入用户名和密码。点击Button以后，有一个UserManager会去执行performlogin操作，然后将结果返回，更新页
+一个Login页面，上面有两个EditText和一个Button。两个EditText分别用于输入用户名和密码。点击Button以后，有一个UserManager会去执行performlogin操作，然后将结果返回，更新页面。那么我们给这个东西做单元测试的时候，不是测这个login流程。这种整个流程的测试：给两个输入框设置正确的用户名和密码，点击login button，最后页面得到更新，叫做 集成测试，而不是单元测试。当然，集成测试是有必要的，但这不是程序员应该花精力的地方。
+
+#####Test Pyramid
+Test Pyramid理论基本大意是，单元测试是基础，是我们应该花绝大多数时间去写的部分，而集成测试等应该是冰山上面能看见的那一小部分。
+为什么是这样呢？因为集成测试设置起来很麻烦，运行起来很慢，发现的bug少，在保证代码质量、改善代码设计方面更起不到任何作用，因此它的重要程度并不是那么高，也无法将它纳入我们正常的工作流程中。而单元测试则刚好相反，它运行速度超快，能发现的bug更多，在开发时能引
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -870,7 +876,12 @@ Asserts that the given matcher matches one and only one intent sent
           
           Tip当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：
 
-一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会
+一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫的动物。如果你想让这个动物叫起来像猫而不是狗，那么重写即可，子类里重新定义“叫”这个行为即可。但无论如何，这样得到的类是绝对不会有多重继承的冲突的。
+
+对于Mixin并没有一个准确的概念，有人理解为Mix in混入。它类似于多继承，但通常混入Mixin的类和Mixin类本身斌那个不是is-a的关系。实质上Mixin是通过语言特性，来更简洁地实现组合模式。因此，Mixin可以灵活地添加某些功能。传统的接口概念中，并不包含实现部分，而Mixin包含实现。
+基本概念 Mixins in Strongtalk建议了解一下Mixin学术文献资料，因为它定义了重要概念和注解。
+
+注：Smalltalk被公认历史上第二个面向对象的程序设计语言和第一个真正的集成开发环境（IDE）。并且它
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1029,8 +1040,12 @@ Asserts that the given matcher matches one and only one intent sent
       
         
           
-          前言Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不
-          ...
+          前言Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。在拉取Flutter源码时出现5-9KiB/s的情况，实在忍不了，所以有了这篇文章
+具体逻辑 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置
+12git config --global http.https://github.com.proxy https://127.0.0.1:1087git config --global https.https://github.com.proxy https://127.0.0.1:1087
+其中端口号，可以在ShadowSocks上查到，然后就享受40M/s的畅快吧
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/07/16/部分地区github拉取代码奇满问题/#more" rel="contents">
@@ -1188,7 +1203,9 @@ Asserts that the given matcher matches one and only one intent sent
       
         
           
-          又是一次有意思的经历，踉踉跄跄的来，心无旁骛的走，我感到了前所未有的释然，从来都没有过的成长，这种成长并非职业技能上的成长，既是个人思想上的成长，如果对待无所不在的冲突呢？如何在冲突中找到属于自己的位置呢？要是自我职业技能成长迅速的话，如何在狂妄自大中平息哪一点虚无呢？要是身处混乱之中如何不去随波逐
+          又是一次有意思的经历，踉踉跄跄的来，心无旁骛的走，我感到了前所未有的释然，从来都没有过的成长，这种成长并非职业技能上的成长，既是个人思想上的成长，如果对待无所不在的冲突呢？如何在冲突中找到属于自己的位置呢？要是自我职业技能成长迅速的话，如何在狂妄自大中平息哪一点虚无呢？要是身处混乱之中如何不去随波逐流进行自我救赎呢？
+冲突真的存在吗应该不存在吧，有既是有，没有既是没有，没有的你想有也就有了，有的东西你想没有也就没有了。对待各种欲望的爆发，就应该理性的思考，让思考超过非理性的情绪爆发，情绪化其实就是最大的弱点。冲突本不是问题的根本，冲突是人为的强制性添加的用来解决自己对当前事物无能处理的结果，应该在多次深入思考后去解决这种无能。
+要是陷入了虚无的自大中，如何平息呢那其实应该是注焉而不满酌焉而不竭呢，老祖宗的这句对游刃有余的解释完美的解决了这个问题，自大源自自满，歧视来自无知。要是能有更大的眼界，站到更高的位置，应该只会感受到自己的渺小吧。其实如果对这个世界永远充满敬畏的话，那一定会一直处于自我反省的状态吧，怎么会自大呢。其实能承认自己自大也已经是很大的进步了，承认自己并非你所以为的那种人
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1351,7 +1368,17 @@ Asserts that the given matcher matches one and only one intent sent
 Guided by a beating heart
 I can’t tell where the journey will end
 But i know where to start
-They
+They tell me I’m too young to understand
+They say I’m caught up in a dream
+Well life will pass me by if i don’t open up my eyes
+Well that’s fine by me
+So wake me up when it’s all over
+When I’m wiser and I’m older
+All this time I was finding myself
+And I did’t know I was lost
+I tried carrying the weight of the world
+But I only hava two hands
+All this ti
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1510,7 +1537,7 @@ They
       
         
           
-          &emsp;&emsp;“从小了解了人类的种种卑劣之处，对这种卑劣深深厌恶，但他随后发现自己身上也有这种卑劣，进而对自己也产生了这种厌恶。但是，叶藏并没有力量去阻止，甚至没有力量去努力，只好随波逐流，做一个被动的人。为了脱离这种罪恶感，他的精神领域里产生了一种自我切割现象，把这些卑劣，具现化成了那个
+          &emsp;&emsp;“从小了解了人类的种种卑劣之处，对这种卑劣深深厌恶，但他随后发现自己身上也有这种卑劣，进而对自己也产生了这种厌恶。但是，叶藏并没有力量去阻止，甚至没有力量去努力，只好随波逐流，做一个被动的人。为了脱离这种罪恶感，他的精神领域里产生了一种自我切割现象，把这些卑劣，具现化成了那个黑色的小人。那个小人，可以说是叶藏自己的罪，但也可以说是叶藏自己。一般人，其实是终生和小人共生下去的，但叶藏对于内心世界有很高的追求，希望把这件事情思考透彻，所以最后只好陷入了极端，选择放弃自己的生命。其实，了解到人性本恶这一点，其实不一定要走向这样的极端，不如放弃掉对人性的虚假预期，想着怎样在每件事情上努力变好，可能是更积极的做法。不过，人并不能总是这么坚强与阳光，所以叶藏并不难取得读者某种程度上的共情，因为实际上很多人都曾经尝试过像叶藏这样思考。只是，最后不一定会选择这么极端的方式。一部文学作品如果能够引起广泛的人的共情，那么就是有价值的。只是，我这边任然希望读者看到这部作品以后，是有“别人也有同样经历，能够理解自己”的治愈，而不要在这种厌恶的情绪中继续发展。叶藏纤细而罪恶的灵魂，因为他
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1670,7 +1697,7 @@ They
         
           
           项目中有类似陌陌输入框的UI，因为Edittext不在输入框底部，导致软键盘弹出时显示在Edittext底部而遮挡掉输入框部分UI，目前采用的方法是对Viewtree进行监听，软键盘弹起来时，进行scrollTo移动输入框
-12345678910111213141516171819202122232
+12345678910111213141516171819202122232425private void configureViewTreeObserver(View root, View scrollToView) &#123;        root.getViewTreeObserver().addOnGlobalLayoutListener(() -&gt; &#123;            Rect rect = new Rect();            //获取到界面可见区域的矩形            root.getWindowVisibleDisplayFrame(rect);            //根布局高度 - 可见区域高度 = 软键盘高度            int keyboardHeight = root.getRootVi
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1832,7 +1859,17 @@ They
           WindowManager窗口管理WindowManager是android的窗口管理器，所有显示窗口都可以通过它来控制
 
 WindowManager.addView(view,layoutParams)  添加一个view到窗口中
-WindowManager.updateView(view,lay
+WindowManager.updateView(view,layoutParams)  更新窗口中的view属性
+WindowManager.removeView(view)  删除窗口中的View
+
+WindowManager.LayoutParams获取布局参数
+WindowManager.LayoutParams params = getWindow().getAttributes();
+创建布局参数
+WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+WindowManager.LayoutParams.type用于确定窗口在屏幕上的显示层次
+
+FIRST_APPLICATION_WINDOW  普通应用的第一个窗口
+TYPE_BASE_APPLICATION
           ...
           <!--noindex-->
           <div class="post-button text-center">
