@@ -303,6 +303,584 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="8MilesRD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head_icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanniballol's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/" itemprop="url">MAC android studio3.1.2无比卡，解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T17:31:56+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/" class="leancloud_visitors" data-flag-title="MAC android studio3.1.2无比卡，解决方案">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>升级Android Studio3.1.2以后，真是java文件写一个字卡三个字，xml文件根本不敢打开。在V2ex找到的解决办法是强制使用独显。会有一定的效果，不过治标不治标，长久的跑还是会卡，并且电量消耗奇快。分享一个下command line</p>
+<pre><code>sudo pmset -a GPUSwitch 1
+0 - 强制使用核显
+1 - 强制使用独显（相当于在偏好设置-节能 里去掉自动切换显卡这个选项）
+2 - 自动切换显卡
+</code></pre><p>其实时间是最好的老师，公司赶项目，只能忍，今天忙完找了一下，如下解决方案正合适</p>
+<ul>
+<li><p>Help -&gt; Edit Custom VM Options… 修改如下部分</p>
+<pre><code>-Xms956m
+-Xmx3280m
+-XX:ReservedCodeCacheSize=240m
+-XX:+UseConcMarkSweepGC
+-XX:SoftRefLRUPolicyMSPerMB=50
+-Dsun.io.useCanonCaches=false
+-Djava.net.preferIPv4Stack=true
+-Djna.nosys=true
+-Djna.boot.library.path=
+
+-da
+</code></pre></li>
+<li><p>Settings -&gt; Appearance -&gt; Show memory indicator然后你就可以在idea右下角看到内存使用情况了</p>
+</li>
+</ul>
+<p>参考:<br><a href="https://developer.android.com/studio/intro/studio-config#low_memory" target="_blank" rel="noopener">官方提供的开发工具调优策略</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/MAC-adb无线连接Android真机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="8MilesRD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head_icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanniballol's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/MAC-adb无线连接Android真机/" itemprop="url">MAC adb无线连接Android真机</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T09:49:13+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/29/MAC-adb无线连接Android真机/" class="leancloud_visitors" data-flag-title="MAC adb无线连接Android真机">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一直懒得搞，因为用不上，最近配置了双屏，瞬间usb插口不够用了，于是就有了下文。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>手机和电脑需要再同一个局域网</li>
+<li>电脑上已经安装adb工具。</li>
+</ul>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="打开手机端口"><a href="#打开手机端口" class="headerlink" title="打开手机端口"></a>打开手机端口</h2><p>让手机在指定的端口可以接收到TCP/IP连接</p>
+<ul>
+<li>确保手机开启usb调试</li>
+<li>用usb线把手机和电脑连接起来</li>
+<li>执行命令：’adb tcpip 5555’</li>
+</ul>
+<p>执行成功后拔掉usb线，端口可以不用5555，这个官方默认使用的。</p>
+<h2 id="找到手机的IP地址"><a href="#找到手机的IP地址" class="headerlink" title="找到手机的IP地址"></a>找到手机的IP地址</h2><p>一般在 设置-我得设备-全部参数-状态信息-IP地址</p>
+<h2 id="通过IP地址连接手机"><a href="#通过IP地址连接手机" class="headerlink" title="通过IP地址连接手机"></a>通过IP地址连接手机</h2><p>执行命令：</p>
+<pre><code>&gt; adb connect 192.168.26.58:5555
+</code></pre><p>若端口号是5555，则可以省略，直接：</p>
+<pre><code>&gt; adb connect 192.168.26.58
+</code></pre><h2 id="如果没有连接成功"><a href="#如果没有连接成功" class="headerlink" title="如果没有连接成功"></a>如果没有连接成功</h2><p>如果确定网络与端口没有问题，可以尝试重启adb服务：</p>
+<pre><code>&gt; adb kill-server
+</code></pre><h2 id="连接成功"><a href="#连接成功" class="headerlink" title="连接成功"></a>连接成功</h2><p>如果连接成功，可以执行以下命令查看当前连接的设备列表：</p>
+<pre><code>&gt; adb devices
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/静默安装、自启动实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="8MilesRD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head_icon.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanniballol's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/26/静默安装、自启动实践/" itemprop="url">静默安装、自启动实践</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T09:41:39+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/26/静默安装、自启动实践/" class="leancloud_visitors" data-flag-title="静默安装、自启动实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
+<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
+，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
+性，自家的系统想咋样就咋样。
+</code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
+</code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
+<pre><code>pm install -r
+</code></pre><p>实现代码</p>
+<pre><code>/**
+* install slient
+* 
+* @param context
+* @param filePath
+* @return 0 means normal, 1 means file not exist, 2 means other exception error
+*/
+public static int installSlient(Context context, String filePath) {
+    File file = new File(filePath);
+    if (filePath == null || filePath.length() == 0 || (file = new File(filePath)) == null || file.length() &lt;= 0
+    || !file.exists() || !file.isFile()) {
+        return 1;
+    }
+
+    String[] args = { &quot;pm&quot;, &quot;install&quot;, &quot;-r&quot;, filePath };
+    ProcessBuilder processBuilder = new ProcessBuilder(args);
+
+    Process process = null;
+    BufferedReader successResult = null;
+    BufferedReader errorResult = null;
+    StringBuilder successMsg = new StringBuilder();
+    StringBuilder errorMsg = new StringBuilder();
+    int result;
+    try {
+        process = processBuilder.start();
+        successResult = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        errorResult = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        String s;
+
+        while ((s = successResult.readLine()) != null) {
+        successMsg.append(s);
+        }
+
+        while ((s = errorResult.readLine()) != null) {
+        errorMsg.append(s);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+        result = 2;
+    } catch (Exception e) {
+        e.printStackTrace();
+        result = 2;
+    } finally {
+        try {
+        if (successResult != null) {
+            successResult.close();
+            }
+            if (errorResult != null) {
+            errorResult.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (process != null) {
+        process.destroy();
+        }
+    }
+
+    // TODO should add memory is not enough here
+    if (successMsg.toString().contains(&quot;Success&quot;) || successMsg.toString().contains(&quot;success&quot;)) {
+        result = 0;
+    } else {
+        result = 2;
+    }
+    Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
+    return result;
+}
+</code></pre><h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
+<p>参考:<br><a href="http://www.trinea.cn/android/android-install-silent/" target="_blank" rel="noopener">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java" target="_blank" rel="noopener">pm.java</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/android-studio支持系统签名/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1447,141 +2025,11 @@ $ pod repo update ThirdSDK
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/试试水/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="8MilesRD">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head_icon.JPG">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hanniballol's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/试试水/" itemprop="url">试试水</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T11:39:56+08:00">
-                2017-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/23/试试水/" class="leancloud_visitors" data-flag-title="试试水">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1631,7 +2079,7 @@ $ pod repo update ThirdSDK
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1653,7 +2101,7 @@ $ pod repo update ThirdSDK
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
