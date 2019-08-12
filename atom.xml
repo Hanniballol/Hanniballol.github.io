@@ -5,9 +5,9 @@
   <subtitle>Hanniballol&#39;s Mad World</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://hanniballol.github.io/"/>
   <updated>2019-08-12T06:19:07.625Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://hanniballol.github.io/</id>
   
   <author>
     <name>8MilesRD</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Dive Into Flutter</title>
-    <link href="http://yoursite.com/2019/08/09/Dive-Into-Flutter/"/>
-    <id>http://yoursite.com/2019/08/09/Dive-Into-Flutter/</id>
+    <link href="http://hanniballol.github.io/2019/08/09/Dive-Into-Flutter/"/>
+    <id>http://hanniballol.github.io/2019/08/09/Dive-Into-Flutter/</id>
     <published>2019-08-09T09:14:10.000Z</published>
     <updated>2019-08-12T06:19:07.625Z</updated>
     
@@ -31,17 +31,17 @@
     
     </summary>
     
-      <category term="Flutter" scheme="http://yoursite.com/categories/Flutter/"/>
+      <category term="Flutter" scheme="http://hanniballol.github.io/categories/Flutter/"/>
     
     
-      <category term="Flutter" scheme="http://yoursite.com/tags/Flutter/"/>
+      <category term="Flutter" scheme="http://hanniballol.github.io/tags/Flutter/"/>
     
   </entry>
   
   <entry>
     <title>Espresso</title>
-    <link href="http://yoursite.com/2019/08/07/Espresso/"/>
-    <id>http://yoursite.com/2019/08/07/Espresso/</id>
+    <link href="http://hanniballol.github.io/2019/08/07/Espresso/"/>
+    <id>http://hanniballol.github.io/2019/08/07/Espresso/</id>
     <published>2019-08-07T07:35:23.000Z</published>
     <updated>2019-08-12T06:32:25.997Z</updated>
     
@@ -53,17 +53,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="Unit Case" scheme="http://yoursite.com/tags/Unit-Case/"/>
+      <category term="Unit Case" scheme="http://hanniballol.github.io/tags/Unit-Case/"/>
     
   </entry>
   
   <entry>
     <title>Android Unit Case</title>
-    <link href="http://yoursite.com/2019/08/06/Android-Unit-Case/"/>
-    <id>http://yoursite.com/2019/08/06/Android-Unit-Case/</id>
+    <link href="http://hanniballol.github.io/2019/08/06/Android-Unit-Case/"/>
+    <id>http://hanniballol.github.io/2019/08/06/Android-Unit-Case/</id>
     <published>2019-08-06T07:33:38.000Z</published>
     <updated>2019-08-12T06:32:13.284Z</updated>
     
@@ -75,17 +75,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="Unit Case" scheme="http://yoursite.com/tags/Unit-Case/"/>
+      <category term="Unit Case" scheme="http://hanniballol.github.io/tags/Unit-Case/"/>
     
   </entry>
   
   <entry>
     <title>Mixin</title>
-    <link href="http://yoursite.com/2019/07/25/Mixin/"/>
-    <id>http://yoursite.com/2019/07/25/Mixin/</id>
+    <link href="http://hanniballol.github.io/2019/07/25/Mixin/"/>
+    <id>http://hanniballol.github.io/2019/07/25/Mixin/</id>
     <published>2019-07-25T03:54:15.000Z</published>
     <updated>2019-08-12T06:32:39.367Z</updated>
     
@@ -97,17 +97,17 @@
     
     </summary>
     
-      <category term="Flutter" scheme="http://yoursite.com/categories/Flutter/"/>
+      <category term="Flutter" scheme="http://hanniballol.github.io/categories/Flutter/"/>
     
     
-      <category term="dart" scheme="http://yoursite.com/tags/dart/"/>
+      <category term="dart" scheme="http://hanniballol.github.io/tags/dart/"/>
     
   </entry>
   
   <entry>
     <title>部分地区github拉取代码奇满问题</title>
-    <link href="http://yoursite.com/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%BB%A1%E9%97%AE%E9%A2%98/"/>
-    <id>http://yoursite.com/2019/07/16/部分地区github拉取代码奇满问题/</id>
+    <link href="http://hanniballol.github.io/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%BB%A1%E9%97%AE%E9%A2%98/"/>
+    <id>http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇满问题/</id>
     <published>2019-07-16T03:50:02.000Z</published>
     <updated>2019-08-12T06:33:29.238Z</updated>
     
@@ -119,17 +119,17 @@
     
     </summary>
     
-      <category term="Tools" scheme="http://yoursite.com/categories/Tools/"/>
+      <category term="Tools" scheme="http://hanniballol.github.io/categories/Tools/"/>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="http://hanniballol.github.io/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>又一次有意思的经历</title>
-    <link href="http://yoursite.com/2019/03/22/%E5%8F%88%E4%B8%80%E6%AC%A1%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%BB%8F%E5%8E%86/"/>
-    <id>http://yoursite.com/2019/03/22/又一次有意思的经历/</id>
+    <link href="http://hanniballol.github.io/2019/03/22/%E5%8F%88%E4%B8%80%E6%AC%A1%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%BB%8F%E5%8E%86/"/>
+    <id>http://hanniballol.github.io/2019/03/22/又一次有意思的经历/</id>
     <published>2019-03-22T11:40:36.000Z</published>
     <updated>2019-08-12T06:33:04.070Z</updated>
     
@@ -141,17 +141,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>wake me up</title>
-    <link href="http://yoursite.com/2019/03/07/wake-me-up/"/>
-    <id>http://yoursite.com/2019/03/07/wake-me-up/</id>
+    <link href="http://hanniballol.github.io/2019/03/07/wake-me-up/"/>
+    <id>http://hanniballol.github.io/2019/03/07/wake-me-up/</id>
     <published>2019-03-07T12:05:22.000Z</published>
     <updated>2019-08-12T06:32:47.710Z</updated>
     
@@ -163,17 +163,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>生而为人，对不起</title>
-    <link href="http://yoursite.com/2019/01/27/%E7%94%9F%E8%80%8C%E4%B8%BA%E4%BA%BA%EF%BC%8C%E5%AF%B9%E4%B8%8D%E8%B5%B7/"/>
-    <id>http://yoursite.com/2019/01/27/生而为人，对不起/</id>
+    <link href="http://hanniballol.github.io/2019/01/27/%E7%94%9F%E8%80%8C%E4%B8%BA%E4%BA%BA%EF%BC%8C%E5%AF%B9%E4%B8%8D%E8%B5%B7/"/>
+    <id>http://hanniballol.github.io/2019/01/27/生而为人，对不起/</id>
     <published>2019-01-26T17:39:47.000Z</published>
     <updated>2019-08-12T06:33:15.474Z</updated>
     
@@ -185,17 +185,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>软键盘相关</title>
-    <link href="http://yoursite.com/2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/"/>
-    <id>http://yoursite.com/2018/12/03/软键盘相关/</id>
+    <link href="http://hanniballol.github.io/2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/"/>
+    <id>http://hanniballol.github.io/2018/12/03/软键盘相关/</id>
     <published>2018-12-03T07:58:05.000Z</published>
     <updated>2019-08-12T06:33:24.029Z</updated>
     
@@ -207,17 +207,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="View" scheme="http://yoursite.com/tags/View/"/>
+      <category term="View" scheme="http://hanniballol.github.io/tags/View/"/>
     
   </entry>
   
   <entry>
     <title>WindowManager窗口管理</title>
-    <link href="http://yoursite.com/2018/10/23/WindowManager%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/"/>
-    <id>http://yoursite.com/2018/10/23/WindowManager窗口管理/</id>
+    <link href="http://hanniballol.github.io/2018/10/23/WindowManager%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/"/>
+    <id>http://hanniballol.github.io/2018/10/23/WindowManager窗口管理/</id>
     <published>2018-10-23T08:14:44.000Z</published>
     <updated>2019-08-12T06:32:51.560Z</updated>
     
@@ -229,17 +229,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="View" scheme="http://yoursite.com/tags/View/"/>
+      <category term="View" scheme="http://hanniballol.github.io/tags/View/"/>
     
   </entry>
   
   <entry>
     <title>MAC android studio3.1.2无比卡，解决方案</title>
-    <link href="http://yoursite.com/2018/06/01/MAC-android-studio3-1-2%E6%97%A0%E6%AF%94%E5%8D%A1%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    <id>http://yoursite.com/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/</id>
+    <link href="http://hanniballol.github.io/2018/06/01/MAC-android-studio3-1-2%E6%97%A0%E6%AF%94%E5%8D%A1%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://hanniballol.github.io/2018/06/01/MAC-android-studio3-1-2无比卡，解决方案/</id>
     <published>2018-06-01T09:31:56.000Z</published>
     <updated>2019-08-12T06:32:34.627Z</updated>
     
@@ -251,17 +251,17 @@
     
     </summary>
     
-      <category term="Tools" scheme="http://yoursite.com/categories/Tools/"/>
+      <category term="Tools" scheme="http://hanniballol.github.io/categories/Tools/"/>
     
     
-      <category term="Android Studio" scheme="http://yoursite.com/tags/Android-Studio/"/>
+      <category term="Android Studio" scheme="http://hanniballol.github.io/tags/Android-Studio/"/>
     
   </entry>
   
   <entry>
     <title>MAC adb无线连接Android真机</title>
-    <link href="http://yoursite.com/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/"/>
-    <id>http://yoursite.com/2018/05/29/MAC-adb无线连接Android真机/</id>
+    <link href="http://hanniballol.github.io/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/"/>
+    <id>http://hanniballol.github.io/2018/05/29/MAC-adb无线连接Android真机/</id>
     <published>2018-05-29T01:49:13.000Z</published>
     <updated>2019-08-12T06:32:29.956Z</updated>
     
@@ -273,17 +273,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="adb" scheme="http://yoursite.com/tags/adb/"/>
+      <category term="adb" scheme="http://hanniballol.github.io/tags/adb/"/>
     
   </entry>
   
   <entry>
     <title>静默安装、自启动实践</title>
-    <link href="http://yoursite.com/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://yoursite.com/2018/05/26/静默安装、自启动实践/</id>
+    <link href="http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/</id>
     <published>2018-05-26T01:41:39.000Z</published>
     <updated>2019-08-12T06:33:34.178Z</updated>
     
@@ -295,17 +295,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="system" scheme="http://yoursite.com/tags/system/"/>
+      <category term="system" scheme="http://hanniballol.github.io/tags/system/"/>
     
   </entry>
   
   <entry>
     <title>android studio支持系统签名</title>
-    <link href="http://yoursite.com/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/"/>
-    <id>http://yoursite.com/2018/05/21/android-studio支持系统签名/</id>
+    <link href="http://hanniballol.github.io/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/"/>
+    <id>http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/</id>
     <published>2018-05-21T10:36:38.000Z</published>
     <updated>2019-08-12T06:31:53.343Z</updated>
     
@@ -317,17 +317,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="system" scheme="http://yoursite.com/tags/system/"/>
+      <category term="system" scheme="http://hanniballol.github.io/tags/system/"/>
     
   </entry>
   
   <entry>
     <title>Task :app:compileDebugJavaWithJavac Failed处理</title>
-    <link href="http://yoursite.com/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/</id>
+    <link href="http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86/"/>
+    <id>http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/</id>
     <published>2018-05-09T11:31:21.000Z</published>
     <updated>2018-05-09T11:40:11.867Z</updated>
     
@@ -344,17 +344,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="http://hanniballol.github.io/categories/Android/"/>
     
     
-      <category term="gradle" scheme="http://yoursite.com/tags/gradle/"/>
+      <category term="gradle" scheme="http://hanniballol.github.io/tags/gradle/"/>
     
   </entry>
   
   <entry>
     <title>cocoapods私有库处理</title>
-    <link href="http://yoursite.com/2018/03/29/cocoapods%E7%A7%81%E6%9C%89%E5%BA%93%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2018/03/29/cocoapods私有库处理/</id>
+    <link href="http://hanniballol.github.io/2018/03/29/cocoapods%E7%A7%81%E6%9C%89%E5%BA%93%E5%A4%84%E7%90%86/"/>
+    <id>http://hanniballol.github.io/2018/03/29/cocoapods私有库处理/</id>
     <published>2018-03-29T04:19:49.000Z</published>
     <updated>2019-08-12T06:32:18.302Z</updated>
     
@@ -366,17 +366,17 @@
     
     </summary>
     
-      <category term="iOS" scheme="http://yoursite.com/categories/iOS/"/>
+      <category term="iOS" scheme="http://hanniballol.github.io/categories/iOS/"/>
     
     
-      <category term="cocoaPods" scheme="http://yoursite.com/tags/cocoaPods/"/>
+      <category term="cocoaPods" scheme="http://hanniballol.github.io/tags/cocoaPods/"/>
     
   </entry>
   
   <entry>
     <title>从自己身上找问题或许是一种妥协</title>
-    <link href="http://yoursite.com/2018/02/02/%E4%BB%8E%E8%87%AA%E5%B7%B1%E8%BA%AB%E4%B8%8A%E6%89%BE%E9%97%AE%E9%A2%98%E6%88%96%E8%AE%B8%E6%98%AF%E4%B8%80%E7%A7%8D%E5%A6%A5%E5%8D%8F/"/>
-    <id>http://yoursite.com/2018/02/02/从自己身上找问题或许是一种妥协/</id>
+    <link href="http://hanniballol.github.io/2018/02/02/%E4%BB%8E%E8%87%AA%E5%B7%B1%E8%BA%AB%E4%B8%8A%E6%89%BE%E9%97%AE%E9%A2%98%E6%88%96%E8%AE%B8%E6%98%AF%E4%B8%80%E7%A7%8D%E5%A6%A5%E5%8D%8F/"/>
+    <id>http://hanniballol.github.io/2018/02/02/从自己身上找问题或许是一种妥协/</id>
     <published>2018-02-02T12:49:59.000Z</published>
     <updated>2019-08-12T06:32:55.305Z</updated>
     
@@ -388,17 +388,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>教诲</title>
-    <link href="http://yoursite.com/2017/11/26/%E6%95%99%E8%AF%B2/"/>
-    <id>http://yoursite.com/2017/11/26/教诲/</id>
+    <link href="http://hanniballol.github.io/2017/11/26/%E6%95%99%E8%AF%B2/"/>
+    <id>http://hanniballol.github.io/2017/11/26/教诲/</id>
     <published>2017-11-25T17:22:41.000Z</published>
     <updated>2019-08-12T06:33:11.199Z</updated>
     
@@ -410,17 +410,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>冲突中对中规中矩的认识</title>
-    <link href="http://yoursite.com/2017/11/25/%E5%86%B2%E7%AA%81%E4%B8%AD%E5%AF%B9%E4%B8%AD%E8%A7%84%E4%B8%AD%E7%9F%A9%E7%9A%84%E8%AE%A4%E8%AF%86/"/>
-    <id>http://yoursite.com/2017/11/25/冲突中对中规中矩的认识/</id>
+    <link href="http://hanniballol.github.io/2017/11/25/%E5%86%B2%E7%AA%81%E4%B8%AD%E5%AF%B9%E4%B8%AD%E8%A7%84%E4%B8%AD%E7%9F%A9%E7%9A%84%E8%AE%A4%E8%AF%86/"/>
+    <id>http://hanniballol.github.io/2017/11/25/冲突中对中规中矩的认识/</id>
     <published>2017-11-25T14:35:39.000Z</published>
     <updated>2019-08-12T06:32:59.934Z</updated>
     
@@ -432,17 +432,17 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="life" scheme="http://yoursite.com/tags/life/"/>
+      <category term="life" scheme="http://hanniballol.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>第一篇</title>
-    <link href="http://yoursite.com/2017/11/23/%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
-    <id>http://yoursite.com/2017/11/23/第一篇/</id>
+    <link href="http://hanniballol.github.io/2017/11/23/%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
+    <id>http://hanniballol.github.io/2017/11/23/第一篇/</id>
     <published>2017-11-23T14:05:52.000Z</published>
     <updated>2017-11-23T14:08:42.039Z</updated>
     
@@ -458,10 +458,10 @@
     
     </summary>
     
-      <category term="随笔" scheme="http://yoursite.com/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="随意" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%84%8F/"/>
+      <category term="随意" scheme="http://hanniballol.github.io/tags/%E9%9A%8F%E6%84%8F/"/>
     
   </entry>
   
