@@ -642,7 +642,7 @@ h6 {
           right: 0;
           left: 0;
           padding: 2px 7px;
-          font-size: 0.9em;
+          font-size: 0.5em;
           font-weight: bold;
           color: #cacaca;
           background: #f0f0f0;
@@ -718,6 +718,12 @@ h6 {
       .post .post-content .highlight .code .doctag,
       .post .post-content .highlight .code .regexp {
         color: #2aa198; }
+      .post .post-content .highlight .code .title,
+      .post .post-content .highlight .code .section,
+      .post .post-content .highlight .code .name,
+      .post .post-content .highlight .code .selector-id,
+      .post .post-content .highlight .code .selector-class {
+        color: #268bd2; }
       .post .post-content .highlight .code .attribute,
       .post .post-content .highlight .code .attr,
       .post .post-content .highlight .code .variable,
@@ -1175,7 +1181,7 @@ h6 {
   list-style: none; }
 
 .post code {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+  font-family: Consolas, Menlo; }
 
 .post .post-excerpt code,
 .post .post-content code {
@@ -1191,8 +1197,8 @@ h6 {
   padding: 12px;
   display: block;
   overflow-x: auto;
-  border: 1px solid #e7eaed;
-  background: #f6f8fa;
+  border: 1px solid #fffafa;
+  background: #363636;
   font-size: 85%;
   line-height: 1.7; }
 

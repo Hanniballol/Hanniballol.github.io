@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
+<meta name="baidu-site-verification" content="hkLiBHH93D">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="利用高阶函数简化策略模式、模板方法模式">
+
+
+
+
+  <meta name="keywords" content="Kotlin,">
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://hanniballol.github.io/2020/01/17/利用高阶函数简化策略模式、模板方法模式/">
+
+
+<meta name="description" content="策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。">
+<meta name="keywords" content="Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用高阶函数简化策略模式、模板方法模式">
+<meta property="og:url" content="http://hanniballol.github.io/2020/01/17/利用高阶函数简化策略模式、模板方法模式/index.html">
+<meta property="og:site_name" content="Hanniballol&#39;s Blog">
+<meta property="og:description" content="策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-19T05:01:41.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用高阶函数简化策略模式、模板方法模式">
+<meta name="twitter:description" content="策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+<!--百度统计-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    <title> 利用高阶函数简化策略模式、模板方法模式 - Hanniballol's Blog </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Hanniballol's Blog</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/archives">
+                            
+                            
+                                归档
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/about">
+                            
+                            
+                                关于
+                            
+                        </a>
+                    </li>
+                
+                    
+                        <li class="menu-item">
+                    
+                        <a href="/atom.xml">
+                            
+                            
+                                订阅
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          利用高阶函数简化策略模式、模板方法模式
+        
+      </h1>
+
+      <time class="post-time">
+          2020-01-17
+      </time>
+    </header>
+
+
+
+    
+            
+  <div class="toc-container">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#遵循开闭原则：策略模式"><span class="toc-text">遵循开闭原则：策略模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高阶函数抽象算法"><span class="toc-text">高阶函数抽象算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板方法模式：高阶函数代替继承"><span class="toc-text">模板方法模式：高阶函数代替继承</span></a></li></ol>
+  </div> 
+
+
+            <div class="post-content">
+                <div class="excerpt"><br>      策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。<br></div>
+
+<a id="more"></a>
+<h3 id="遵循开闭原则：策略模式"><a href="#遵循开闭原则：策略模式" class="headerlink" title="遵循开闭原则：策略模式"></a>遵循开闭原则：策略模式</h3><p>假设有一个表示游泳运动员的抽象类Swimmer，有一个游泳的方法swim：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swimmer</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am swimming..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//invoke</span></span><br><span class="line">&gt;&gt;&gt; Swimmer().swim()</span><br><span class="line">I am swimming...</span><br></pre></td></tr></table></figure>
+<p>由于这位运动员在游泳方面很有天赋，他很快掌握了蛙泳、仰泳、自由泳多种姿势。所以我将对Swimmer进行改造：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swimmer</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">breaststroke</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am breaststroke..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">backstroke</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am backstroke..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">freestyle</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am freestyling..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而这并不是一个很好的设计。首先，并不是所有的游泳运动员都掌握了这3种游泳姿势，如果每个Swimmer类对象都可以调用所有方法，显得比较危险。其次，后续难免会有新的行为方法加入，通过修改Swimmer类的方式违背了<strong>开放封闭原则</strong>(open for extension,closed for modification。面向扩展开放，面向修改关闭)。</p>
+<p>所以呢，更好的做法是将游泳这个行为封装成接口，根据不同的场景我们可以调用不同的游泳方法。比如这位游泳运动员计划周末游自由泳，其他时间则游蛙泳。策略模式就是一种解决这种场景很好的思路。</p>
+<blockquote>
+<p>策略模式定义了算法族，分别封装起来，让他们之间可以相互替换，此模式让算法的变化独立于使用算法的用户</p>
+</blockquote>
+<p>本质上，策略模式做的事情就是将不同的行为策略（Strategy）进行独立封装，与类的逻辑上解耦。然后根据不同的上下文（Context）切换选择不同的策略，然后用类对象进行调用：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">SwimStrategy</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Breaststroke</span>: <span class="type">SwimStrategy &#123;</span></span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am breaststroking..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Backstroke</span>: <span class="type">SwimStrategy &#123;</span></span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am Backstroke..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Freestyle</span>: <span class="type">SwimStrategy &#123;</span></span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"I am freestyling..."</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swimmer</span></span>(<span class="keyword">val</span> strategy: SwimStrategy) &#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    strategy.swim()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//invoke</span></span><br><span class="line">Swimmer(Freestyle()).swim()</span><br><span class="line">Swimmer(Breaststroke()).swim()</span><br></pre></td></tr></table></figure>
+<p>这个方案实现了解耦和复用的目的，且很好实现了在不同场景切换采用不同的策略。然而，该版本的代码量也比之前多了很多。</p>
+<h3 id="高阶函数抽象算法"><a href="#高阶函数抽象算法" class="headerlink" title="高阶函数抽象算法"></a>高阶函数抽象算法</h3><p>如果用高阶函数的思路来重新思考下策略类，显然将策略封装成一个函数然后作为参数传递给Swimmer类会更加的简洁。由于策略类的目的非常明确，仅仅是针对行为算法的一种抽象，所以高阶函数式是一种很好的替代思路。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">breaststroke</span><span class="params">()</span></span> &#123; ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Backstroke</span><span class="params">()</span></span> &#123; ...&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">freestyle</span><span class="params">()</span></span>&#123; ...&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Swimmer</span></span>(<span class="keyword">val</span> swimming: () -&gt; <span class="built_in">Unit</span>) &#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">swim</span><span class="params">()</span></span> &#123;</span><br><span class="line">    swimming()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//invoke</span></span><br><span class="line">Swimmer(::freestyle).swim</span><br></pre></td></tr></table></figure>
+<p>代码量一下子变少，而且结构上也更加容易阅读。由于策略算法都封装成了一个个函数，我们在初始化Swimmer类对象时，可以用函数引用的语法传递构造参数。当然，我们也可以把函数用val声明成Lambda表达式，那么在传递参数时会变得更加简洁直观。</p>
+<h3 id="模板方法模式：高阶函数代替继承"><a href="#模板方法模式：高阶函数代替继承" class="headerlink" title="模板方法模式：高阶函数代替继承"></a>模板方法模式：高阶函数代替继承</h3><p>另一个可用高阶函数改良的设计模式，就是<strong>模板方法模式</strong>。某种程度上，模板方法模式和策略模式要解决的问题是相似的，它们都可以分离通用的算法和具体的上下文。然而，如果说策略模式采用的思路是将酸奶法进行委托，那么传统的模板方法模式更多是基于继承的方法实现的。现在来看看模板方法模式的定义：</p>
+<p>定义一个算法中的操作框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可定义该算法的某些特定步骤。</p>
+<p>与策略模式不同，模板方法模式的行为算法具有更明晰的大纲结构，其中完全相同的步骤会在抽象类中实现，可个性化的某些步骤则在某子类中进行定义。举个例子，如果我们去市民事务中心办事时，一般都会有以下几个具体的步骤：</p>
+<p>1） 排队区号等待</p>
+<p>2）根据自己的需求办理个性化的业务，如获取社保清单、申请市民卡、办理房产证</p>
+<p>3）对服务人员的态度进行评价</p>
+<p>这是一个典型的适用模板方法模式的场景，办事步骤整体是一个算法大纲，其中步骤1）和3）都是相同的算法，而步骤2）则可以根据实际需求个性化选择。接下来我们就用代码实现一个抽象类，它定义了这个例子的操作框架：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CivicCenterTask</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">execute</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.lineup()</span><br><span class="line">    <span class="keyword">this</span>.askForHelp()</span><br><span class="line">    <span class="keyword">this</span>.evaluate()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">lineup</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"line up to take a number"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">evaluate</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"evaluaten service attitude"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">askForHelp</span><span class="params">()</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中askForHelp方法是一个抽象方法。接下来我们再定义具体的子类来继承CivicCenter-Task类，然后对抽象的步骤进行实现。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PullSocialSecurity</span>: <span class="type">CivicCenterTask &#123;</span></span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">askForHelp</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"ask for pulling teh social security"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApplyForCitizenCard</span>: <span class="type">CiviCenterTask &#123;</span></span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">askForHelp</span><span class="params">()</span></span> &#123;</span><br><span class="line">    println(<span class="string">"apply for a citizen card"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//invoke</span></span><br><span class="line">&gt;&gt;&gt; PullSocialSecurity().execute()</span><br><span class="line">line up to take a number</span><br><span class="line">ask <span class="keyword">for</span> pulling the social security</span><br><span class="line">evaluation service attitude</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; ApplyForCitizenCard().execute()</span><br><span class="line">line up to take a number</span><br><span class="line">apply <span class="keyword">for</span> a citizen card</span><br><span class="line">evaluaten service attitude</span><br></pre></td></tr></table></figure>
+<p>不出意料，两者的步骤2）的执行结果是不一样的。</p>
+<p>不得不说，模板方法模式的代码复用性已经非常高了，但是我们还是得根据不同的业务场景都定义一个具体的子类。幸运的是，在Kotlin中我们同样可以用改造策略模式的类似思想，来简化模板方法模式。依靠高阶函数，我们可以在只需一个CivicCenterTask类的情况下，代替继承实现相同的效果。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CivicCenterTask</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">execute</span><span class="params">(askForHelp: ()</span></span>-&gt;<span class="built_in">Unit</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.lineUp()</span><br><span class="line">    askForHelp()</span><br><span class="line">    <span class="keyword">this</span>.evaluate()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">lineup</span><span class="params">()</span></span>&#123; ... &#125;</span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">evaluate</span><span class="params">()</span></span>&#123; ... &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">pullSocialSecurity</span><span class="params">()</span></span> &#123; ... &#125;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">applyForCitizenCard</span><span class="params">()</span></span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//invoke</span></span><br><span class="line">&gt;&gt;&gt; CivicCenterTask().execute(::pullSocialSecurity)</span><br><span class="line">live up to take a number</span><br><span class="line">ask <span class="keyword">for</span> pulling the social security</span><br><span class="line">evaluaten service attitude</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; CivicCenterTask().excute(::applyForCitizenCard)</span><br><span class="line">line up to take number</span><br><span class="line">apply <span class="keyword">for</span> a citizen card</span><br><span class="line">evaluaten service attitude</span><br></pre></td></tr></table></figure>
+<p>如你所见，在高阶函数的帮助下，我们可以更加轻松地实现模板方法模式。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+      <ul class="post-copyright">
+        <li class="post-copyright-author">
+            <span>本文作者：</span>8MilesRD
+        </li>
+        <li class="post-copyright-link">
+          <span>本文链接：</span>
+          <a href="http://hanniballol.github.io//2020/01/17/利用高阶函数简化策略模式、模板方法模式/" title="利用高阶函数简化策略模式、模板方法模式">http://hanniballol.github.io/2020/01/17/利用高阶函数简化策略模式、模板方法模式/</a>
+        </li>
+        <li class="post-copyright-license">
+          <span>版权： </span>
+          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
+        </li>
+      </ul>
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Kotlin/">Kotlin</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2020/01/19/运算符重载和迭代器模式/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">运算符重载和迭代器模式</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2020/01/17/工厂方法模式/">
+        <span class="next-text nav-default">工厂方法模式</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+      
+        
+
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+
+    <div id="gitalk-container"></div>
+
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3284c9efc70f114c96b0',
+            clientSecret: '5c78b1e9a3ef66d4499edad956137198f150d04a',
+            repo: 'hanniballol.github.io',
+            owner: 'Hanniballol',
+            admin: 'hanniballol',
+            id: location.pathname,      // Ensure uniqueness and length less than 50
+            distractionFreeMode: 'false'  // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
+
+
+      
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2017 -
+    
+    2020
+    <span class="footer-author">8MilesRD.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+<!--prettify代码高亮脚本引入-->
+
+
+  </body>
+</html>

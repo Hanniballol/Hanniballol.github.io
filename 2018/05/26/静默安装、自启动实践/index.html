@@ -36,18 +36,18 @@
 <link rel="canonical" href="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/">
 
 
-<meta name="description" content="静默安装以及自启动">
+<meta name="description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
 <meta name="keywords" content="system">
 <meta property="og:type" content="article">
 <meta property="og:title" content="静默安装、自启动实践">
 <meta property="og:url" content="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="静默安装以及自启动">
+<meta property="og:description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-12T06:33:34.178Z">
+<meta property="og:updated_time" content="2020-01-17T08:53:34.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静默安装、自启动实践">
-<meta name="twitter:description" content="静默安装以及自启动">
+<meta name="twitter:description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
@@ -179,7 +179,8 @@ var _hmt = _hmt || [];
             <div class="post-content">
                 <div class="excerpt"><br>    静默安装以及自启动<br></div>
 
-<a id="more"></a>
+<div><br>      策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良<br></div>
+
 <p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
 <h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
 ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
