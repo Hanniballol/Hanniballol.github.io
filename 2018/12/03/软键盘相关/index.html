@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="软键盘相关">
+  <meta name="description" content="软键盘相关"/>
 
 
 
 
-  <meta name="keywords" content="View,">
+  <meta name="keywords" content="View," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2018/12/03/软键盘相关/">
+<link rel="canonical" href="http://hanniballol.github.io/2018/12/03/软键盘相关/"/>
 
 
 <meta name="description" content="Android软键盘相关处理">
-<meta name="keywords" content="View">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软键盘相关">
-<meta property="og:url" content="http://hanniballol.github.io/2018/12/03/软键盘相关/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="Android软键盘相关处理">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-12T06:33:24.029Z">
+<meta property="article:published_time" content="2018-12-03T07:58:05.000Z">
+<meta property="article:modified_time" content="2019-08-12T06:33:24.029Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="View">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软键盘相关">
-<meta name="twitter:description" content="Android软键盘相关处理">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> 软键盘相关 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -173,12 +173,17 @@ var _hmt = _hmt || [];
             
 
             <div class="post-content">
-                <div class="excerpt"><br>    Android软键盘相关处理<br></div>
+                <div class="excerpt">
+    Android软键盘相关处理
+</div>
 
 <a id="more"></a>
+
 <p>项目中有类似陌陌输入框的UI，因为Edittext不在输入框底部，导致软键盘弹出时显示在Edittext底部而遮挡掉输入框部分UI，目前采用的方法是对Viewtree进行监听，软键盘弹起来时，进行scrollTo移动输入框</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">configureViewTreeObserver</span><span class="params">(View root, View scrollToView)</span> </span>&#123;</span><br><span class="line">        root.getViewTreeObserver().addOnGlobalLayoutListener(() -&gt; &#123;</span><br><span class="line">            Rect rect = <span class="keyword">new</span> Rect();</span><br><span class="line">            <span class="comment">//获取到界面可见区域的矩形</span></span><br><span class="line">            root.getWindowVisibleDisplayFrame(rect);</span><br><span class="line">            <span class="comment">//根布局高度 - 可见区域高度 = 软键盘高度</span></span><br><span class="line">            <span class="keyword">int</span> keyboardHeight = root.getRootView().getHeight() - rect.bottom;</span><br><span class="line">            <span class="keyword">if</span> (keyboardHeight &gt; <span class="number">100</span>) &#123;</span><br><span class="line">                <span class="comment">//如果像素数大于100极大可能是软键盘弹出</span></span><br><span class="line">                mIsKeyboardOpened = <span class="keyword">true</span>;</span><br><span class="line">                <span class="comment">//处理Edittext不在输入框底部的情况</span></span><br><span class="line">                <span class="keyword">int</span>[] location = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line">                scrollToView.getLocationInWindow(location);</span><br><span class="line">                <span class="comment">//输入框在界面上Y轴坐标 + 输入框高度 - 可见区域底部</span></span><br><span class="line">                root.scrollTo(<span class="number">0</span>, location[<span class="number">1</span>] + scrollToView.getHeight() - rect.bottom);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//软键盘收起</span></span><br><span class="line">                root.scrollTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (mIsKeyboardOpened) &#123;</span><br><span class="line">                    mIsKeyboardOpened = <span class="keyword">false</span>;</span><br><span class="line">                    DanmakuInputDialog.<span class="keyword">this</span>.dismiss();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>##android:windowSoftInputMode属性<br>输入框以DialogFragment的方式进行视图叠加实现，没有用到windowSoftInputMode属性，不过这里也总结一下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:windowSoftInputMode=<span class="string">"stateVisible|adjustResize"</span>. . . &gt;</span><br></pre></td></tr></table></figure></p>
+
+<p>##android:windowSoftInputMode属性<br>输入框以DialogFragment的方式进行视图叠加实现，没有用到windowSoftInputMode属性，不过这里也总结一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:windowSoftInputMode=<span class="string">"stateVisible|adjustResize"</span>. . . &gt;</span><br></pre></td></tr></table></figure>
 <p>activity主窗口与软键盘的交互模式，可以用来避免输入法面板遮挡问题，Android1.5后的一个新特性。<br>这个属性能影响两件事情：</p>
 <ul>
 <li>当有焦点产生时，软键盘是隐藏还是显示</li>
@@ -196,7 +201,8 @@ var _hmt = _hmt || [];
 <li>adjustResize：该Activity总是调整屏幕的大小以便留出软键盘的空间 </li>
 <li>adjustPan：当前窗口的内容将自动移动以便当前焦点从不被键盘覆盖和用户能总是看到输入内容的部分</li>
 </ul>
-<p>##android:imeOptinos属性<br>Android在横屏时唤起软键盘会默认全屏展示，当使用imeOptions时可以解决问题。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Edittext android:imeOptions=<span class="string">"flagNoExtractUi"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>##android:imeOptinos属性<br>Android在横屏时唤起软键盘会默认全屏展示，当使用imeOptions时可以解决问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Edittext android:imeOptions=<span class="string">"flagNoExtractUi"</span>&gt;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>android:imeOptions=”flagNoExtractUi” //使软键盘不全屏显示，只占用一部分屏幕 同时,这个属性还能控件软键盘右下角按键的显示内容,默认情况下为回车键 </li>
 <li>android:imeOptions=”actionNone” //输入框右侧不带任何提示 </li>
@@ -218,7 +224,7 @@ var _hmt = _hmt || [];
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/12/03/软键盘相关/" title="软键盘相关">http://hanniballol.github.io/2018/12/03/软键盘相关/</a>
+          <a href="http://hanniballol.github.io//2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/" title="软键盘相关">http://hanniballol.github.io/2018/12/03/软键盘相关/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -237,14 +243,14 @@ var _hmt = _hmt || [];
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/01/27/生而为人，对不起/">
+      <a class="prev" href="/2019/01/27/%E7%94%9F%E8%80%8C%E4%B8%BA%E4%BA%BA%EF%BC%8C%E5%AF%B9%E4%B8%8D%E8%B5%B7/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">生而为人，对不起</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2018/10/23/WindowManager窗口管理/">
+      <a class="next" href="/2018/10/23/WindowManager%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/">
         <span class="next-text nav-default">WindowManager窗口管理</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -309,7 +315,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

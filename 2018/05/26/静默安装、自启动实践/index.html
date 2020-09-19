@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="静默安装、自启动实践">
+  <meta name="description" content="静默安装、自启动实践"/>
 
 
 
 
-  <meta name="keywords" content="system,">
+  <meta name="keywords" content="system," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/">
+<link rel="canonical" href="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/"/>
 
 
-<meta name="description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
-<meta name="keywords" content="system">
+<meta name="description" content="静默安装以及自启动          策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良   最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然">
 <meta property="og:type" content="article">
 <meta property="og:title" content="静默安装、自启动实践">
-<meta property="og:url" content="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-17T08:53:34.254Z">
+<meta property="og:description" content="静默安装以及自启动          策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良   最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然">
+<meta property="article:published_time" content="2018-05-26T01:41:39.000Z">
+<meta property="article:modified_time" content="2020-01-17T08:53:34.254Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="system">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静默安装、自启动实践">
-<meta name="twitter:description" content="静默安装以及自启动        策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良  最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> 静默安装、自启动实践 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -177,18 +177,22 @@ var _hmt = _hmt || [];
 
 
             <div class="post-content">
-                <div class="excerpt"><br>    静默安装以及自启动<br></div>
+                <div class="excerpt">
+    静默安装以及自启动
+</div>
 
-<div><br>      策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良<br></div>
+<div>
+      策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良
+</div>
 
 <p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
-<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
-，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
-性，自家的系统想咋样就咋样。
-</code></pre><h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>&lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
-</code></pre><h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
-<pre><code>pm install -r
-</code></pre><p>实现代码</p>
+<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
+    ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
+    性，自家的系统想咋样就咋样。</code></pre>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>    &lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;</code></pre>
+<h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
+<pre><code>        pm install -r</code></pre>
+<p>实现代码</p>
 <pre><code>/**
 * install slient
 * 
@@ -255,8 +259,8 @@ public static int installSlient(Context context, String filePath) {
     }
     Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
     return result;
-}
-</code></pre><h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
+}</code></pre>
+<h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
 <p>参考:<br><a href="http://www.trinea.cn/android/android-install-silent/" target="_blank" rel="noopener">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java" target="_blank" rel="noopener">pm.java</a></p>
 
             </div>
@@ -270,7 +274,7 @@ public static int installSlient(Context context, String filePath) {
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/05/26/静默安装、自启动实践/" title="静默安装、自启动实践">http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/</a>
+          <a href="http://hanniballol.github.io//2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/" title="静默安装、自启动实践">http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -289,14 +293,14 @@ public static int installSlient(Context context, String filePath) {
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/05/29/MAC-adb无线连接Android真机/">
+      <a class="prev" href="/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">MAC adb无线连接Android真机</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2018/05/21/android-studio支持系统签名/">
+      <a class="next" href="/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/">
         <span class="next-text nav-default">android studio支持系统签名</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -361,7 +365,7 @@ public static int installSlient(Context context, String filePath) {
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

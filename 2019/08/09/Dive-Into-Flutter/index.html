@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="Dive Into Flutter">
+  <meta name="description" content="Dive Into Flutter"/>
 
 
 
 
-  <meta name="keywords" content="Flutter,">
+  <meta name="keywords" content="Flutter," />
 
 
 
@@ -29,37 +29,35 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2019/08/09/Dive-Into-Flutter/">
+<link rel="canonical" href="http://hanniballol.github.io/2019/08/09/Dive-Into-Flutter/"/>
 
 
-<meta name="description" content="首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一">
-<meta name="keywords" content="Flutter">
+<meta name="description" content="首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dive Into Flutter">
 <meta property="og:url" content="http://hanniballol.github.io/2019/08/09/Dive-Into-Flutter/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当">
 <meta property="og:image" content="http://hanniballol.github.io/images/dive_into_flutter_screen_scan.png">
 <meta property="og:image" content="http://hanniballol.github.io/images/dive_into_flutter_screen_display.png">
-<meta property="og:image" content="http://hanniballol.github.io/images/dive_into_flutter_vsync_off.jpg">
 <meta property="og:image" content="http://hanniballol.github.io/images/dive_into_flutter_frame_drop.png">
-<meta property="og:updated_time" content="2019-08-12T06:19:07.625Z">
+<meta property="article:published_time" content="2019-08-09T09:14:10.000Z">
+<meta property="article:modified_time" content="2020-09-17T08:57:29.551Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="Flutter">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dive Into Flutter">
-<meta name="twitter:description" content="首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一">
 <meta name="twitter:image" content="http://hanniballol.github.io/images/dive_into_flutter_screen_scan.png">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -103,7 +101,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> Dive Into Flutter - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -182,23 +181,22 @@ var _hmt = _hmt || [];
 
 
             <div class="post-content">
-                <div class="excerpt"><br>首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号（vertial synchronization），简称VSync。显示器通常以固定频率进行刷新，这个刷新率就是VSync信号产生的频率。尽管现在的设备大都是液晶显示屏了，但原理仍然没有变。<br></div>
+                <div class="excerpt">
+首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号（vertial synchronization），简称VSync。显示器通常以固定频率进行刷新，这个刷新率就是VSync信号产生的频率。尽管现在的设备大都是液晶显示屏了，但原理仍然没有变。
+</div>
 
 <a id="more"></a>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="屏幕显示图片的原理"><a href="#屏幕显示图片的原理" class="headerlink" title="屏幕显示图片的原理"></a>屏幕显示图片的原理</h4><div style="width: 321px;"><img src="/images/dive_into_flutter_screen_scan.png" alt="dive_into_flutter_screen_scan"></div>
 
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><h4 id="屏幕显示图片的原理"><a href="#屏幕显示图片的原理" class="headerlink" title="屏幕显示图片的原理"></a>屏幕显示图片的原理</h4><p><img src="/images/dive_into_flutter_screen_scan.png" alt="dive_into_flutter_screen_scan"></p>
 <p>首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号（vertial synchronization），简称VSync。显示器通常以固定频率进行刷新，这个刷新率就是VSync信号产生的频率。尽管现在的设备大都是液晶显示屏了，但原理仍然没有变。</p>
-<div style="width: 546px;"><img src="/images/dive_into_flutter_screen_display.png" alt="dive_into_flutter_screen_display"></div>
-
+<p><img src="/images/dive_into_flutter_screen_display.png" alt="dive_into_flutter_screen_display"></p>
 <p>通常来说，计算机系统中CPU,GPU,显示器是以上面这种方式协同工作的。CPU计算好显示内容提交到GPU,GPU渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照VSync信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。CPU和GPU的任务是各有偏重的，CPU主要用于基本数学和逻辑计算，而GPU主要执行和图形处理相关的复杂的数学，如矩阵变化和几何计算，GPU的主要作用就是确定最终输送给显示器的各个像素点的色值。</p>
 <p>在最简单的情况下，帧缓存区只有一个，这时帧缓存区的读取和刷新都会有比较大的效率问题。为了解决效率问题，显示系统通常会引入两个缓冲区，让视频控制器读取，当下一帧渲染好后，GPU会直接把视频控制器的指针指向第二个缓冲器。如此一来效率会有很大的提高。</p>
 <p>双缓冲虽然能解决效率问题，但会引入一个新的问题。当视频控制器还未读取完成时，即屏幕内容刚显示一半时，GPU将新的一帧内容提交到帧缓存区并把两个缓冲区进行交换后，视频控制器就会把新的一帧数据的下半段显示到屏幕上，造成画面撕裂现象，如下图：</p>
-<div style="width: 500px;"><img src="/images/dive_into_flutter_vsync_off.jpg" alt="dive_into_flutter_vsync_off"></div>
-
+<p>![dive_into_flutter_vsync_off](/images/dive_into_flutter_vsync_off.jpg</p>
 <p>为了解决这个问题，GPU通常有一个机制叫做垂直同步（简写也是V-Sync），当开启垂直同步后，GPU会等待显示器的VSync信号发出后，才进行新的一帧渲染和缓存区更新。这样能解决画面撕裂现象，也增加了画面流畅度，但需要消费更多的计算资源，也会带来部分延迟。</p>
 <p>那么目前主流的移动设备是什么情况？从网上查到的资料可以知道，iOS设备会始终使用双缓存，并开启垂直同步。而安卓设备到4.1版本，Google才开始引入这种机制，目前安卓系统是三缓存+垂直同步。</p>
-<div style="widows: 712px"><img src="/images/dive_into_flutter_frame_drop.png" alt="dive_into_flutter_frame_drop"></div>
-
+<p><img src="/images/dive_into_flutter_frame_drop.png" alt="dive_into_flutter_frame_drop"></p>
 <p>当VSync信号到来后，系统图形服务会通过CADisplayLink(iOS),ViewTreeObserver(Android)等机制通知App，App主线程开始在CPU中计算显示内容，比如视图的创建、布局计算、图片解码、文本绘制等。随后CPU会将计算好的内容提交到GPU去，由GPU进行变化、合成、渲染。随后GPU会把渲染结果提交到帧缓冲区去，等待下一次VSync信号到来时显示到屏幕上。由于垂直同步的机制，如果在一个VSync时间内，CPU或者GPU没有完成内容提交，则那一帧就会被丢弃，等待下一次机会再显示，而这时显示屏会保留之前的内容不变。这就是界面卡顿的原因。</p>
 <h4 id="卡顿产生的原因和解决方案"><a href="#卡顿产生的原因和解决方案" class="headerlink" title="卡顿产生的原因和解决方案"></a>卡顿产生的原因和解决方案</h4><p>参考:<br><a href="https://blog.ibireme.com/2015/11/12/smooth_user_interfaces_for_ios/" target="_blank" rel="noopener">iOS保持界面流畅的技巧</a></p>
 
@@ -304,7 +302,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

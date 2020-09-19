@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="android studio支持系统签名">
+  <meta name="description" content="android studio支持系统签名"/>
 
 
 
 
-  <meta name="keywords" content="system,">
+  <meta name="keywords" content="system," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/">
+<link rel="canonical" href="http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/"/>
 
 
 <meta name="description" content="Android源码环境编译调试">
-<meta name="keywords" content="system">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android studio支持系统签名">
-<meta property="og:url" content="http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="Android源码环境编译调试">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-12T06:31:53.343Z">
+<meta property="article:published_time" content="2018-05-21T10:36:38.000Z">
+<meta property="article:modified_time" content="2019-08-12T06:31:53.343Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="system">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android studio支持系统签名">
-<meta name="twitter:description" content="Android源码环境编译调试">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> android studio支持系统签名 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -172,63 +172,66 @@ var _hmt = _hmt || [];
     
             
   <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用系统签名方式"><span class="toc-text">常用系统签名方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android源码环境下签名"><span class="toc-text">Android源码环境下签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动重新签名"><span class="toc-text">手动重新签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相关文件"><span class="toc-text">相关文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件位置"><span class="toc-text">文件位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#签名命令"><span class="toc-text">签名命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤"><span class="toc-text">步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Studio系统签名"><span class="toc-text">Android Studio系统签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keytool-importkeypair"><span class="toc-text">keytool-importkeypair</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关文件-1"><span class="toc-text">相关文件</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#转换系统签名命令"><span class="toc-text">转换系统签名命令</span></a>
-  </li></div> 
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用系统签名方式"><span class="toc-text">常用系统签名方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android源码环境下签名"><span class="toc-text">Android源码环境下签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动重新签名"><span class="toc-text">手动重新签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相关文件"><span class="toc-text">相关文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件位置"><span class="toc-text">文件位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#签名命令"><span class="toc-text">签名命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#步骤"><span class="toc-text">步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Studio系统签名"><span class="toc-text">Android Studio系统签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#keytool-importkeypair"><span class="toc-text">keytool-importkeypair</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关文件-1"><span class="toc-text">相关文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#转换系统签名命令"><span class="toc-text">转换系统签名命令</span></a>
+  </div> 
 
 
             <div class="post-content">
-                <div class="excerpt"><br>    Android源码环境编译调试<br></div>
+                <div class="excerpt">
+    Android源码环境编译调试
+</div>
 
 <a id="more"></a>
+
 <p>如果想让apk拥有系统权限，需要再AndroidManifest.xml中添加共享系统进程属性：</p>
-<pre><code>android:sharedUserId=&quot;android.uid.system&quot;
-android:sharedUserId=&quot;android.uid.shared&quot;
-android:sharedUserId=&quot;android.media&quot;
-</code></pre><p>这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。</p>
+<pre><code>    android:sharedUserId=&quot;android.uid.system&quot;
+    android:sharedUserId=&quot;android.uid.shared&quot;
+    android:sharedUserId=&quot;android.media&quot;</code></pre>
+<p>这时候apk的签名就需要是系统签名(platform、shared或media)才能正常使用。</p>
 <h2 id="常用系统签名方式"><a href="#常用系统签名方式" class="headerlink" title="常用系统签名方式"></a>常用系统签名方式</h2><h3 id="Android源码环境下签名"><a href="#Android源码环境下签名" class="headerlink" title="Android源码环境下签名"></a>Android源码环境下签名</h3><p>这种方式比较麻烦，你需要有编译过的源码环境，并按如下步骤：</p>
 <p>1、拷贝App源码到Android源码的packages/apps/目录下，且App源码是普通(Eclipse)格式的<br>2、配置Android.mk，在其中添加</p>
-<pre><code>LOCAL_CERTIFICATE := platform 或 shared 或 media
-</code></pre><p>3、使用mm编译App，生成的apk即系统签名</p>
+<pre><code>LOCAL_CERTIFICATE := platform 或 shared 或 media</code></pre>
+<p>3、使用mm编译App，生成的apk即系统签名</p>
 <h3 id="手动重新签名"><a href="#手动重新签名" class="headerlink" title="手动重新签名"></a>手动重新签名</h3><p>这种方式比在源码环境下签名简单，App可以在Eclipse或Android Studio下编译，然后给apk重新签名即可。<br>但这种方式在频繁调试的时候比较痛苦，即使写成脚本，也需要重复一样的操作。</p>
 <h4 id="相关文件"><a href="#相关文件" class="headerlink" title="相关文件"></a>相关文件</h4><p>platform.x509.pem、platform.pk8、signapk.jar</p>
 <h4 id="文件位置"><a href="#文件位置" class="headerlink" title="文件位置"></a>文件位置</h4><p>platform.x509.pem、platform.pk8:</p>
-<pre><code>../build/target/product/security
-</code></pre><p>signapk.jar:</p>
-<pre><code>../out/host/linux-x86/framework
-</code></pre><p>signapk源码路径:</p>
-<pre><code>../build/tools/signapk
-</code></pre><h4 id="签名命令"><a href="#签名命令" class="headerlink" title="签名命令"></a>签名命令</h4><p>java -jar signapk.jar platform.x509.pem platform.pk8 old.apk new.apk</p>
+<pre><code>../build/target/product/security</code></pre>
+<p>signapk.jar:</p>
+<pre><code>../out/host/linux-x86/framework</code></pre>
+<p>signapk源码路径:</p>
+<pre><code>../build/tools/signapk</code></pre>
+<h4 id="签名命令"><a href="#签名命令" class="headerlink" title="签名命令"></a>签名命令</h4><p>java -jar signapk.jar platform.x509.pem platform.pk8 old.apk new.apk</p>
 <h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><p>1、将相关文件及源apk文件置于同一路径下<br>2、检查源apk包，去掉META-INF/CERT.SF 和 META-INF/CERT.RSA 文件<br>3、执行签名命令即可</p>
 <h2 id="Android-Studio系统签名"><a href="#Android-Studio系统签名" class="headerlink" title="Android Studio系统签名"></a>Android Studio系统签名</h2><p>让Android Studio集成系统签名，需要用到一个工具keytool-importkeypair，详见下文。</p>
-<h3 id="keytool-importkeypair"><a href="#keytool-importkeypair" class="headerlink" title="keytool-importkeypair"></a>keytool-importkeypair</h3><pre><code>keytool-importkeypair – A shell script to import key/certificate pairs into an existing Java keystore
-</code></pre><h3 id="相关文件-1"><a href="#相关文件-1" class="headerlink" title="相关文件"></a>相关文件</h3><p>platform.x509.pem、platform.pk8、keytool-importkeypair、demo.jks、signature.sh<br>我的做法是在App根目录新建Signature文件夹专门存放签名相关文件。<br>1.生成签名文件xx.jks<br>2.编写签名脚本signature.sh，内容如下:</p>
+<h3 id="keytool-importkeypair"><a href="#keytool-importkeypair" class="headerlink" title="keytool-importkeypair"></a>keytool-importkeypair</h3><pre><code>keytool-importkeypair – A shell script to import key/certificate pairs into an existing Java keystore</code></pre>
+<h3 id="相关文件-1"><a href="#相关文件-1" class="headerlink" title="相关文件"></a>相关文件</h3><p>platform.x509.pem、platform.pk8、keytool-importkeypair、demo.jks、signature.sh<br>我的做法是在App根目录新建Signature文件夹专门存放签名相关文件。<br>1.生成签名文件xx.jks<br>2.编写签名脚本signature.sh，内容如下:</p>
 <p>#!/bin/sh</p>
 <h1 id="转换系统签名命令"><a href="#转换系统签名命令" class="headerlink" title="转换系统签名命令"></a>转换系统签名命令</h1><p>./keytool-importkeypair -k demo.jks -p 123456 -pk8 platform.pk8 -cert platform.x509.pem -alias demo</p>
 <pre><code># demo.jks : 签名文件
 # 123456 : 签名文件密码
 # platform.pk8、platform.x509.pem : 系统签名文件
-# demo : 签名文件别名
-</code></pre><p>为脚本文件添加可执行权限：</p>
-<pre><code>$ sudo chmod a+x signature.sh
-</code></pre><p>执行脚本：</p>
-<pre><code>$ ./signature.sh
-</code></pre><p>3.配置builde.gradle</p>
+# demo : 签名文件别名</code></pre>
+<p>为脚本文件添加可执行权限：</p>
+<pre><code>$ sudo chmod a+x signature.sh</code></pre>
+<p>执行脚本：</p>
+<pre><code>$ ./signature.sh</code></pre>
+<p>3.配置builde.gradle</p>
 <pre><code>signingConfigs {
     release {
     storeFile file(&quot;../signature/demo.jks&quot;)
-    storePassword &apos;123456&apos;
-    keyAlias &apos;demo&apos;
-    keyPassword &apos;123456&apos;
+    storePassword &#39;123456&#39;
+    keyAlias &#39;demo&#39;
+    keyPassword &#39;123456&#39;
     }
 
     debug {
     storeFile file(&quot;../signature/demo.jks&quot;)
-    storePassword &apos;123456&apos;
-    keyAlias &apos;demo&apos;
-    keyPassword &apos;123456&apos;
+    storePassword &#39;123456&#39;
+    keyAlias &#39;demo&#39;
+    keyPassword &#39;123456&#39;
     }
-}
-</code></pre><p>这样debug或release apk就带有系统签名了。</p>
+}</code></pre>
+<p>这样debug或release apk就带有系统签名了。</p>
 
             </div>
           
@@ -241,7 +244,7 @@ android:sharedUserId=&quot;android.media&quot;
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/05/21/android-studio支持系统签名/" title="android studio支持系统签名">http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/</a>
+          <a href="http://hanniballol.github.io//2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/" title="android studio支持系统签名">http://hanniballol.github.io/2018/05/21/android-studio支持系统签名/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -260,14 +263,14 @@ android:sharedUserId=&quot;android.media&quot;
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/05/26/静默安装、自启动实践/">
+      <a class="prev" href="/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">静默安装、自启动实践</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/">
+      <a class="next" href="/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86/">
         <span class="next-text nav-default">Task :app:compileDebugJavaWithJavac Failed处理</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -332,7 +335,7 @@ android:sharedUserId=&quot;android.media&quot;
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

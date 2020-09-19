@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="Task :app:compileDebugJavaWithJavac Failed处理">
+  <meta name="description" content="Task :app:compileDebugJavaWithJavac Failed处理"/>
 
 
 
 
-  <meta name="keywords" content="gradle,">
+  <meta name="keywords" content="gradle," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/">
+<link rel="canonical" href="http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/"/>
 
 
-<meta name="description" content="今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用 $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入 $">
-<meta name="keywords" content="gradle">
+<meta name="description" content="今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用     $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: .&#x2F;gradlew: Permission denied错误，可以输">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Task :app:compileDebugJavaWithJavac Failed处理">
-<meta property="og:url" content="http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用 $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入 $">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-09T11:40:11.867Z">
+<meta property="og:description" content="今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用     $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: .&#x2F;gradlew: Permission denied错误，可以输">
+<meta property="article:published_time" content="2018-05-09T11:31:21.000Z">
+<meta property="article:modified_time" content="2018-05-09T11:40:11.867Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="gradle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Task :app:compileDebugJavaWithJavac Failed处理">
-<meta name="twitter:description" content="今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。 该问题基本由于gradle编译导致，可以用 $ gradlew compileDebug --stacktrace 来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入 $">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> Task :app:compileDebugJavaWithJavac Failed处理 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -175,12 +175,12 @@ var _hmt = _hmt || [];
             <div class="post-content">
                 <p>今天遇到了Task :app:compileDebugJavaWithJavac FAILED问题，网上答案很杂，解决以后总结一下。</p>
 <p>该问题基本由于gradle编译导致，可以用</p>
-<pre><code>$ gradlew compileDebug --stacktrace
-</code></pre><p>来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入</p>
-<pre><code>$ chmod +x gradlew
-</code></pre><p>来解决权限问题，不过gradlew comileDebug 并不能看到有价值的信息，根据提示，输入</p>
-<pre><code>$ gradlew compileDebugSources --stacktrace -info
-</code></pre><p>解决问题，原来是某个.java文件没push导致。</p>
+<pre><code>    $ gradlew compileDebug --stacktrace</code></pre>
+<p>来跟踪gradle编译时的stacktrace信息，如果出现-bash: ./gradlew: Permission denied错误，可以输入</p>
+<pre><code>    $ chmod +x gradlew</code></pre>
+<p>来解决权限问题，不过gradlew comileDebug 并不能看到有价值的信息，根据提示，输入</p>
+<pre><code>    $ gradlew compileDebugSources --stacktrace -info</code></pre>
+<p>解决问题，原来是某个.java文件没push导致。</p>
 
             </div>
           
@@ -193,7 +193,7 @@ var _hmt = _hmt || [];
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/" title="Task :app:compileDebugJavaWithJavac Failed处理">http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/</a>
+          <a href="http://hanniballol.github.io//2018/05/09/Task-app-compileDebugJavaWithJavac-Failed%E5%A4%84%E7%90%86/" title="Task :app:compileDebugJavaWithJavac Failed处理">http://hanniballol.github.io/2018/05/09/Task-app-compileDebugJavaWithJavac-Failed处理/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -212,14 +212,14 @@ var _hmt = _hmt || [];
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2018/05/21/android-studio支持系统签名/">
+      <a class="prev" href="/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">android studio支持系统签名</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2018/03/29/cocoapods私有库处理/">
+      <a class="next" href="/2018/03/29/cocoapods%E7%A7%81%E6%9C%89%E5%BA%93%E5%A4%84%E7%90%86/">
         <span class="next-text nav-default">cocoapods私有库处理</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -284,7 +284,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

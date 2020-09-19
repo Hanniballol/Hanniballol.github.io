@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="ADT实现状态模式">
+  <meta name="description" content="ADT实现状态模式"/>
 
 
 
 
-  <meta name="keywords" content="Kotlin,">
+  <meta name="keywords" content="Kotlin," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2020/01/21/ADT实现状态模式/">
+<link rel="canonical" href="http://hanniballol.github.io/2020/01/21/ADT实现状态模式/"/>
 
 
 <meta name="description" content="ADT(代数数据类型)是函数式语音中一种强大的语言特性，这次用它来实现状态模式">
-<meta name="keywords" content="Kotlin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ADT实现状态模式">
-<meta property="og:url" content="http://hanniballol.github.io/2020/01/21/ADT实现状态模式/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="ADT(代数数据类型)是函数式语音中一种强大的语言特性，这次用它来实现状态模式">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-21T08:42:39.237Z">
+<meta property="article:published_time" content="2020-01-21T07:06:20.000Z">
+<meta property="article:modified_time" content="2020-01-21T08:42:39.237Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ADT实现状态模式">
-<meta name="twitter:description" content="ADT(代数数据类型)是函数式语音中一种强大的语言特性，这次用它来实现状态模式">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> ADT实现状态模式 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -173,9 +173,12 @@ var _hmt = _hmt || [];
             
 
             <div class="post-content">
-                <div class="excerpt"><br>    ADT(代数数据类型)是函数式语音中一种强大的语言特性，这次用它来实现状态模式<br></div>
+                <div class="excerpt">
+    ADT(代数数据类型)是函数式语音中一种强大的语言特性，这次用它来实现状态模式
+</div>
 
 <a id="more"></a>
+
 <p>状态模式与策略模式存在某些相似性，它们都可以实现某种算法、业务逻辑的切换。以下是状态模式的定义：</p>
 <blockquote>
 <p>状态模式允许一个对象在其内部状态改变时改变的行为，对象看起来似乎修改了它的类。</p>
@@ -188,6 +191,7 @@ var _hmt = _hmt || [];
 <p>再次与策略模式做对比，策略模式通过在客户端切换不同的策略实现来改变算法；而在状态模式中，<strong>对象通过修改内部的状态来切换不同的行为方法</strong>。</p>
 <p>现在我们举一个饮水机的例子，假如一个饮水机有3种工作状态，分别为未启动、制冷模式、制热模式，那么可以用密封类来封装一个代表不同饮水机状态的ADT。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">class</span> <span class="title">WaterMachineState</span></span>(<span class="keyword">open</span> <span class="keyword">val</span> machine: WaterMachine) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnHeating</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> !<span class="keyword">is</span> Heating) &#123;</span><br><span class="line">      print(<span class="string">"turn heating"</span>)</span><br><span class="line">      machine.state = machine.heating</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      print(<span class="string">"The state is already heating mode."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnCooling</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> !<span class="keyword">is</span> Cooling) &#123;</span><br><span class="line">      print(<span class="string">"turn cooling"</span>)</span><br><span class="line">      machine.state = machine.cooling</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      print(<span class="string">"The state is already cooling mode."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnOff</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> !<span class="keyword">is</span> Off) &#123;</span><br><span class="line">      print(<span class="string">"turn off"</span>)</span><br><span class="line">      machine.state = machine.off</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      print(<span class="string">"The state is already off mode."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Off</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> machine: WaterMachine) : WatermachineState(machine)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Heating</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> machine: WaterMachine) : WatermachineState(machine)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cooling</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> machine: WaterMachine) : WatermachineState(machine)</span><br></pre></td></tr></table></figure>
+
 <p>以上代码分析：</p>
 <ul>
 <li>WatermachineState是一个密封类，拥有一个构造参数为WaterMachine类对象</li>
@@ -195,7 +199,8 @@ var _hmt = _hmt || [];
 <li>在每个切换状态的方法中，我们通过改变machine对象的state，来实现切换饮水机状态的目的</li>
 </ul>
 <p>接着看WaterMachine类：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WaterMachine</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> state: WaterMachineState</span><br><span class="line">  <span class="keyword">val</span> off = Off(<span class="keyword">this</span>)</span><br><span class="line">  <span class="keyword">val</span> heating = Heating(<span class="keyword">this</span>)</span><br><span class="line">  <span class="keyword">val</span> cooling = Cooling(<span class="keyword">this</span>)</span><br><span class="line">  </span><br><span class="line">  init &#123;</span><br><span class="line">    <span class="keyword">this</span>.state = off</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnHeating</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnHeating()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnCooling</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnCooling()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnOff</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnOff()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WaterMachine</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> state: WaterMachineState</span><br><span class="line">  <span class="keyword">val</span> off = Off(<span class="keyword">this</span>)</span><br><span class="line">  <span class="keyword">val</span> heating = Heating(<span class="keyword">this</span>)</span><br><span class="line">  <span class="keyword">val</span> cooling = Cooling(<span class="keyword">this</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">init</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state = off</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnHeating</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnHeating()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnCooling</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnCooling()</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">turnOff</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.turnOff()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>WaterMachine很简单，内部主要包含了一下成员属性和方法：</p>
 <ul>
 <li>引用可变的WaterMachineState类对象state，用来表示当前饮水机所处的工作状态</li>
@@ -205,6 +210,7 @@ var _hmt = _hmt || [];
 <p>如果办公室的小伙伴都喜欢喝冷水，早上一来就会把饮水机调整为制冷模式，但Shaw有吃泡面的习惯，他想泡面的时候，就会把饮水机变为制热，所以每次他吃了泡面，下一个喝水的同事就需要再切换回制冷。最后要下班了，Kim就会关闭饮水机的电源。</p>
 <p>为了满足这一需求，我们设计了一个waterMachineOps函数：</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Moment</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  EARLY_MORNING,</span><br><span class="line">  DRINKING_WATER,</span><br><span class="line">  INSTANCE_NOODLES,</span><br><span class="line">  AFTER_WORK</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">waterMachineOps</span><span class="params">(machine: <span class="type">WaterMachine</span>,moment: <span class="type">Moment</span>)</span></span> &#123;</span><br><span class="line">  <span class="keyword">when</span>(moment) &#123;</span><br><span class="line">    EARLY_MORNING, DRINKING_WATER -&gt; <span class="keyword">when</span>(machine.state) &#123;</span><br><span class="line">      !<span class="keyword">is</span> WatermachineState.Cooling -&gt;machine.turnCooling()</span><br><span class="line">    &#125;</span><br><span class="line">    INSTANCE_NOODLES -&gt; <span class="keyword">when</span>(machine.state) &#123;</span><br><span class="line">      !<span class="keyword">is</span> WatermachineState.Heating -&gt; machine.turnHeating()</span><br><span class="line">    &#125;</span><br><span class="line">    AFTER_WORK -&gt; <span class="keyword">when</span>(machine.state) &#123;</span><br><span class="line">      !<span class="keyword">is</span> WatermachineState.Off -&gt; machine.turnOff()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这个方法很好地处理了不同角色在不同需求场景下，应该对饮水机执行的不同操作。此外，当用when表达式处理枚举类时，默认的情况必须用else进行处理。然而，由于密封类在类型安全上的额外设计，我们在处理machine对象的state对象时，则不需要考虑这一细节，在语言表达上要简洁得多。</p>
 
             </div>
@@ -218,7 +224,7 @@ var _hmt = _hmt || [];
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2020/01/21/ADT实现状态模式/" title="ADT实现状态模式">http://hanniballol.github.io/2020/01/21/ADT实现状态模式/</a>
+          <a href="http://hanniballol.github.io//2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="ADT实现状态模式">http://hanniballol.github.io/2020/01/21/ADT实现状态模式/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -237,14 +243,14 @@ var _hmt = _hmt || [];
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2020/02/25/无题/">
+      <a class="prev" href="/2020/02/25/%E6%97%A0%E9%A2%98/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">无题</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2020/01/19/用偏函数实现责任链模式/">
+      <a class="next" href="/2020/01/19/%E7%94%A8%E5%81%8F%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/">
         <span class="next-text nav-default">用偏函数实现责任链模式</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -309,7 +315,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

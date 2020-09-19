@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="Android Unit Case">
+  <meta name="description" content="Android Unit Case"/>
 
 
 
 
-  <meta name="keywords" content="Test automation,">
+  <meta name="keywords" content="Test automation," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2019/08/06/Android-Unit-Case/">
+<link rel="canonical" href="http://hanniballol.github.io/2019/08/06/Android-Unit-Case/"/>
 
 
 <meta name="description" content="Android单元测试编写原则及相关三方库详解">
-<meta name="keywords" content="Test automation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Unit Case">
 <meta property="og:url" content="http://hanniballol.github.io/2019/08/06/Android-Unit-Case/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="Android单元测试编写原则及相关三方库详解">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-16T07:00:45.445Z">
+<meta property="article:published_time" content="2019-08-06T07:33:38.000Z">
+<meta property="article:modified_time" content="2020-01-16T07:00:45.445Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="Test automation">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Unit Case">
-<meta name="twitter:description" content="Android单元测试编写原则及相关三方库详解">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> Android Unit Case - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -172,14 +172,17 @@ var _hmt = _hmt || [];
     
             
   <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Test-Pyramid"><span class="toc-text">Test Pyramid</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么"><span class="toc-text">为什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多种工具"><span class="toc-text">多种工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mock-Mockito"><span class="toc-text">Mock/Mockito</span></a></li></ol></li>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Test-Pyramid"><span class="toc-text">Test Pyramid</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么"><span class="toc-text">为什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多种工具"><span class="toc-text">多种工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mock-Mockito"><span class="toc-text">Mock&#x2F;Mockito</span></a></li></ol></li></ol>
   </div> 
 
 
             <div class="post-content">
-                <div class="excerpt"><br>    Android单元测试编写原则及相关三方库详解<br></div> 
+                <div class="excerpt">
+    Android单元测试编写原则及相关三方库详解
+</div> 
 
 <a id="more"></a>
+
 <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>单元测试只是测试一个方法单元，它不是测试一个整个流程。举一个🌰</p>
 <blockquote>
 <p>一个Login页面，上面有两个EditText和一个Button。两个EditText分别用于输入用户名和密码。点击Button以后，有一个UserManager会去执行performlogin操作，然后将结果返回，更新页面。<br>那么我们给这个东西做单元测试的时候，不是测这个login流程。这种整个流程的测试：给两个输入框设置正确的用户名和密码，点击login button，最后页面得到更新，叫做 <strong>集成测试</strong>，而不是单元测试。当然，集成测试是有必要的，但这不是程序员应该花精力的地方。</p>
@@ -205,7 +208,8 @@ var _hmt = _hmt || [];
 <p>@Before : 每个测试函数在调用之前都会先调用@Before注解的函数，比如 addTest 运行前会执行 setup , multiplyTest 运行前会执行 setup,类似逻辑的还有@After、@BeforeClass、@AfterClass。即在跑一个测试类的所有测试方法之前，会执行一个被@BeforeClass修饰的函数。</p>
 <p>@Ignore : 如果需要忽略某些方法可以使用该注解，例如正式代码还没有实现</p>
 <p>@Test(expected = IllegalArgumentException.class) : 表示验证这个测试方法将抛出异常，如果没有抛出的话，则测试失败。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">divide</span><span class="params">(<span class="keyword">double</span> divident,<span class="keyword">double</span> dividor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (dividor == <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Dividor can't be 0"</span>);</span><br><span class="line">        <span class="keyword">return</span> divident / dividor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span>(expected = IllegalArgumentException.class) </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    mCalculator.dividor(<span class="number">4</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">divide</span><span class="params">(<span class="keyword">double</span> divident,<span class="keyword">double</span> dividor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (dividor == <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Dividor can't be 0"</span>);</span><br><span class="line">        <span class="keyword">return</span> divident / dividor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span>(expected = IllegalArgumentException<span class="class">.<span class="keyword">class</span>) </span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">void</span> <span class="title">test</span> () </span>&#123;</span><br><span class="line">    mCalculator.dividor(<span class="number">4</span>,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h4 id="Mock-Mockito"><a href="#Mock-Mockito" class="headerlink" title="Mock/Mockito"></a>Mock/Mockito</h4><p>Mock是创建一个类的虚假对象，在测试环境中，用来替换真实对象，以达到两个目的：</p>
 <ul>
 <li>验证这个对象的某些方法的调用情况，调用了多少次，参数是什么</li>
@@ -213,13 +217,24 @@ var _hmt = _hmt || [];
 </ul>
 <p>Mockito是最Java界使用最广泛的Mock框架</p>
 <p><strong>1.验证方法调用</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLogin</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    UserManager mockUserManager = Mockito.mock(UserManager.class);</span><br><span class="line">    LoginPresenter loginPresenter = <span class="keyword">new</span> LoginPresenter();</span><br><span class="line">    loginPresenter.setUserManager(mockUserManager);  <span class="comment">//&lt;==</span></span><br><span class="line"></span><br><span class="line">    loginPresenter.login(<span class="string">"xiaochuang"</span>, <span class="string">"xiaochuang password"</span>);</span><br><span class="line"></span><br><span class="line">    Mockito.verify(mockUserManager).performLogin(<span class="string">"xiaochuang"</span>, <span class="string">"xiaochuang password"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果需要验证mockUserManager的performLogin()得到了调用，同时参数是”username”,”password”<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mockito.verify(mockUserManager).performLogin(<span class="string">"username"</span>,<span class="string">"password"</span>);</span><br></pre></td></tr></table></figure></p>
-<p>当然也可以验证该函数调用次数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mockito.verify(mockUserManager, Mockito.times(<span class="number">3</span>)).performLogin(...); <span class="comment">//验证mockUserManager的performLogin得到了三次调用。</span></span><br><span class="line">Mockito.verify(mockUserManager, Mockito.atLeast(<span class="number">3</span>)).performLogin(...); <span class="comment">//验证mockUserManager的performLogin最少得到了三次调用。</span></span><br><span class="line">Mockito.verify(mockUserManager).performLogin(Mockito.anyString(),Mockito.anyString()); <span class="comment">//并不关心参数，任意参数皆可</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>2.指定mock对象的某些方法的行为</strong><br>举一个🌰：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username == <span class="keyword">null</span> || username.length() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//假设我们对密码强度有一定要求，使用一个专门的validator来验证密码的有效性</span></span><br><span class="line">    <span class="keyword">if</span> (mPasswordValidator.verifyPassword(password)) <span class="keyword">return</span>;  <span class="comment">//&lt;==</span></span><br><span class="line"></span><br><span class="line">    mUserManager.performLogin(<span class="keyword">null</span>, password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里我们需要PasswordValidator来验证密码的有效性，但是这个类的verifyPassword()方法需要联网，其实我们只需要给一些阈值判断即可，因为我们要测的是login()，跟PasswordValidator内部逻辑没有关系，这才是单元测试真正该有的颗粒度，比如可以这么写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先创建一个mock对象</span></span><br><span class="line">PasswordValidator mockValidator = Mockito.mock(PasswordValidator.class);</span><br><span class="line"><span class="comment">//当调用mockValidator的verifyPassword方法，同时传入"xiaochuang_is_handsome"时，返回true</span></span><br><span class="line">Mockito.when(mockValidator.verifyPassword(<span class="string">"xiaochuang_is_handsome"</span>)).thenReturn(<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//当调用mockValidator的verifyPassword方法，同时传入"xiaochuang_is_not_handsome"时，返回false</span></span><br><span class="line">Mockito.when(validator.verifyPassword(<span class="string">"xiaochuang_is_not_handsome"</span>)).thenReturn(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
-<p>又比如有如下逻辑:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loginCallbackVersion</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username == <span class="keyword">null</span> || username.length() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//假设我们对密码强度有一定要求，使用一个专门的validator来验证密码的有效性</span></span><br><span class="line">    <span class="keyword">if</span> (mPasswordValidator.verifyPassword(password)) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//login的结果将通过callback传递回来。</span></span><br><span class="line">    mUserManager.performLogin(username, password, <span class="keyword">new</span> NetworkCallback() &#123;  <span class="comment">//&lt;==</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//update view with data</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> code, String msg)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//show error msg</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>想进一步测试传给mUserManager.performLogin的NetworkCallback里面的代码，验证view得到了更新，测试环境里，我们并不想依赖mUserManager.performLogin的真实逻辑，而是让mUserManager直接调用传入的NetworkCallback的onSuccess或onFailure方法，这种指定mock对象执行特定的动作的写法如下：Mockito.doAnswer(desiredAnswer).when(mockObject).targetMethod(args);举一个🌰：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Mockito.doAnswer(<span class="keyword">new</span> Answer() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">(InvocationOnMock invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//这里可以获得传给performLogin的参数</span></span><br><span class="line">        Object[] arguments = invocation.getArguments();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//callback是第三个参数</span></span><br><span class="line">        NetworkCallback callback = (NetworkCallback) arguments[<span class="number">2</span>];</span><br><span class="line">        </span><br><span class="line">        callback.onFailure(<span class="number">500</span>, <span class="string">"Server error"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">500</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).when(mockUserManager).performLogin(anyString(), anyString(), any(NetworkCallback.class));</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLogin</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    UserManager mockUserManager = Mockito.mock(UserManager<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    LoginPresenter loginPresenter = <span class="keyword">new</span> LoginPresenter();</span><br><span class="line">    loginPresenter.setUserManager(mockUserManager);  <span class="comment">//&lt;==</span></span><br><span class="line"></span><br><span class="line">    loginPresenter.login(<span class="string">"xiaochuang"</span>, <span class="string">"xiaochuang password"</span>);</span><br><span class="line"></span><br><span class="line">    Mockito.verify(mockUserManager).performLogin(<span class="string">"xiaochuang"</span>, <span class="string">"xiaochuang password"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果需要验证mockUserManager的performLogin()得到了调用，同时参数是”username”,”password”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Mockito.verify(mockUserManager).performLogin(<span class="string">"username"</span>,<span class="string">"password"</span>);</span><br></pre></td></tr></table></figure>
+<p>当然也可以验证该函数调用次数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mockito.verify(mockUserManager, Mockito.times(<span class="number">3</span>)).performLogin(...); <span class="comment">//验证mockUserManager的performLogin得到了三次调用。</span></span><br><span class="line">Mockito.verify(mockUserManager, Mockito.atLeast(<span class="number">3</span>)).performLogin(...); <span class="comment">//验证mockUserManager的performLogin最少得到了三次调用。</span></span><br><span class="line">Mockito.verify(mockUserManager).performLogin(Mockito.anyString(),Mockito.anyString()); <span class="comment">//并不关心参数，任意参数皆可</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2.指定mock对象的某些方法的行为</strong><br>举一个🌰：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username == <span class="keyword">null</span> || username.length() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//假设我们对密码强度有一定要求，使用一个专门的validator来验证密码的有效性</span></span><br><span class="line">    <span class="keyword">if</span> (mPasswordValidator.verifyPassword(password)) <span class="keyword">return</span>;  <span class="comment">//&lt;==</span></span><br><span class="line"></span><br><span class="line">    mUserManager.performLogin(<span class="keyword">null</span>, password);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们需要PasswordValidator来验证密码的有效性，但是这个类的verifyPassword()方法需要联网，其实我们只需要给一些阈值判断即可，因为我们要测的是login()，跟PasswordValidator内部逻辑没有关系，这才是单元测试真正该有的颗粒度，比如可以这么写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//先创建一个mock对象</span></span><br><span class="line">PasswordValidator mockValidator = Mockito.mock(PasswordValidator<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">//当调用mockValidator的verifyPassword方法，同时传入"xiaochuang_is_handsome"时，返回true</span></span><br><span class="line">Mockito.when(mockValidator.verifyPassword(<span class="string">"xiaochuang_is_handsome"</span>)).thenReturn(<span class="keyword">true</span>);</span><br><span class="line"><span class="comment">//当调用mockValidator的verifyPassword方法，同时传入"xiaochuang_is_not_handsome"时，返回false</span></span><br><span class="line">Mockito.when(validator.verifyPassword(<span class="string">"xiaochuang_is_not_handsome"</span>)).thenReturn(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>又比如有如下逻辑:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loginCallbackVersion</span><span class="params">(String username, String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username == <span class="keyword">null</span> || username.length() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//假设我们对密码强度有一定要求，使用一个专门的validator来验证密码的有效性</span></span><br><span class="line">    <span class="keyword">if</span> (mPasswordValidator.verifyPassword(password)) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//login的结果将通过callback传递回来。</span></span><br><span class="line">    mUserManager.performLogin(username, password, <span class="keyword">new</span> NetworkCallback() &#123;  <span class="comment">//&lt;==</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(Object data)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//update view with data</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> code, String msg)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//show error msg</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>想进一步测试传给mUserManager.performLogin的NetworkCallback里面的代码，验证view得到了更新，测试环境里，我们并不想依赖mUserManager.performLogin的真实逻辑，而是让mUserManager直接调用传入的NetworkCallback的onSuccess或onFailure方法，这种指定mock对象执行特定的动作的写法如下：Mockito.doAnswer(desiredAnswer).when(mockObject).targetMethod(args);举一个🌰：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Mockito.doAnswer(<span class="keyword">new</span> Answer() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">(InvocationOnMock invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//这里可以获得传给performLogin的参数</span></span><br><span class="line">        Object[] arguments = invocation.getArguments();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//callback是第三个参数</span></span><br><span class="line">        NetworkCallback callback = (NetworkCallback) arguments[<span class="number">2</span>];</span><br><span class="line">        </span><br><span class="line">        callback.onFailure(<span class="number">500</span>, <span class="string">"Server error"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">500</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).when(mockUserManager).performLogin(anyString(), anyString(), any(NetworkCallback<span class="class">.<span class="keyword">class</span>))</span>;</span><br></pre></td></tr></table></figure>
+
+
 
             </div>
           
@@ -323,7 +338,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

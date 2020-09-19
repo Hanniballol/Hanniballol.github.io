@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="github访问及clone过慢问题">
+  <meta name="description" content="github访问及clone过慢问题"/>
 
 
 
 
-  <meta name="keywords" content="git,">
+  <meta name="keywords" content="git," />
 
 
 
@@ -29,35 +29,34 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇慢问题/">
+<link rel="canonical" href="http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇慢问题/"/>
 
 
 <meta name="description" content="墙相关">
-<meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github访问及clone过慢问题">
-<meta property="og:url" content="http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇慢问题/index.html">
+<meta property="og:url" content="http://hanniballol.github.io/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%85%A2%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="墙相关">
-<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://hanniballol.github.io/images/ip_subdomain.jpg">
 <meta property="og:image" content="http://hanniballol.github.io/images/ip_dns_speed.jpg">
-<meta property="og:updated_time" content="2020-01-19T08:34:16.472Z">
+<meta property="article:published_time" content="2019-07-16T03:50:02.000Z">
+<meta property="article:modified_time" content="2020-09-17T08:55:20.026Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="github访问及clone过慢问题">
-<meta name="twitter:description" content="墙相关">
 <meta name="twitter:image" content="http://hanniballol.github.io/images/ip_subdomain.jpg">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -101,7 +100,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> github访问及clone过慢问题 - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -175,29 +175,33 @@ var _hmt = _hmt || [];
     
             
   <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改端口"><span class="toc-text">修改端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指定IP"><span class="toc-text">指定IP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS工作方式"><span class="toc-text">DNS工作方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#子域名信息"><span class="toc-text">子域名信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#就近cdn加速"><span class="toc-text">就近cdn加速</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改端口"><span class="toc-text">修改端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指定IP"><span class="toc-text">指定IP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DNS工作方式"><span class="toc-text">DNS工作方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#子域名信息"><span class="toc-text">子域名信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#就近cdn加速"><span class="toc-text">就近cdn加速</span></a></li></ol></li></ol></li></ol>
   </div> 
 
 
             <div class="post-content">
-                <div class="excerpt"><br>    墙相关<br></div>
+                <div class="excerpt">
+    墙相关
+</div>
 
 <a id="more"></a>
+
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Github是开源世界的一扇大门，伟大的墙对GitHub网开一面，没有像对Google那样直接斩尽杀绝，但是对它做了严格的限速。<br>git clone（有些地区较快，有些地区较慢）；但总体来说,基本都在10KiB/s-40KiB/s之间。<br>在拉取Flutter源码时出现5-9KiB/s的情况，所以有了这篇文章</p>
 <h2 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h2><p> 首先需要打开ShadowSocks，我不会配置全局模式，一是每月流量问题，二是访问一些国内网站反而会慢，所以对于PAC自动模式来说可以如下配置</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.https:<span class="comment">//github.com.proxy https://127.0.0.1:xxxx</span></span><br><span class="line"></span><br><span class="line">git config --global https.https:<span class="comment">//github.com.proxy https://127.0.0.1:xxxx</span></span><br></pre></td></tr></table></figure>
+
 <p>其中端口号，可以在ShadowSocks上查找socks5端口，然后就享受40M/s的畅快吧。</p>
 <h2 id="指定IP"><a href="#指定IP" class="headerlink" title="指定IP"></a>指定IP</h2><p>如果修改端口的方法也无济于事，还可以通过指定host的方式，指定最近dns服务商以达到快速的效果。</p>
 <h4 id="DNS工作方式"><a href="#DNS工作方式" class="headerlink" title="DNS工作方式"></a>DNS工作方式</h4><p>当我们访问github.com时，浏览器并不知道这个域名对应的真实<strong>ip</strong>地址，最先回去询问本地dns缓存，是否认识这个域名的门牌号，如果不认识接着往上问，当地运行商也不认识这个域名的话，继续问上级，知道问出来<strong>github.com</strong>的门牌号为止！<br>这个问路过程称为<strong>DNS</strong>寻址，如果问路的时间过长，那么返回速度自然很慢。<br>那么如果我们直接告诉浏览器目的地，那么浏览器也就不会一步步去问路了，所以也就能达到加快访问速度的要求。</p>
 <p>正常来说，网站的主域名下会存在多个子域名，由这些域名组合在一起提供完整的服务。所以我们不仅要告诉本机<strong>github.com</strong>的主域名，还要把相关的子域名也告诉本机。就像现实中，每个人都有自己的家，而这个家有具体的地址，一些有钱人可能有几个家。</p>
 <p>对应到计算机世界中，如果域名是用户，那么<strong>ip</strong>地址就是用户的家，同一个域名可以对应多个<strong>ip</strong>地址，同一个<strong>ip</strong>地址也可以有多多个域名。<br>域名到<strong>ip</strong>地址的过程同样需要找人询问，这个信息一般会存在<strong>dns</strong>服务商那里，就像我们的地址登记到相关机构一样.</p>
 <h4 id="子域名信息"><a href="#子域名信息" class="headerlink" title="子域名信息"></a>子域名信息</h4><p><strong>ipaddress.com</strong> 网站为例，查询下 <strong>github.com</strong> 网站的相关信息。得到如下域名信息。</p>
-<div style="width: 321px;"><img src="/images/ip_subdomain.jpg" alt="ip_subdomain"></div>
+<p><img src="/images/ip_subdomain.jpg" alt="ip_subdomain"></p>
+<h4 id="就近cdn加速"><a href="#就近cdn加速" class="headerlink" title="就近cdn加速"></a>就近cdn加速</h4><p>大型网站服务器都不会只有一台服务器，而是多台服务器组成集群一起对外提供服务。全世界都在使用 ** github<strong>，如果每次都访问美国服务器，即使浏览器知道目的地，但是距离太远还是会很慢，所以能够就近访问</strong>github.com<strong>就能大幅提高访问速度了。<br>**tool.chinaz.com</strong> 网站为例，查询下 <strong>github.com</strong> 各子域名的就近地址。</p>
+<p><img src="/images/ip_dns_speed.jpg" alt="ip_dns_speed"></p>
+<p>所以只需要选择<strong>TTL</strong>值最小的作为优化标准，并写入/etc/hosts(macOS)文件中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># github related website </span><br><span class="line"><span class="number">13.250</span><span class="number">.177</span><span class="number">.223</span> github.com </span><br><span class="line"><span class="number">31.13</span><span class="number">.83</span><span class="number">.8</span> github.global.ssl.fastly.net </span><br><span class="line"><span class="number">203.98</span><span class="number">.7</span><span class="number">.65</span> gist.github.com </span><br><span class="line"><span class="number">13.229</span><span class="number">.189</span><span class="number">.0</span> codeload.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span> desktop.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span> guides.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span> blog.github.com </span><br><span class="line"><span class="number">18.204</span><span class="number">.240</span><span class="number">.114</span> status.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span> developer.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span> services.github.com </span><br><span class="line"><span class="number">140.82</span><span class="number">.113</span><span class="number">.22</span> enterprise.github.com </span><br><span class="line"><span class="number">34.195</span><span class="number">.49</span><span class="number">.195</span> education.github.com </span><br><span class="line"><span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span> pages.github.com </span><br><span class="line"><span class="number">34.196</span><span class="number">.237</span><span class="number">.103</span> classroom.github.com</span><br></pre></td></tr></table></figure>
 
-<h4 id="就近cdn加速"><a href="#就近cdn加速" class="headerlink" title="就近cdn加速"></a>就近cdn加速</h4><p>大型网站服务器都不会只有一台服务器，而是多台服务器组成集群一起对外提供服务。全世界都在使用 <strong> github</strong>，如果每次都访问美国服务器，即使浏览器知道目的地，但是距离太远还是会很慢，所以能够就近访问<strong>github.com</strong>就能大幅提高访问速度了。<br><strong>tool.chinaz.com</strong> 网站为例，查询下 <strong>github.com</strong> 各子域名的就近地址。</p>
-<div style="width: 321px;"><img src="/images/ip_dns_speed.jpg" alt="ip_dns_speed"></div>
-
-<p>所以只需要选择<strong>TTL</strong>值最小的作为优化标准，并写入/etc/hosts(macOS)文件中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># github related website </span><br><span class="line"><span class="number">13.250</span>.177.223 github.com </span><br><span class="line"><span class="number">31.13</span>.83.8 github.global.ssl.fastly.net </span><br><span class="line"><span class="number">203.98</span>.7.65 gist.github.com </span><br><span class="line"><span class="number">13.229</span>.189.0 codeload.github.com </span><br><span class="line"><span class="number">185.199</span>.109.153 desktop.github.com </span><br><span class="line"><span class="number">185.199</span>.108.153 guides.github.com </span><br><span class="line"><span class="number">185.199</span>.108.153 blog.github.com </span><br><span class="line"><span class="number">18.204</span>.240.114 status.github.com </span><br><span class="line"><span class="number">185.199</span>.108.153 developer.github.com </span><br><span class="line"><span class="number">185.199</span>.108.153 services.github.com </span><br><span class="line"><span class="number">140.82</span>.113.22 enterprise.github.com </span><br><span class="line"><span class="number">34.195</span>.49.195 education.github.com </span><br><span class="line"><span class="number">185.199</span>.108.153 pages.github.com </span><br><span class="line"><span class="number">34.196</span>.237.103 classroom.github.com</span><br></pre></td></tr></table></figure></p>
 <p>最后进行dns刷新 <strong>sudo dscacheutil -flushcache</strong></p>
 
             </div>
@@ -211,7 +215,7 @@ var _hmt = _hmt || [];
         </li>
         <li class="post-copyright-link">
           <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2019/07/16/部分地区github拉取代码奇慢问题/" title="github访问及clone过慢问题">http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇慢问题/</a>
+          <a href="http://hanniballol.github.io//2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%85%A2%E9%97%AE%E9%A2%98/" title="github访问及clone过慢问题">http://hanniballol.github.io/2019/07/16/部分地区github拉取代码奇慢问题/</a>
         </li>
         <li class="post-copyright-license">
           <span>版权： </span>
@@ -237,7 +241,7 @@ var _hmt = _hmt || [];
       </a>
     
     
-      <a class="next" href="/2019/03/22/又一次有意思的经历/">
+      <a class="next" href="/2019/03/22/%E5%8F%88%E4%B8%80%E6%AC%A1%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%BB%8F%E5%8E%86/">
         <span class="next-text nav-default">又一次有意思的经历</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -302,7 +306,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 

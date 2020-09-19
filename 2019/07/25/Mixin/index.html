@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-  <head><meta name="generator" content="Hexo 3.9.0">
+  <head>
     
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc">
-<meta name="baidu-site-verification" content="hkLiBHH93D">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
+<meta name="baidu-site-verification" content="hkLiBHH93D" />
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
-  <meta name="description" content="Mixin">
+  <meta name="description" content="Mixin"/>
 
 
 
 
-  <meta name="keywords" content="dart,">
+  <meta name="keywords" content="dart," />
 
 
 
@@ -29,32 +29,31 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
 
 
 
-<link rel="canonical" href="http://hanniballol.github.io/2019/07/25/Mixin/">
+<link rel="canonical" href="http://hanniballol.github.io/2019/07/25/Mixin/"/>
 
 
 <meta name="description" content="对Dart中Mixin的理解">
-<meta name="keywords" content="dart">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mixin">
 <meta property="og:url" content="http://hanniballol.github.io/2019/07/25/Mixin/index.html">
 <meta property="og:site_name" content="Hanniballol&#39;s Blog">
 <meta property="og:description" content="对Dart中Mixin的理解">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-12T06:32:39.367Z">
+<meta property="article:published_time" content="2019-07-25T03:54:15.000Z">
+<meta property="article:modified_time" content="2019-08-12T06:32:39.367Z">
+<meta property="article:author" content="8MilesRD">
+<meta property="article:tag" content="dart">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mixin">
-<meta name="twitter:description" content="对Dart中Mixin的理解">
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -98,7 +97,8 @@ var _hmt = _hmt || [];
 })();
 </script>
     <title> Mixin - Hanniballol's Blog </title>
-  </head>
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
+</head>
 
   <body>
     <div id="page">
@@ -177,9 +177,12 @@ var _hmt = _hmt || [];
 
 
             <div class="post-content">
-                <div class="excerpt"><br>    对Dart中Mixin的理解<br></div>
+                <div class="excerpt">
+    对Dart中Mixin的理解
+</div>
 
 <a id="more"></a>
+
 <h3 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h3><p>当然多继承会有很多不足之处，例如，结构复杂化，有限顺序模糊，功能冲突等问题，举一个列子：</p>
 <blockquote>
 <p>一个物体的本质只能有一个，一个动物只能是狗或者只能是猫，如果你想创造一个会玩毛线球会玩激光的狗，那么只需创造一个描述这类行为的接口，然后在自己的类里面实现”玩耍”接口，具体实现这些玩的行为，最终你同样会得到一个既像狗又像猫的动物。如果你想让这个动物叫起来像猫而不是狗，那么重写即可，子类里重新定义“叫”这个行为即可。但无论如何，这样得到的类是绝对不会有多重继承的冲突的。</p>
@@ -196,17 +199,21 @@ var _hmt = _hmt || [];
 <h3 id="语法和语义"><a href="#语法和语义" class="headerlink" title="语法和语义"></a>语法和语义</h3><p> Mixin通过正常的类声明被隐式定义。原则上，每个类都定义了一个Mixin，并可以从类中提取出来。然而，Mixin只能从未定义构造函数的类中提取。由于沿着继承链传递构造函数参数的需要，该约束能避免出现新的连锁问题。</p>
 <p> <strong>举一个🌰:</strong></p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    Collection&lt;E&gt; newInstance();</span><br><span class="line">    <span class="keyword">void</span> forEach(<span class="keyword">void</span> f(E element)) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> add(E element) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br><span class="line"><span class="class"><span class="title">abstract</span> <span class="title">class</span> <span class="title">DOMElementSet</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br></pre></td></tr></table></figure>
-<p><strong>Collection<e></e></strong>是一个标准类，并用来声明一个Mixin。另外，<strong>DOMElementList</strong>和<strong>DOMElementSet</strong>也是混合应用。这两个Mixin在类声明的时候，通过特殊的形式来定义。在类声明中包含一个名字，并用<strong>with</strong>语句来声明他们与父类中的混合应用相同。<strong>Collection<e></e></strong>是抽象类，因为它并没有实现类中年定义的抽象方法<strong>newInstance()</strong>。</p>
+
+<p><strong>Collection<E>**是一个标准类，并用来声明一个Mixin。另外，</strong>DOMElementList<strong>和</strong>DOMElementSet<strong>也是混合应用。这两个Mixin在类声明的时候，通过特殊的形式来定义。在类声明中包含一个名字，并用</strong>with<strong>语句来声明他们与父类中的混合应用相同。</strong>Collection<E><strong>是抽象类，因为它并没有实现类中年定义的抽象方法</strong>newInstance()**。</p>
 <p>上述中，事实上<strong>DOMElementList</strong>混合Collection mixin |&gt; DOMList，而DOMElementSet则是Collection mixin |&gt; DOMSet。</p>
 <p>这样做的好处是，Collection中的代码可以在类的多个继承层次中被共享。因此，无论<code>DOMList</code>还是<code>DOMSet</code>，都不需要重复、复制Collection中的代码，并且任何变化都会使Collection传递到这两个继承结构中，大大简化了维护代码。上面的代码介绍了Mixin应用的一种方式：混合应用指定应用的Mixin和父类，以及混合应用的名称。</p>
 <p>另外一种情况，混合应用出现在类声明的<code>with</code>语句中，以逗号来分隔标识符列表的时候。此时，所有的标识符代表Class。在这种情况下，多混合在<code>extends</code>语句中可以构成及应用于父类名称，生成一个匿名的父类。再以同样的🌰：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementSet&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementSet&lt;E&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里，<code>DOMElementList</code>并不是应用Collection mixin |&gt; DOMList。相反，它是一个父类为应用的新定义的类（注意extends关键字），DOMElementSet同样如此。注意，在每一种情况下，抽象函数<code>newInstance()</code>必须单独实现，以便能够直接被实例化。</p>
 <p>想象一下，如果<code>DOMList</code>有一个带参数的构造函数：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;(<span class="number">0</span>);</span><br><span class="line">    DOMElementList(size):<span class="keyword">super</span>(size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>构造函数可以为各个字段以及泛型参数设置值。每个Mixin都有一个自定义的构造函数被单独调用，父类也是如此。因为Mixin的构造函数不能够被声明，所以调用函数可以省略。在底层的实现中，调用总是放在初始列表之前。</p>
 <p>第二种是以方便实用的语法糖形式，将多个Mixin混入类中，而不需要引入多个中间声明。举一个🌰：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="built_in">String</span> name;</span><br><span class="line">    Person(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Maestro</span> <span class="keyword">extends</span> <span class="title">Person</span> <span class="title">with</span> <span class="title">Musical</span>, <span class="title">Aggressive</span>, <span class="title">Demented</span> </span>&#123;</span><br><span class="line">    Maestro(name):<span class="keyword">super</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里，父类是一个混合应用：Demented mixin |&gt; Aggressive mixin |&gt; Musical mixin |&gt; Person</p>
 <p>假设<code>Person</code>有带参数的构造函数，则Musical mixin |&gt; Person将继承Person的构造函数。以此类推，一直到<code>Maestro</code>实际的父类<code>Person</code>，它由一系列的Mixin应用组成。</p>
 <h3 id="细节描述"><a href="#细节描述" class="headerlink" title="细节描述"></a>细节描述</h3><ul>
@@ -259,7 +266,7 @@ var _hmt = _hmt || [];
       </a>
     
     
-      <a class="next" href="/2019/07/16/部分地区github拉取代码奇慢问题/">
+      <a class="next" href="/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%85%A2%E9%97%AE%E9%A2%98/">
         <span class="next-text nav-default">github访问及clone过慢问题</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
@@ -324,7 +331,7 @@ var _hmt = _hmt || [];
     2020
     <span class="footer-author">8MilesRD.</span>
     <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
     </span>
 </span>
 
