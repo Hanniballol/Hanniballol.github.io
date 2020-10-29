@@ -228,7 +228,7 @@
 
   
   <url>
-    <loc>http://hanniballol.github.io/tags/Flutter/</loc>
+    <loc>http://hanniballol.github.io/tags/Kotlin/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -242,28 +242,7 @@
   </url>
   
   <url>
-    <loc>http://hanniballol.github.io/tags/Kotlin/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://hanniballol.github.io/tags/gradle/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://hanniballol.github.io/tags/Android-Studio/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://hanniballol.github.io/tags/View/</loc>
+    <loc>http://hanniballol.github.io/tags/Flutter/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -277,6 +256,13 @@
   </url>
   
   <url>
+    <loc>http://hanniballol.github.io/tags/Android-Studio/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://hanniballol.github.io/tags/dart/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
@@ -284,7 +270,28 @@
   </url>
   
   <url>
+    <loc>http://hanniballol.github.io/tags/gradle/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://hanniballol.github.io/tags/system/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://hanniballol.github.io/tags/View/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://hanniballol.github.io/tags/syntactic-sugar/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -299,13 +306,6 @@
   
   <url>
     <loc>http://hanniballol.github.io/tags/life/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://hanniballol.github.io/tags/syntactic-sugar/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -335,13 +335,6 @@
 
   
   <url>
-    <loc>http://hanniballol.github.io/categories/Flutter/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://hanniballol.github.io/categories/Android/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
@@ -349,7 +342,21 @@
   </url>
   
   <url>
+    <loc>http://hanniballol.github.io/categories/Flutter/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://hanniballol.github.io/categories/Tools/</loc>
+    <lastmod>2020-10-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://hanniballol.github.io/categories/Kotlin/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -364,13 +371,6 @@
   
   <url>
     <loc>http://hanniballol.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2020-10-29</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://hanniballol.github.io/categories/Kotlin/</loc>
     <lastmod>2020-10-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
