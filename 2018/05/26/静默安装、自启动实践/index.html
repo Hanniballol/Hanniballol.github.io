@@ -1,183 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>静默安装、自启动实践</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="静默安装、自启动实践"/>
-
-
-
-
-  <meta name="keywords" content="system," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/"/>
-
-
-<meta name="description" content="静默安装以及自启动          策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良   最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然">
-<meta property="og:type" content="article">
-<meta property="og:title" content="静默安装、自启动实践">
-<meta property="og:url" content="http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="静默安装以及自启动          策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良   最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然">
-<meta property="article:published_time" content="2018-05-26T01:41:39.000Z">
-<meta property="article:modified_time" content="2020-01-17T08:53:34.254Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="system">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> 静默安装、自启动实践 - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          静默安装、自启动实践
-        
-      </h1>
-
-      <time class="post-time">
-          2018-05-26
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#静默安装"><span class="toc-text">静默安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限"><span class="toc-text">权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装代码"><span class="toc-text">安装代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自启动"><span class="toc-text">自启动</span></a></li></ol>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">静默安装、自启动实践</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#静默安装"><span class="toc-text">静默安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限"><span class="toc-text">权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装代码"><span class="toc-text">安装代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自启动"><span class="toc-text">自启动</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/system"><i class="tag post-item-tag">system</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">静默安装、自启动实践</h1><time class="has-text-grey" datetime="2018-05-26T01:41:39.000Z">2018-05-26</time><article class="mt-2 post-content"><div class="excerpt">
     静默安装以及自启动
 </div>
 
@@ -189,7 +13,7 @@ var _hmt = _hmt || [];
 <h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
     ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
     性，自家的系统想咋样就咋样。</code></pre>
-<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>    &lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;</code></pre>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>    &lt;uses-permission android:name="android.permission.INSTALL_PACKAGES" /&gt;</code></pre>
 <h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system/app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到/system/lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
 <pre><code>        pm install -r</code></pre>
 <p>实现代码</p>
@@ -207,7 +31,7 @@ public static int installSlient(Context context, String filePath) {
         return 1;
     }
 
-    String[] args = { &quot;pm&quot;, &quot;install&quot;, &quot;-r&quot;, filePath };
+    String[] args = { "pm", "install", "-r", filePath };
     ProcessBuilder processBuilder = new ProcessBuilder(args);
 
     Process process = null;
@@ -252,151 +76,14 @@ public static int installSlient(Context context, String filePath) {
     }
 
     // TODO should add memory is not enough here
-    if (successMsg.toString().contains(&quot;Success&quot;) || successMsg.toString().contains(&quot;success&quot;)) {
+    if (successMsg.toString().contains("Success") || successMsg.toString().contains("success")) {
         result = 0;
     } else {
         result = 2;
     }
-    Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
+    Log.d("installSlient", "successMsg:" + successMsg + ", ErrorMsg:" + errorMsg);
     return result;
 }</code></pre>
 <h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
 <p>参考:<br><a href="http://www.trinea.cn/android/android-install-silent/" target="_blank" rel="noopener">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java" target="_blank" rel="noopener">pm.java</a></p>
-
-            </div>
-          
-
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/" title="静默安装、自启动实践">http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/system/">system</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">MAC adb无线连接Android真机</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/">
-        <span class="next-text nav-default">android studio支持系统签名</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-small is-default py-4" href="/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/" title="MAC adb无线连接Android真机"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: MAC adb无线连接Android真机</span></a><a class="button is-small is-default py-4" href="/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/" title="android studio支持系统签名"><span class="has-text-weight-semibold">下一页: android studio支持系统签名</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

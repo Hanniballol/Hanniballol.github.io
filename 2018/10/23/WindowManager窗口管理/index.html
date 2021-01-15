@@ -1,183 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>WindowManager窗口管理</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="WindowManager窗口管理"/>
-
-
-
-
-  <meta name="keywords" content="View," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2018/10/23/WindowManager窗口管理/"/>
-
-
-<meta name="description" content="WindowManager相关属性汇总">
-<meta property="og:type" content="article">
-<meta property="og:title" content="WindowManager窗口管理">
-<meta property="og:url" content="http://hanniballol.github.io/2018/10/23/WindowManager%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="WindowManager相关属性汇总">
-<meta property="article:published_time" content="2018-10-23T08:14:44.000Z">
-<meta property="article:modified_time" content="2019-08-12T06:32:51.560Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="View">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> WindowManager窗口管理 - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          WindowManager窗口管理
-        
-      </h1>
-
-      <time class="post-time">
-          2018-10-23
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager窗口管理"><span class="toc-text">WindowManager窗口管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams"><span class="toc-text">WindowManager.LayoutParams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-type"><span class="toc-text">WindowManager.LayoutParams.type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-flags"><span class="toc-text">WindowManager.LayoutParams.flags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-softInputMode"><span class="toc-text">WindowManager.LayoutParams.softInputMode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ActivityInfo-screenOrientation"><span class="toc-text">ActivityInfo.screenOrientation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-rotationAnimation"><span class="toc-text">WindowManager.LayoutParams.rotationAnimation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#params-dimAmount"><span class="toc-text">params.dimAmount</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#buttonBrightness"><span class="toc-text">buttonBrightness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#screenBrightness"><span class="toc-text">screenBrightness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#systemUiVisibility"><span class="toc-text">systemUiVisibility</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见应用场景"><span class="toc-text">常见应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#悬浮窗"><span class="toc-text">悬浮窗</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗中需要EditText进行输入"><span class="toc-text">悬浮窗中需要EditText进行输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗不影响下层应用的操作"><span class="toc-text">悬浮窗不影响下层应用的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗和输入法之间的叠放效果"><span class="toc-text">悬浮窗和输入法之间的叠放效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗的拖动效果"><span class="toc-text">悬浮窗的拖动效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity设置屏幕旋转-全屏等"><span class="toc-text">Activity设置屏幕旋转, 全屏等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹窗位于软键盘之下，其他视图之上"><span class="toc-text">弹窗位于软键盘之下，其他视图之上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dialog全屏显示"><span class="toc-text">Dialog全屏显示</span></a></li></ol>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">WindowManager窗口管理</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager窗口管理"><span class="toc-text">WindowManager窗口管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams"><span class="toc-text">WindowManager.LayoutParams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-type"><span class="toc-text">WindowManager.LayoutParams.type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-flags"><span class="toc-text">WindowManager.LayoutParams.flags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-softInputMode"><span class="toc-text">WindowManager.LayoutParams.softInputMode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ActivityInfo-screenOrientation"><span class="toc-text">ActivityInfo.screenOrientation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WindowManager-LayoutParams-rotationAnimation"><span class="toc-text">WindowManager.LayoutParams.rotationAnimation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#params-dimAmount"><span class="toc-text">params.dimAmount</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#buttonBrightness"><span class="toc-text">buttonBrightness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#screenBrightness"><span class="toc-text">screenBrightness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#systemUiVisibility"><span class="toc-text">systemUiVisibility</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见应用场景"><span class="toc-text">常见应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#悬浮窗"><span class="toc-text">悬浮窗</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗中需要EditText进行输入"><span class="toc-text">悬浮窗中需要EditText进行输入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗不影响下层应用的操作"><span class="toc-text">悬浮窗不影响下层应用的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗和输入法之间的叠放效果"><span class="toc-text">悬浮窗和输入法之间的叠放效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#悬浮窗的拖动效果"><span class="toc-text">悬浮窗的拖动效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity设置屏幕旋转-全屏等"><span class="toc-text">Activity设置屏幕旋转, 全屏等</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹窗位于软键盘之下，其他视图之上"><span class="toc-text">弹窗位于软键盘之下，其他视图之上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dialog全屏显示"><span class="toc-text">Dialog全屏显示</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/View"><i class="tag post-item-tag">View</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">WindowManager窗口管理</h1><time class="has-text-grey" datetime="2018-10-23T08:14:44.000Z">2018-10-23</time><article class="mt-2 post-content"><div class="excerpt">
     WindowManager相关属性汇总
 </div>
 
@@ -333,8 +157,29 @@ var _hmt = _hmt || [];
 <li>View.SYSTEM_UI_FLAG_LOW_PROFILE<br>  低调模式, 状态栏和图标会变暗</li>
 </ul>
 <h3 id="常见应用场景"><a href="#常见应用场景" class="headerlink" title="常见应用场景"></a>常见应用场景</h3><h4 id="悬浮窗"><a href="#悬浮窗" class="headerlink" title="悬浮窗"></a>悬浮窗</h4><p>悬浮窗主要是设置type, 有多种type都可以实现悬浮窗效果(PHONE, SYSTEM_ALERT…)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">WindowManager mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);</span><br><span class="line"><span class="comment">// 创建一个新的布局</span></span><br><span class="line">WindowManager.LayoutParams param = <span class="keyword">new</span> WindowManager.LayoutParams();</span><br><span class="line"><span class="comment">// 设置窗口属性</span></span><br><span class="line">param.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;       <span class="comment">// 设置为系统警告窗, 可以悬浮在其他应用之上</span></span><br><span class="line">param.format = PixelFormat.TRANSLUCENT;                          <span class="comment">// 支持透明</span></span><br><span class="line">param.flags = WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN   <span class="comment">// 可在全屏幕布局, 不受状态栏影响</span></span><br><span class="line">        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;         <span class="comment">// 最初不可获取焦点, 这样不影响底层应用接收触摸事件</span></span><br><span class="line">param.alpha = <span class="number">0.9f</span>;                                              <span class="comment">// 悬浮窗的透明度</span></span><br><span class="line">param.gravity = Gravity.LEFT | Gravity.TOP;                      <span class="comment">// 悬浮窗的重力效果</span></span><br><span class="line">param.width = dp2px(<span class="number">140</span>);                                        <span class="comment">// 悬浮窗宽度</span></span><br><span class="line">param.height = WindowManager.LayoutParams.WRAP_CONTENT;          <span class="comment">// 悬浮窗高度</span></span><br><span class="line"><span class="comment">// 以下将悬浮穿定位在屏幕中央</span></span><br><span class="line"><span class="keyword">int</span> screenWidth = mWindowManager.getDefaultDisplay().getWidth();</span><br><span class="line"><span class="keyword">int</span> screenHeight = mWindowManager.getDefaultDisplay().getHeight();</span><br><span class="line">param.x = (screenWidth - param.width) / <span class="number">2</span>;</span><br><span class="line">param.y = (screenHeight - param.height) / <span class="number">2</span>;</span><br><span class="line"><span class="comment">// 创建悬浮窗view</span></span><br><span class="line">mFloatView = View.inflate(<span class="keyword">this</span>, R.layout.view_float_window, <span class="keyword">null</span>);</span><br><span class="line">ButterKnife.bind(<span class="keyword">this</span>, mFloatView);</span><br><span class="line"><span class="comment">// 添加到屏幕</span></span><br><span class="line">mWindowManager.addView(mFloatView, param);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">
+WindowManager mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+// 创建一个新的布局
+WindowManager.LayoutParams param = new WindowManager.LayoutParams();
+// 设置窗口属性
+param.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;       // 设置为系统警告窗, 可以悬浮在其他应用之上
+param.format = PixelFormat.TRANSLUCENT;                          // 支持透明
+param.flags = WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN   // 可在全屏幕布局, 不受状态栏影响
+        | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;         // 最初不可获取焦点, 这样不影响底层应用接收触摸事件
+param.alpha = 0.9f;                                              // 悬浮窗的透明度
+param.gravity = Gravity.LEFT | Gravity.TOP;                      // 悬浮窗的重力效果
+param.width = dp2px(140);                                        // 悬浮窗宽度
+param.height = WindowManager.LayoutParams.WRAP_CONTENT;          // 悬浮窗高度
+// 以下将悬浮穿定位在屏幕中央
+int screenWidth = mWindowManager.getDefaultDisplay().getWidth();
+int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
+param.x = (screenWidth - param.width) / 2;
+param.y = (screenHeight - param.height) / 2;
+// 创建悬浮窗view
+mFloatView = View.inflate(this, R.layout.view_float_window, null);
+ButterKnife.bind(this, mFloatView);
+// 添加到屏幕
+mWindowManager.addView(mFloatView, param);</code></pre>
 <h3 id="悬浮窗中需要EditText进行输入"><a href="#悬浮窗中需要EditText进行输入" class="headerlink" title="悬浮窗中需要EditText进行输入"></a>悬浮窗中需要EditText进行输入</h3><p>悬浮窗如果需要弹出输入法进行输入，就需要获取焦点</p>
 <ul>
 <li>当悬浮窗中有EditText需要使用输入法时, 使用FLAG_NOT_TOUCH_MODAL, 这样悬浮窗中的EditText就可以弹出输入法.</li>
@@ -348,156 +193,65 @@ var _hmt = _hmt || [];
 <li>WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE</li>
 </ul>
 <h3 id="悬浮窗的拖动效果"><a href="#悬浮窗的拖动效果" class="headerlink" title="悬浮窗的拖动效果"></a>悬浮窗的拖动效果</h3><p>为悬浮窗设置onTouchListener, 通过事件判断是点击还是移动,使用mWindowManager.updateViewLayout(mFloatView, param)来更新窗口位置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">floatView.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">    <span class="comment">// 记录上次移动的位置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> lastX = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> lastY = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 是否是移动事件</span></span><br><span class="line">    <span class="keyword">boolean</span> isMoved = <span class="keyword">false</span>;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (event.getAction()) &#123;</span><br><span class="line">            <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">                isMoved = <span class="keyword">false</span>;</span><br><span class="line">                <span class="comment">// 记录按下位置</span></span><br><span class="line">                lastX = event.getRawX();</span><br><span class="line">                lastY = event.getRawY();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">                isMoved = <span class="keyword">true</span>;</span><br><span class="line">                <span class="comment">// 记录移动后的位置</span></span><br><span class="line">                <span class="keyword">float</span> moveX = event.getRawX();</span><br><span class="line">                <span class="keyword">float</span> moveY = event.getRawY();</span><br><span class="line">                <span class="comment">// 获取当前窗口的布局属性, 添加偏移量, 并更新界面, 实现移动</span></span><br><span class="line">                WindowManager.LayoutParams param = (WindowManager.LayoutParams) mFloatView.getLayoutParams();</span><br><span class="line">                param.x += (<span class="keyword">int</span>) (moveX - lastX);</span><br><span class="line">                param.y += (<span class="keyword">int</span>) (moveY - lastY);</span><br><span class="line">                mWindowManager.updateViewLayout(mFloatView, param);</span><br><span class="line">                lastX = moveX;</span><br><span class="line">                lastY = moveY;</span><br><span class="line">            <span class="keyword">case</span> MotionEvent.ACTION_CANCEL:</span><br><span class="line">                isMoved = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果是移动事件, 则消费掉; 如果不是, 则由其他处理, 比如点击</span></span><br><span class="line">        <span class="keyword">return</span> isMoved;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Activity设置屏幕旋转-全屏等"><a href="#Activity设置屏幕旋转-全屏等" class="headerlink" title="Activity设置屏幕旋转, 全屏等"></a>Activity设置屏幕旋转, 全屏等</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">android:configChanges=<span class="string">"orientation|screenSize"</span></span><br><span class="line">keyboardHidden</span><br><span class="line">orientation</span><br><span class="line">screenSize</span><br><span class="line">orientation|screenSize: 改变屏幕方向时并不重启Activity</span><br><span class="line">setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)</span><br><span class="line">getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);</span><br><span class="line">getWindow().setAttributes(windowParams);</span><br></pre></td></tr></table></figure>
-
-<h3 id="弹窗位于软键盘之下，其他视图之上"><a href="#弹窗位于软键盘之下，其他视图之上" class="headerlink" title="弹窗位于软键盘之下，其他视图之上"></a>弹窗位于软键盘之下，其他视图之上</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getWindow().addFlags( WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);</span><br></pre></td></tr></table></figure>
+<pre><code class="java">
+floatView.setOnTouchListener(new View.OnTouchListener() {
+    // 记录上次移动的位置
+    private float lastX = 0;
+    private float lastY = 0;
+    // 是否是移动事件
+    boolean isMoved = false;
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                isMoved = false;
+                // 记录按下位置
+                lastX = event.getRawX();
+                lastY = event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                isMoved = true;
+                // 记录移动后的位置
+                float moveX = event.getRawX();
+                float moveY = event.getRawY();
+                // 获取当前窗口的布局属性, 添加偏移量, 并更新界面, 实现移动
+                WindowManager.LayoutParams param = (WindowManager.LayoutParams) mFloatView.getLayoutParams();
+                param.x += (int) (moveX - lastX);
+                param.y += (int) (moveY - lastY);
+                mWindowManager.updateViewLayout(mFloatView, param);
+                lastX = moveX;
+                lastY = moveY;
+            case MotionEvent.ACTION_CANCEL:
+                isMoved = true;
+                break;
+        }
+        // 如果是移动事件, 则消费掉; 如果不是, 则由其他处理, 比如点击
+        return isMoved;
+    }
+});
+</code></pre>
+<h3 id="Activity设置屏幕旋转-全屏等"><a href="#Activity设置屏幕旋转-全屏等" class="headerlink" title="Activity设置屏幕旋转, 全屏等"></a>Activity设置屏幕旋转, 全屏等</h3><pre><code class="java">
+android:configChanges="orientation|screenSize"
+keyboardHidden
+orientation
+screenSize
+orientation|screenSize: 改变屏幕方向时并不重启Activity
+setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+getWindow().setAttributes(windowParams);
+</code></pre>
+<h3 id="弹窗位于软键盘之下，其他视图之上"><a href="#弹窗位于软键盘之下，其他视图之上" class="headerlink" title="弹窗位于软键盘之下，其他视图之上"></a>弹窗位于软键盘之下，其他视图之上</h3><pre><code class="java">getWindow().addFlags( WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);</code></pre>
 <p>FLAG_ALT_FOCUSABLE_IM|FLAG_NOT_FOCUSABLE可以实现UI，不过弹窗上的edittext不会接受到软键盘上的输入事件，FLAG_NOT_FOCUSABLE已经拒绝接受了。那可以在dialog onCreate的时候完成以上UI FLAG设置，在show的时候清除flag即可接受到输入事件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);</span><br><span class="line">getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">getWindow().clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM|WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);</code></pre>
 <h3 id="Dialog全屏显示"><a href="#Dialog全屏显示" class="headerlink" title="Dialog全屏显示"></a>Dialog全屏显示</h3><ul>
 <li>Phonewindow中对windowIsFloating进行判断，activity默认主题为false，generateLayout方法中对该参数进行判断设置LayoutParams为MATCH_PARENT或WRAP_CONTENNT。</li>
 <li>windowBackground主要是默认背景的问题，默认采用了有padding的InsetDrawable,设置了一些边距，导致上面的状态栏，底部的导航栏，左右都有一定的边距。</li>
-<li>windowNoTitle去除toolbar等顶部UI。<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;style name=<span class="string">"Dialog.FullScreen"</span> parent=<span class="string">"Theme.AppCompat.Dialog"</span>&gt;</span><br><span class="line">    &lt;item name="android:windowNoTitle"&gt;true&lt;/item&gt;</span><br><span class="line">    &lt;item name="android:windowBackground"&gt;@color/transparent&lt;/item&gt;</span><br><span class="line">    &lt;item name="android:windowIsFloating"&gt;false&lt;/item&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
+<li>windowNoTitle去除toolbar等顶部UI。<pre><code class="java">&lt;style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog"&gt;
+  &lt;item name="android:windowNoTitle"&gt;true&lt;/item&gt;
+  &lt;item name="android:windowBackground"&gt;@color/transparent&lt;/item&gt;
+  &lt;item name="android:windowIsFloating"&gt;false&lt;/item&gt;
+&lt;/style&gt;</code></pre>
 </li>
 </ul>
-
-            </div>
-          
-
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2018/10/23/WindowManager%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/" title="WindowManager窗口管理">http://hanniballol.github.io/2018/10/23/WindowManager窗口管理/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/View/">View</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">软键盘相关</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2018/06/01/MAC-android-studio3-1-2%E6%97%A0%E6%AF%94%E5%8D%A1%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-        <span class="next-text nav-default">MAC android studio3.1.2无比卡，解决方案</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-small is-default py-4" href="/2018/12/03/%E8%BD%AF%E9%94%AE%E7%9B%98%E7%9B%B8%E5%85%B3/" title="软键盘相关"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 软键盘相关</span></a><a class="button is-small is-default py-4" href="/2018/06/01/MAC-android-studio3-1-2%E6%97%A0%E6%AF%94%E5%8D%A1%EF%BC%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="MAC android studio3.1.2无比卡，解决方案"><span class="has-text-weight-semibold">下一页: MAC android studio3.1.2无比卡，解决方案</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

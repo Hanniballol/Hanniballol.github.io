@@ -1,192 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>将Flutter添加到已有的项目中</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="将Flutter添加到已有的项目中"/>
-
-
-
-
-  <meta name="keywords" content="Flutter," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2020/09/19/将Flutter添加到已有的项目中/"/>
-
-
-<meta name="description" content="利用maven仓库、cocoaPods将Flutter抽离成sdk，native开发人员无需安装Flutter环境，无感知开发">
-<meta property="og:type" content="article">
-<meta property="og:title" content="将Flutter添加到已有的项目中">
-<meta property="og:url" content="http://hanniballol.github.io/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="利用maven仓库、cocoaPods将Flutter抽离成sdk，native开发人员无需安装Flutter环境，无感知开发">
-<meta property="og:image" content="http://hanniballol.github.io/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/idea_new_module.jpg">
-<meta property="article:published_time" content="2020-09-19T01:41:56.000Z">
-<meta property="article:modified_time" content="2020-09-19T05:54:27.379Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="Flutter">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://hanniballol.github.io/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/idea_new_module.jpg">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> 将Flutter添加到已有的项目中 - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          将Flutter添加到已有的项目中
-        
-      </h1>
-
-      <time class="post-time">
-          2020-09-19
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Debug"><span class="toc-text">Debug</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Profile"><span class="toc-text">Profile</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Release"><span class="toc-text">Release</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建Flutter-module"><span class="toc-text">创建Flutter module</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#产物集成"><span class="toc-text">产物集成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cocoapods-git管理"><span class="toc-text">cocoapods+git管理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-以aar的形式上传到私有maven-本地依赖"><span class="toc-text">Android-以aar的形式上传到私有maven&#x2F;本地依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建Flutter-module-1"><span class="toc-text">创建Flutter module</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#产物集成-1"><span class="toc-text">产物集成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#maven管理"><span class="toc-text">maven管理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证-1"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#End"><span class="toc-text">End</span></a>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
-    利用maven仓库、cocoaPods将Flutter抽离成sdk，native开发人员无需安装Flutter环境，无感知开发
-</div>
-<a id="more"></a>
-
-
-
-<p>查看了网上各种方案也包括闲鱼团队的开源<a href="https://github.com/alibaba-flutter/flutter-boot" target="_blank" rel="noopener">flutter_boot</a>，都各有缺点。鉴于各种方案都需要制定相应的Flutter版本，考虑到Flutter更新速度，于是决定依靠官方的产物集成方式解决混合开发的问题，并进行远程SDK管理。</p>
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">将Flutter添加到已有的项目中</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Debug"><span class="toc-text">Debug</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Profile"><span class="toc-text">Profile</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Release"><span class="toc-text">Release</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建Flutter-module"><span class="toc-text">创建Flutter module</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#产物集成"><span class="toc-text">产物集成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cocoapods-git管理"><span class="toc-text">cocoapods+git管理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-以aar的形式上传到私有maven-本地依赖"><span class="toc-text">Android-以aar的形式上传到私有maven&#x2F;本地依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建Flutter-module-1"><span class="toc-text">创建Flutter module</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#产物集成-1"><span class="toc-text">产物集成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#maven管理"><span class="toc-text">maven管理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#验证-1"><span class="toc-text">验证</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#End"><span class="toc-text">End</span></a></div><div class="column is-9"><header class="my-4"><a href="/tags/Flutter"><i class="tag post-item-tag">Flutter</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">将Flutter添加到已有的项目中</h1><time class="has-text-grey" datetime="2020-09-19T01:41:56.000Z">2020-09-19</time><article class="mt-2 post-content"><p>查看了网上各种方案也包括闲鱼团队的开源<a href="https://github.com/alibaba-flutter/flutter-boot" target="_blank" rel="noopener">flutter_boot</a>，都各有缺点。鉴于各种方案都需要制定相应的Flutter版本，考虑到Flutter更新速度，于是决定依靠官方的产物集成方式解决混合开发的问题，并进行远程SDK管理。</p>
 <p>##Flutter构建模式</p>
 <p>你可以在官方<a href="https://flutter.cn/docs/testing/build-modes" target="_blank" rel="noopener">DOCS</a>中看到详细介绍，下文打包命令都会产出对应三种模式的包以便满足各场景需要，我们简单记录下来：</p>
 <h5 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h5><p>Debug模式下，app可以被安装在物理设备、仿真器或者模拟器上进行调试。</p>
@@ -198,221 +13,323 @@ var _hmt = _hmt || [];
 <h5 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h5><p>Profile模式下，一些调试能力是被保留的——足够分析你的app性能。在仿真器和模拟器上，Profile模式是不可用的。</p>
 <h5 id="Release"><a href="#Release" class="headerlink" title="Release"></a>Release</h5><p>Release模式对快速启动、快速执行和package的大小进行了优化，并禁用了调试、服务扩展等功能，Release模式做到了最大的优化以及最小的占用空间。</p>
 <p>如上三种模式可以通过以下命令运行到设备上：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flutter run --release</span><br><span class="line"></span><br><span class="line">flutter run --profile</span><br><span class="line">flutter run --debug</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">flutter run --release
+flutter run --profile
+flutter run --debug</code></pre>
 <p>##iOS - 以framework的形式添加到你的既有iOS应用中，并上传CocoaPods</p>
 <h5 id="创建Flutter-module"><a href="#创建Flutter-module" class="headerlink" title="创建Flutter module"></a>创建Flutter module</h5><p>你可以在Android Studio中创建</p>
 <p><img src="idea_new_module.jpg" alt="ide_new_module"></p>
 <p>也可以通过命令行</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter create --template module my_flutter</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">flutter create --template module my_flutter</code></pre>
 <p>此module并不是Android里的模块或者iOS里的组件，而是Google提供的一种创建模式，可以独立运行。</p>
-<h5 id="产物集成"><a href="#产物集成" class="headerlink" title="产物集成"></a>产物集成</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter build ios-framework --output=somePath/</span><br></pre></td></tr></table></figure>
-
+<h5 id="产物集成"><a href="#产物集成" class="headerlink" title="产物集成"></a>产物集成</h5><pre><code class="kotlin">flutter build ios-framework --output=somePath/</code></pre>
 <p>产物目录结构如下：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">somePath/</span><br><span class="line">└── Flutter/</span><br><span class="line">    ├── Debug/</span><br><span class="line">    │   ├── Flutter.framework</span><br><span class="line">    │   ├── App.framework</span><br><span class="line">    │   ├── FlutterPluginRegistrant.framework (only <span class="keyword">if</span> you have plugins with iOS platform code)</span><br><span class="line">    │   └── example_plugin.framework (each plugin <span class="keyword">is</span> a separate framework)</span><br><span class="line">    ├── Profile/</span><br><span class="line">    │   ├── Flutter.framework</span><br><span class="line">    │   ├── App.framework</span><br><span class="line">    │   ├── FlutterPluginRegistrant.framework</span><br><span class="line">    │   └── example_plugin.framework</span><br><span class="line">    └── Release/</span><br><span class="line">        ├── Flutter.framework</span><br><span class="line">        ├── App.framework</span><br><span class="line">        ├── FlutterPluginRegistrant.framework</span><br><span class="line">        └── example_plugin.framework</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">somePath/
+└── Flutter/
+    ├── Debug/
+    │   ├── Flutter.framework
+    │   ├── App.framework
+    │   ├── FlutterPluginRegistrant.framework (only if you have plugins with iOS platform code)
+    │   └── example_plugin.framework (each plugin is a separate framework)
+    ├── Profile/
+    │   ├── Flutter.framework
+    │   ├── App.framework
+    │   ├── FlutterPluginRegistrant.framework
+    │   └── example_plugin.framework
+    └── Release/
+        ├── Flutter.framework
+        ├── App.framework
+        ├── FlutterPluginRegistrant.framework
+        └── example_plugin.framework</code></pre>
 <p>Flutter.framework有400M-500M，并且不会经常变动，下文的pod lib处理中我们需要为它单独创建一个pod，剩下的framwork每次新增插件或变更代码都会跟着变动，放在一个pod。</p>
 <h5 id="cocoapods-git管理"><a href="#cocoapods-git管理" class="headerlink" title="cocoapods+git管理"></a>cocoapods+git管理</h5><p>podfile无法直接引用framework，需要一个pod作为中转。首先我们需要依次进行如下操作：</p>
 <ol>
 <li>创建一个名为flutter-plugin-lib私有库</li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib create flutter-plugin-lib</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">pod lib create flutter-plugin-lib</code></pre>
 <ol start="2">
 <li>打开flutter-plugin-lib.podspec，在end前加入：</li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.ios.vendored_frameworks = <span class="string">'flutter_frameworks/App.framework'</span>,</span><br><span class="line">  <span class="string">'flutter_frameworks/FlutterPluginRegistrant.framework'</span>,</span><br><span class="line">  <span class="string">'flutter_frameworks/shared_preferences.framework'</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">s.ios.vendored_frameworks = 'flutter_frameworks/App.framework',
+  'flutter_frameworks/FlutterPluginRegistrant.framework',
+  'flutter_frameworks/shared_preferences.framework'</code></pre>
 <ol start="3">
 <li>在根目录创建flutter_frameworks文件夹，把刚生成Release的framework除去Flutter.framework cv过来。</li>
 <li>创建git仓库并上传到云端。</li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">init</span></span><br><span class="line"></span><br><span class="line">git remote add origin http:<span class="comment">//xxx/flutter-plugin-lib.git</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"xxx"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">git init
 
+git remote add origin http://xxx/flutter-plugin-lib.git
+git add .
+git commit -m "xxx"
+git push -u origin master</code></pre>
 <ol start="5">
 <li>在需要混编Flutter的native项目的podfile中添加：</li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'flutter-plugin-lib'</span>, :git =&gt; <span class="string">'http://xxx/flutter-plugin-lib'</span> :tag =&gt; <span class="string">'v1.0.0'</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin"> pod 'flutter-plugin-lib', :git =&gt; 'http://xxx/flutter-plugin-lib' :tag =&gt; 'v1.0.0'</code></pre>
 <ol start="6">
 <li>同步cocoapods</li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">pod install</code></pre>
 <ol start="7">
 <li>Flutter.framework处理方案如上。</li>
 </ol>
 <p>至此，完成了引入所有的frameworks，并且不需要组内其他成员在本地安装Flutter SDK和Cocoapods。</p>
 <h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>AppDelegate.swift</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Flutter</span><br><span class="line"><span class="keyword">import</span> FlutterPluginRegistrant</span><br><span class="line"></span><br><span class="line"><span class="meta">@UIApplicationMain</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppDelegate</span>: <span class="title">FlutterAppDelegate</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">lazy</span> <span class="keyword">var</span> flutterEngine = <span class="type">FlutterEngine</span>(name: <span class="string">"sup flutter engine"</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: <span class="keyword">Any</span>]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    flutterEngine.run()</span><br><span class="line">    <span class="type">GeneratedPluginRegistrant</span>.register(with: <span class="keyword">self</span>.flutterEngine)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.application(application, didFinishLaunchingWithOptions: launchOptions)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">import UIKit
 
+import Flutter
+import FlutterPluginRegistrant
+
+@UIApplicationMain
+class AppDelegate: FlutterAppDelegate {
+
+  lazy var flutterEngine = FlutterEngine(name: "sup flutter engine")
+
+  override func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -&gt; Bool {
+    flutterEngine.run()
+    GeneratedPluginRegistrant.register(with: self.flutterEngine)
+    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+}</code></pre>
 <p>ViewController.swift</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Flutter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="keyword">let</span> button = <span class="type">UIButton</span>(type: <span class="type">UIButton</span>.<span class="type">ButtonType</span>.custom)</span><br><span class="line">        button.addTarget(<span class="keyword">self</span>, action: #selector(showFlutter), <span class="keyword">for</span>: .touchUpInside)</span><br><span class="line">        button.setTitle(<span class="string">"Show Flutter!"</span>, <span class="keyword">for</span>: <span class="type">UIControl</span>.<span class="type">State</span>.normal)</span><br><span class="line">        button.frame = <span class="type">CGRect</span>(x: <span class="number">80.0</span>, y: <span class="number">200.0</span>, width: <span class="number">160.0</span>, height: <span class="number">40.0</span>)</span><br><span class="line">        button.backgroundColor = <span class="type">UIColor</span>.blue</span><br><span class="line">        <span class="keyword">self</span>.view.addSubview(button)</span><br><span class="line">        <span class="keyword">self</span>.view.backgroundColor = <span class="type">UIColor</span>.white</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">showFlutter</span><span class="params">()</span></span>  &#123;</span><br><span class="line">        present(<span class="type">FlutterViewController</span>(engine: (<span class="type">UIApplication</span>.shared.delegate <span class="keyword">as</span>! <span class="type">AppDelegate</span>).flutterEngine, nibName: <span class="literal">nil</span>, bundle: <span class="literal">nil</span>),animated: <span class="literal">true</span>,completion: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="swift">import UIKit
 
+import Flutter
 
+class ViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.addTarget(self, action: #selector(showFlutter), for: .touchUpInside)
+        button.setTitle("Show Flutter!", for: UIControl.State.normal)
+        button.frame = CGRect(x: 80.0, y: 200.0, width: 160.0, height: 40.0)
+        button.backgroundColor = UIColor.blue
+        self.view.addSubview(button)
+        self.view.backgroundColor = UIColor.white
+    }
 
+    @objc func showFlutter()  {
+        present(FlutterViewController(engine: (UIApplication.shared.delegate as! AppDelegate).flutterEngine, nibName: nil, bundle: nil),animated: true,completion: nil)
+    }
+}
+</code></pre>
 <h2 id="Android-以aar的形式上传到私有maven-本地依赖"><a href="#Android-以aar的形式上传到私有maven-本地依赖" class="headerlink" title="Android-以aar的形式上传到私有maven/本地依赖"></a>Android-以aar的形式上传到私有maven/本地依赖</h2><h5 id="创建Flutter-module-1"><a href="#创建Flutter-module-1" class="headerlink" title="创建Flutter module"></a>创建Flutter module</h5><p>你可以在上述iOS所创建的module中继续开发。</p>
-<h5 id="产物集成-1"><a href="#产物集成-1" class="headerlink" title="产物集成"></a>产物集成</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter build aar</span><br></pre></td></tr></table></figure>
-
+<h5 id="产物集成-1"><a href="#产物集成-1" class="headerlink" title="产物集成"></a>产物集成</h5><pre><code class="kotlin">flutter build aar</code></pre>
 <p>产物目录结构如下：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">build/host/outputs/repo</span><br><span class="line">└── com</span><br><span class="line">    └── example</span><br><span class="line">        └── my_flutter</span><br><span class="line">            ├── flutter_release</span><br><span class="line">            │   ├── <span class="number">1.0</span></span><br><span class="line">            │   │   ├── flutter_release-<span class="number">1.0</span>.aar</span><br><span class="line">            │   │   ├── flutter_release-<span class="number">1.0</span>.aar.md5</span><br><span class="line">            │   │   ├── flutter_release-<span class="number">1.0</span>.aar.sha1</span><br><span class="line">            │   │   ├── flutter_release-<span class="number">1.0</span>.pom</span><br><span class="line">            │   │   ├── flutter_release-<span class="number">1.0</span>.pom.md5</span><br><span class="line">            │   │   └── flutter_release-<span class="number">1.0</span>.pom.sha1</span><br><span class="line">            │   ├── maven-metadata.xml</span><br><span class="line">            │   ├── maven-metadata.xml.md5</span><br><span class="line">            │   └── maven-metadata.xml.sha1</span><br><span class="line">            ├── flutter_profile</span><br><span class="line">            │   ├── ...</span><br><span class="line">            └── flutter_debug</span><br><span class="line">                └── ...</span><br></pre></td></tr></table></figure>
-
+<pre><code class="kotlin">build/host/outputs/repo
+└── com
+    └── example
+        └── my_flutter
+            ├── flutter_release
+            │   ├── 1.0
+            │   │   ├── flutter_release-1.0.aar
+            │   │   ├── flutter_release-1.0.aar.md5
+            │   │   ├── flutter_release-1.0.aar.sha1
+            │   │   ├── flutter_release-1.0.pom
+            │   │   ├── flutter_release-1.0.pom.md5
+            │   │   └── flutter_release-1.0.pom.sha1
+            │   ├── maven-metadata.xml
+            │   ├── maven-metadata.xml.md5
+            │   └── maven-metadata.xml.sha1
+            ├── flutter_profile
+            │   ├── ...
+            └── flutter_debug
+                └── ...</code></pre>
 <h5 id="maven管理"><a href="#maven管理" class="headerlink" title="maven管理"></a>maven管理</h5><p>你可以按照<a href="https://flutter.cn/docs/development/add-to-app/android/project-setup" target="_blank" rel="noopener">google DOCS</a> 中描述的方式在本地依赖aar。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url <span class="string">'somepath/my_flutter/build/host/outputs/repo'</span></span><br><span class="line">    <span class="comment">// This is relative to the location of the build.gradle file</span></span><br><span class="line">    <span class="comment">// if using a relative path.</span></span><br><span class="line">  &#125;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url <span class="string">'https://storage.googleapis.com/download.flutter.io'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  debugImplementation <span class="string">'com.example.flutter_module:flutter_debug:1.0'</span></span><br><span class="line">  profileImplementation <span class="string">'com.example.flutter_module:flutter_profile:1.0'</span></span><br><span class="line">  releaseImplementation <span class="string">'com.example.flutter_module:flutter_release:1.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">android {
+  // ...
+}
 
+repositories {
+  maven {
+    url 'somepath/my_flutter/build/host/outputs/repo'
+    // This is relative to the location of the build.gradle file
+    // if using a relative path.
+  }
+  maven {
+    url 'https://storage.googleapis.com/download.flutter.io'
+  }
+}
+
+dependencies {
+  // ...
+  debugImplementation 'com.example.flutter_module:flutter_debug:1.0'
+  profileImplementation 'com.example.flutter_module:flutter_profile:1.0'
+  releaseImplementation 'com.example.flutter_module:flutter_release:1.0'
+}
+</code></pre>
 <p>但是这样对native开发组员来说接入成本还是过高，于是我考虑到用maven私服管理的方式处理依赖，当然首先公司应该有服务器，以下基于mac搭建maven仓库：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install nexus</span><br><span class="line"></span><br><span class="line">nexus start</span><br><span class="line">&gt;&gt;http:<span class="comment">//localhost:8081/nexus/</span></span><br><span class="line">nexus stop</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">brew install nexus
 
+nexus start
+&gt;&gt;http://localhost:8081/nexus/
+nexus stop</code></pre>
 <p>在flutter module中编写sh脚本处理上传动作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">flutter clean</span><br><span class="line">flutter build aar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义用于aar、pom文件目录存放的数组</span></span><br><span class="line">aars=()</span><br><span class="line">poms=()</span><br><span class="line"><span class="comment"># 指定打包后本地仓库的目录，由于这里将此脚本放在flutter module根目录，因此直接配置了flutter module根目录下相对目录</span></span><br><span class="line">targetPath=<span class="string">"build/host/outputs/repo"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义遍历找到所有pom文件和aar文件的函数</span></span><br><span class="line"><span class="comment"># 参数$1：当前查找的目录名</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">findAarPom</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"查找此目录是否有aar及pom：<span class="variable">$1</span>"</span></span><br><span class="line">	targetDir=`ls <span class="variable">$1</span>`</span><br><span class="line">	<span class="keyword">for</span> fileName <span class="keyword">in</span> <span class="variable">$targetDir</span></span><br><span class="line">	<span class="keyword">do</span></span><br><span class="line">		<span class="keyword">if</span> [[ -d  <span class="variable">$1</span><span class="string">"/"</span><span class="variable">$fileName</span> ]]; <span class="keyword">then</span></span><br><span class="line">			<span class="comment"># 还是目录，则递归找下一级</span></span><br><span class="line">			findAarPom <span class="variable">$1</span><span class="string">"/"</span><span class="variable">$fileName</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  <span class="comment"># 如果是文件，判断后缀，如果符合期望，则将文件路径拼接好放于对应数组最后一位</span></span><br><span class="line">			<span class="keyword">if</span> [[ <span class="variable">$&#123;fileName:0-4&#125;</span> == <span class="string">'.aar'</span> ]]; <span class="keyword">then</span></span><br><span class="line">				aars[<span class="variable">$&#123;#aars[@]&#125;</span>]=<span class="variable">$1</span><span class="string">"/"</span><span class="variable">$fileName</span></span><br><span class="line">			<span class="keyword">elif</span> [[ <span class="variable">$&#123;fileName:0-4&#125;</span> == <span class="string">'.pom'</span> ]]; <span class="keyword">then</span></span><br><span class="line">				poms[<span class="variable">$&#123;#poms[@]&#125;</span>]=<span class="variable">$1</span><span class="string">"/"</span><span class="variable">$fileName</span></span><br><span class="line">			<span class="keyword">fi</span></span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	<span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">findAarPom <span class="variable">$targetPath</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"============"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"aar有：《共<span class="variable">$&#123;#aars[@]&#125;</span>个》"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;aars[@]&#125;</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pom有：《共<span class="variable">$&#123;#poms[@]&#125;</span>个》"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;poms[@]&#125;</span>"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"============"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个aar文件必然对应会有一个pom文件，如果数量不对，一定是打包出错</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;#aars[@]&#125;</span> -ne <span class="variable">$&#123;#poms[@]&#125;</span> ]]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"-- !!! pom文件与aar不对称，请检查aar打包配置，上传任务 退出 !!! --"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$&#123;#aars[@]&#125;</span> == 0 ]]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"-- !!! 未找到aar文件，请检查aar打包配置，上传任务 退出 !!! --"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义将目标pom及aar上传到maven指定仓库的函数</span></span><br><span class="line"><span class="comment"># 参数$1：为pom文件</span></span><br><span class="line"><span class="comment"># 参数$2：为aar文件</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">upload</span></span>()&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"开始上传："</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$2</span></span><br><span class="line">	<span class="comment"># mvn上传命令，这里由于将上传用户名密码配置于全局maven settings.xml，则无需再指定用户名密码</span></span><br><span class="line">	mvn deploy:deploy-file \</span><br><span class="line">	-DpomFile=<span class="string">"<span class="variable">$1</span>"</span> \</span><br><span class="line">	-DgeneratePom=<span class="literal">false</span> \</span><br><span class="line">	-Dfile=<span class="string">"<span class="variable">$2</span>"</span> \</span><br><span class="line">	-Durl=<span class="string">"http://localhost:8081/nexus/content/repositories/releases"</span> \</span><br><span class="line">	-DrepositoryId=<span class="string">"nexus"</span> \</span><br><span class="line">	-Dpackaging=aar \</span><br><span class="line">	-s=<span class="string">"mvn-settings.xml"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环上传</span></span><br><span class="line"><span class="keyword">for</span> (( i=0;i&lt;<span class="variable">$&#123;#aars[@]&#125;</span>;i++ )); <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"正在处理第$[<span class="variable">$i</span>+1]个，共<span class="variable">$&#123;#aars[@]&#125;</span>个"</span></span><br><span class="line">    upload <span class="string">"<span class="variable">$&#123;poms[$i]&#125;</span>"</span> <span class="string">"<span class="variable">$&#123;aars[$i]&#125;</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">#!/bin/bash
 
+flutter clean
+flutter build aar
+
+# 定义用于aar、pom文件目录存放的数组
+aars=()
+poms=()
+# 指定打包后本地仓库的目录，由于这里将此脚本放在flutter module根目录，因此直接配置了flutter module根目录下相对目录
+targetPath="build/host/outputs/repo"
+
+# 定义遍历找到所有pom文件和aar文件的函数
+# 参数$1：当前查找的目录名
+function findAarPom(){
+    echo "查找此目录是否有aar及pom：$1"
+    targetDir=`ls $1`
+    for fileName in $targetDir
+    do
+        if [[ -d  $1"/"$fileName ]]; then
+            # 还是目录，则递归找下一级
+            findAarPom $1"/"$fileName
+        else
+          # 如果是文件，判断后缀，如果符合期望，则将文件路径拼接好放于对应数组最后一位
+            if [[ ${fileName:0-4} == '.aar' ]]; then
+                aars[${#aars[@]}]=$1"/"$fileName
+            elif [[ ${fileName:0-4} == '.pom' ]]; then
+                poms[${#poms[@]}]=$1"/"$fileName
+            fi
+        fi
+    done
+}
+
+findAarPom $targetPath
+echo "============"
+echo "aar有：《共${#aars[@]}个》"
+echo "${aars[@]}"
+echo "pom有：《共${#poms[@]}个》"
+echo "${poms[@]}"
+echo "============"
+
+# 一个aar文件必然对应会有一个pom文件，如果数量不对，一定是打包出错
+if [[ ${#aars[@]} -ne ${#poms[@]} ]]; then
+    echo "-- !!! pom文件与aar不对称，请检查aar打包配置，上传任务 退出 !!! --"
+    exit 1
+fi
+if [[ ${#aars[@]} == 0 ]]; then
+    echo "-- !!! 未找到aar文件，请检查aar打包配置，上传任务 退出 !!! --"
+    exit 1
+fi
+
+# 定义将目标pom及aar上传到maven指定仓库的函数
+# 参数$1：为pom文件
+# 参数$2：为aar文件
+function upload(){
+    echo "开始上传："
+    echo $1
+    echo $2
+    # mvn上传命令，这里由于将上传用户名密码配置于全局maven settings.xml，则无需再指定用户名密码
+    mvn deploy:deploy-file \
+    -DpomFile="$1" \
+    -DgeneratePom=false \
+    -Dfile="$2" \
+    -Durl="http://localhost:8081/nexus/content/repositories/releases" \
+    -DrepositoryId="nexus" \
+    -Dpackaging=aar \
+    -s="mvn-settings.xml"
+}
+
+# 循环上传
+for (( i=0;i&lt;${#aars[@]};i++ )); do
+    echo "正在处理第$[$i+1]个，共${#aars[@]}个"
+    upload "${poms[$i]}" "${aars[$i]}"
+done</code></pre>
 <p>其中mvn-settings.xml是单独对当前项目配置mvn，修改admin password为maven的账号密码，默认为admin/admin123</p>
 <p>在Android项目app模块中的build.gradle</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">   buildTypes &#123;</span><br><span class="line">       ...</span><br><span class="line">        profile &#123;</span><br><span class="line">            initWith debug</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">        targetCompatibility JavaVersion.VERSION_1_8</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url <span class="string">'http://localhost:8081/nexus/content/repositories/releases'</span></span><br><span class="line">    <span class="comment">// This is relative to the location of the build.gradle file</span></span><br><span class="line">    <span class="comment">// if using a relative path.</span></span><br><span class="line">  &#125;</span><br><span class="line">  maven &#123;</span><br><span class="line">    url <span class="string">'https://storage.googleapis.com/download.flutter.io'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  debugImplementation <span class="string">'com.example.flutter_module:flutter_debug:1.0'</span></span><br><span class="line">  profileImplementation <span class="string">'com.example.flutter_module:flutter_profile:1.0'</span></span><br><span class="line">  releaseImplementation <span class="string">'com.example.flutter_module:flutter_release:1.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="go">android {
+  // ...
+   buildTypes {
+       ...
+        profile {
+            initWith debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 
+repositories {
+  maven {
+    url 'http://localhost:8081/nexus/content/repositories/releases'
+    // This is relative to the location of the build.gradle file
+    // if using a relative path.
+  }
+  maven {
+    url 'https://storage.googleapis.com/download.flutter.io'
+  }
+}
+
+dependencies {
+  // ...
+  debugImplementation 'com.example.flutter_module:flutter_debug:1.0'
+  profileImplementation 'com.example.flutter_module:flutter_profile:1.0'
+  releaseImplementation 'com.example.flutter_module:flutter_release:1.0'
+}</code></pre>
 <p>如此即可完成maven私服上传，如果你有服务器可以修改ip地址完成上传、依赖。由于我司没有私服，于是决定把host/文件夹拖入项目的方式实现依赖：</p>
 <p>根目录build.gradle:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">		...</span><br><span class="line">    repositories &#123;</span><br><span class="line">				...</span><br><span class="line">        maven &#123; url <span class="string">'../host/outputs/repo'</span> &#125;</span><br><span class="line">        maven &#123; url <span class="string">'https://storage.flutter-io.cn/download.flutter.io'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">      	...</span><br><span class="line">        maven &#123; url <span class="string">'../host/outputs/repo'</span> &#125;</span><br><span class="line">        maven &#123; url <span class="string">'https://storage.flutter-io.cn/download.flutter.io'</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">buildscript {
+        ...
+    repositories {
+                ...
+        maven { url '../host/outputs/repo' }
+        maven { url 'https://storage.flutter-io.cn/download.flutter.io' }
+    }
+}
 
+allprojects {
+    repositories {
+          ...
+        maven { url '../host/outputs/repo' }
+        maven { url 'https://storage.flutter-io.cn/download.flutter.io' }
+    }
+}</code></pre>
 <p>至此，完成了引入所有的aar，并且不需要组内其他成员在本地安装Flutter SDK。网上也有通过fat-aar来合并aar包进行依赖处理的方法，我认为对于迭代频繁的新技术应该尽量用官方推荐的方式去实现，以免之后的迭代、版本升级带来不必要的开发成本。</p>
 <h5 id="验证-1"><a href="#验证-1" class="headerlink" title="验证"></a>验证</h5><p>App.kt</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> : <span class="type">Application</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">        FlutterMain.startInitialization(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class App : Application() {
 
-
-
+    override fun onCreate() {
+        super.onCreate()
+        FlutterMain.startInitialization(this)
+    }
+}</code></pre>
 <p>FlutterActivity.kt</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlutterActivity</span> : <span class="type">FlutterFragmentActivity</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> engine:FlutterEngine? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        engine = FlutterEngine(<span class="keyword">this</span>)</span><br><span class="line">        engine?.dartExecutor?.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())</span><br><span class="line">        setContentView(R.layout.activity_flutter)</span><br><span class="line">        fv_container.attachToFlutterEngine(engine!!)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        engine?.lifecycleChannel?.appIsResumed()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onPause</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onPause()</span><br><span class="line">        engine?.lifecycleChannel?.appIsInactive()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onStop()</span><br><span class="line">        engine?.lifecycleChannel?.appIsPaused()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        fv_container.detachFromFlutterEngine()</span><br><span class="line">        <span class="keyword">super</span>.onDestroy()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class FlutterActivity : FlutterFragmentActivity() {
 
-<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2>
-            </div>
-          
+    var engine:FlutterEngine? = null
 
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/" title="将Flutter添加到已有的项目中">http://hanniballol.github.io/2020/09/19/将Flutter添加到已有的项目中/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Flutter/">Flutter</a>
-		  
-		</div>
-		
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        engine = FlutterEngine(this)
+        engine?.dartExecutor?.executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault())
+        setContentView(R.layout.activity_flutter)
+        fv_container.attachToFlutterEngine(engine!!)
+    }
 
-        
-        
-  <nav class="post-nav">
-    
-    
-      <a class="next" href="/2020/02/25/%E6%97%A0%E9%A2%98/">
-        <span class="next-text nav-default">无题</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
+    override fun onResume() {
+        super.onResume()
+        engine?.lifecycleChannel?.appIsResumed()
+    }
 
-        
-  <div class="comments" id="comments">
-    
-  </div>
+    override fun onPause() {
+        super.onPause()
+        engine?.lifecycleChannel?.appIsInactive()
+    }
 
+    override fun onStop() {
+        super.onStop()
+        engine?.lifecycleChannel?.appIsPaused()
+    }
 
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+    override fun onDestroy() {
+        fv_container.detachFromFlutterEngine()
+        super.onDestroy()
+    }
+}</code></pre>
+<h2 id="End"><a href="#End" class="headerlink" title="End"></a>End</h2></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em><a class="button is-small is-default py-4" href="/2020/02/25/%E6%97%A0%E9%A2%98/" title="无题"><span class="has-text-weight-semibold">下一页: 无题</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

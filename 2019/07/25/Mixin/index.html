@@ -1,183 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>Mixin</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="Mixin"/>
-
-
-
-
-  <meta name="keywords" content="dart," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2019/07/25/Mixin/"/>
-
-
-<meta name="description" content="对Dart中Mixin的理解">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Mixin">
-<meta property="og:url" content="http://hanniballol.github.io/2019/07/25/Mixin/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="对Dart中Mixin的理解">
-<meta property="article:published_time" content="2019-07-25T03:54:15.000Z">
-<meta property="article:modified_time" content="2019-08-12T06:32:39.367Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="dart">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> Mixin - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          Mixin
-        
-      </h1>
-
-      <time class="post-time">
-          2019-07-25
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tip"><span class="toc-text">Tip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法和语义"><span class="toc-text">语法和语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#细节描述"><span class="toc-text">细节描述</span></a></li></ol>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Mixin</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tip"><span class="toc-text">Tip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法和语义"><span class="toc-text">语法和语义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#细节描述"><span class="toc-text">细节描述</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/dart"><i class="tag post-item-tag">dart</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Mixin</h1><time class="has-text-grey" datetime="2019-07-25T03:54:15.000Z">2019-07-25</time><article class="mt-2 post-content"><div class="excerpt">
     对Dart中Mixin的理解
 </div>
 
@@ -198,22 +22,46 @@ var _hmt = _hmt || [];
 <p> 函数非常有用，因为他们可以应用于不同的参数。同样，Class隐式定义的Mixin，通常仅在类声明给出的父类中应用一次。为允许Mixin应用于不同的父类，我们要么声明Mixin不依赖于特定的父类，要么脱离于Class隐式的Mixin，然后重用外部的原始定义。</p>
 <h3 id="语法和语义"><a href="#语法和语义" class="headerlink" title="语法和语义"></a>语法和语义</h3><p> Mixin通过正常的类声明被隐式定义。原则上，每个类都定义了一个Mixin，并可以从类中提取出来。然而，Mixin只能从未定义构造函数的类中提取。由于沿着继承链传递构造函数参数的需要，该约束能避免出现新的连锁问题。</p>
 <p> <strong>举一个🌰:</strong></p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    Collection&lt;E&gt; newInstance();</span><br><span class="line">    <span class="keyword">void</span> forEach(<span class="keyword">void</span> f(E element)) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> add(E element) &#123;</span><br><span class="line">        <span class="comment">//body</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br><span class="line"><span class="class"><span class="title">abstract</span> <span class="title">class</span> <span class="title">DOMElementSet</span>&lt;<span class="title">E</span>&gt; = <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Collection<E>**是一个标准类，并用来声明一个Mixin。另外，</strong>DOMElementList<strong>和</strong>DOMElementSet<strong>也是混合应用。这两个Mixin在类声明的时候，通过特殊的形式来定义。在类声明中包含一个名字，并用</strong>with<strong>语句来声明他们与父类中的混合应用相同。</strong>Collection<E><strong>是抽象类，因为它并没有实现类中年定义的抽象方法</strong>newInstance()**。</p>
+<pre><code class="dart">abstract class Collection&lt;E&gt; {
+    Collection&lt;E&gt; newInstance();
+    void forEach(void f(E element)) {
+        //body
+    }
+    void add(E element) {
+        //body
+    }
+    //...
+}
+abstract class DOMElementList&lt;E&gt; = DOMList with Collection&lt;E&gt;;
+abstract class DOMElementSet&lt;E&gt; = DOMSet with Collection&lt;E&gt;;
+</code></pre>
+<p><strong>Collection<e>**是一个标准类，并用来声明一个Mixin。另外，</e></strong>DOMElementList<strong>和</strong>DOMElementSet<strong>也是混合应用。这两个Mixin在类声明的时候，通过特殊的形式来定义。在类声明中包含一个名字，并用</strong>with<strong>语句来声明他们与父类中的混合应用相同。</strong>Collection<e><strong>是抽象类，因为它并没有实现类中年定义的抽象方法</strong>newInstance()**。</e></p>
 <p>上述中，事实上<strong>DOMElementList</strong>混合Collection mixin |&gt; DOMList，而DOMElementSet则是Collection mixin |&gt; DOMSet。</p>
 <p>这样做的好处是，Collection中的代码可以在类的多个继承层次中被共享。因此，无论<code>DOMList</code>还是<code>DOMSet</code>，都不需要重复、复制Collection中的代码，并且任何变化都会使Collection传递到这两个继承结构中，大大简化了维护代码。上面的代码介绍了Mixin应用的一种方式：混合应用指定应用的Mixin和父类，以及混合应用的名称。</p>
 <p>另外一种情况，混合应用出现在类声明的<code>with</code>语句中，以逗号来分隔标识符列表的时候。此时，所有的标识符代表Class。在这种情况下，多混合在<code>extends</code>语句中可以构成及应用于父类名称，生成一个匿名的父类。再以同样的🌰：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMSet</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementSet&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementSet&lt;E&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="dart">class DOMElementList&lt;E&gt; extends DOMList with Collection&lt;E&gt; {
+    DOMElementList&lt;E&gt; newInstance() =&gt; new DOMElementList&lt;E&gt;();
+}
 
+class DOMElementList&lt;E&gt; extends DOMSet with Collection&lt;E&gt; {
+    DOMElementSet&lt;E&gt; newInstance() =&gt; new DOMElementSet&lt;E&gt;();
+}</code></pre>
 <p>这里，<code>DOMElementList</code>并不是应用Collection mixin |&gt; DOMList。相反，它是一个父类为应用的新定义的类（注意extends关键字），DOMElementSet同样如此。注意，在每一种情况下，抽象函数<code>newInstance()</code>必须单独实现，以便能够直接被实例化。</p>
 <p>想象一下，如果<code>DOMList</code>有一个带参数的构造函数：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DOMElementList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">DOMList</span> <span class="title">with</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    DOMElementList&lt;E&gt; newInstance() =&gt; <span class="keyword">new</span> DOMElementList&lt;E&gt;(<span class="number">0</span>);</span><br><span class="line">    DOMElementList(size):<span class="keyword">super</span>(size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="dart">class DOMElementList&lt;E&gt; extends DOMList with Collection&lt;E&gt; {
+    DOMElementList&lt;E&gt; newInstance() =&gt; new DOMElementList&lt;E&gt;(0);
+    DOMElementList(size):super(size);
+}</code></pre>
 <p>构造函数可以为各个字段以及泛型参数设置值。每个Mixin都有一个自定义的构造函数被单独调用，父类也是如此。因为Mixin的构造函数不能够被声明，所以调用函数可以省略。在底层的实现中，调用总是放在初始列表之前。</p>
 <p>第二种是以方便实用的语法糖形式，将多个Mixin混入类中，而不需要引入多个中间声明。举一个🌰：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="built_in">String</span> name;</span><br><span class="line">    Person(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Maestro</span> <span class="keyword">extends</span> <span class="title">Person</span> <span class="title">with</span> <span class="title">Musical</span>, <span class="title">Aggressive</span>, <span class="title">Demented</span> </span>&#123;</span><br><span class="line">    Maestro(name):<span class="keyword">super</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="dart">class Person {
+    String name;
+    Person(this.name);
+}
 
+class Maestro extends Person with Musical, Aggressive, Demented {
+    Maestro(name):super(name);
+}</code></pre>
 <p>这里，父类是一个混合应用：Demented mixin |&gt; Aggressive mixin |&gt; Musical mixin |&gt; Person</p>
 <p>假设<code>Person</code>有带参数的构造函数，则Musical mixin |&gt; Person将继承Person的构造函数。以此类推，一直到<code>Maestro</code>实际的父类<code>Person</code>，它由一系列的Mixin应用组成。</p>
 <h3 id="细节描述"><a href="#细节描述" class="headerlink" title="细节描述"></a>细节描述</h3><ul>
@@ -228,141 +76,4 @@ var _hmt = _hmt || [];
 <p>  最初的Class有它自身的父类。为确保特定的混合应用与最初进行混入的Class兼容，需要使用<code>with</code>语句。例如，如果通过<code>with</code>语句定义了Class A，并应用了一个混合M，M源自Class K，那么A必须支持K定义的接口。</p>
 </li>
 </ul>
-
-            </div>
-          
-
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2019/07/25/Mixin/" title="Mixin">http://hanniballol.github.io/2019/07/25/Mixin/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/dart/">dart</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2019/08/06/Android-Unit-Case/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Android Unit Case</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%85%A2%E9%97%AE%E9%A2%98/">
-        <span class="next-text nav-default">github访问及clone过慢问题</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-small is-default py-4" href="/2019/08/06/Android-Unit-Case/" title="Android Unit Case"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: Android Unit Case</span></a><a class="button is-small is-default py-4" href="/2019/07/16/%E9%83%A8%E5%88%86%E5%9C%B0%E5%8C%BAgithub%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81%E5%A5%87%E6%85%A2%E9%97%AE%E9%A2%98/" title="github访问及clone过慢问题"><span class="has-text-weight-semibold">下一页: github访问及clone过慢问题</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

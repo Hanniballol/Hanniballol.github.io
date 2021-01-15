@@ -1,183 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>用偏函数实现责任链模式</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="用偏函数实现责任链模式"/>
-
-
-
-
-  <meta name="keywords" content="Kotlin," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2020/01/19/用偏函数实现责任链模式/"/>
-
-
-<meta name="description" content="责任链模式的目的就是避免请求的发送者和接收者之间的耦合关系，将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用偏函数实现责任链模式">
-<meta property="og:url" content="http://hanniballol.github.io/2020/01/19/%E7%94%A8%E5%81%8F%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="责任链模式的目的就是避免请求的发送者和接收者之间的耦合关系，将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。">
-<meta property="article:published_time" content="2020-01-19T07:06:12.000Z">
-<meta property="article:modified_time" content="2020-01-21T06:53:19.876Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="Kotlin">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> 用偏函数实现责任链模式 - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          用偏函数实现责任链模式
-        
-      </h1>
-
-      <time class="post-time">
-          2020-01-19
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现偏函数类型：PartialFunction"><span class="toc-text">实现偏函数类型：PartialFunction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用orElse构建责任链"><span class="toc-text">用orElse构建责任链</span></a></li></ol>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">用偏函数实现责任链模式</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现偏函数类型：PartialFunction"><span class="toc-text">实现偏函数类型：PartialFunction</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用orElse构建责任链"><span class="toc-text">用orElse构建责任链</span></a></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/Kotlin"><i class="tag post-item-tag">Kotlin</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">用偏函数实现责任链模式</h1><time class="has-text-grey" datetime="2020-01-19T07:06:12.000Z">2020-01-19</time><article class="mt-2 post-content"><div class="excerpt">
     责任链模式的目的就是避免请求的发送者和接收者之间的耦合关系，将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
 </div>
 
@@ -190,27 +14,102 @@ var _hmt = _hmt || [];
 <p>简单来说，<strong>责任链模式的目的就是避免请求的发送者和接收者之间的耦合关系，将这个对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止</strong>。</p>
 <p>现在举一个更具体的🌰。计算机学院的学生会管理了一个学生会基金，用于各种活动和组织人员工作的开支。当要发生一笔支出时，如果金额在100元之内，可由各个分部长审批；如果金额超过了100元，那么就需要会长同意；但假使金额较大，达到了500元以上，那么就需要学院的辅导员陈老师批准。此外，学院里还有一个不宣的规定，经费的上限为1000元，如果超出则默认打回申请。</p>
 <p>当然我们可以用最简单的if-else来实现经费审批的需求。然而根据开闭原则，我们需要将其中的逻辑进行解耦。下面我们就用面向对象的思路结合责任链模式，来设计一个程序。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplyEvent</span></span>(<span class="keyword">val</span> monkey: <span class="built_in">Int</span>, <span class="keyword">val</span> title: String)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ApplyHandler</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> successor: ApplyHandler?</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">handleEvent</span><span class="params">(event: <span class="type">ApplyEvent</span>)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GroupLeader</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> successor: ApplyHandler?): ApplyHandler &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleEvent</span><span class="params">(event: <span class="type">ApplyEvent</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> &#123;</span><br><span class="line">      event.monkey &lt;= <span class="number">100</span> -&gt; print(<span class="string">"Group Leader handled application: <span class="subst">$&#123;event.title&#125;</span>"</span>)</span><br><span class="line">      <span class="keyword">else</span> -&gt; <span class="keyword">when</span>(successor) &#123;</span><br><span class="line">        <span class="keyword">is</span> ApplyHandler -&gt; successor.handleEvent(event)</span><br><span class="line">        <span class="keyword">else</span> -&gt; print(<span class="string">"Group Leader: This application cannot be handdle"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">President</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> successor: ApplyHandler?) :ApplyHandler &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleEvent</span><span class="params">(event: <span class="type">ApplyEvent</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> &#123;</span><br><span class="line">      event.monkey &lt;= <span class="number">500</span> -&gt; print(<span class="string">"President handled application: <span class="subst">$&#123;event.title&#125;</span>"</span>)</span><br><span class="line">      <span class="keyword">else</span> -&gt; <span class="keyword">when</span>(successor) &#123;</span><br><span class="line">        <span class="keyword">is</span> ApplyHandler -&gt; successor.handleEvent(event)</span><br><span class="line">        <span class="keyword">else</span> -&gt; print(<span class="string">"President: This application cannot be handdle."</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">College</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> successor: ApplyHandler?) :ApplyHandler &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">handleEvent</span><span class="params">(event: <span class="type">ApplyEvent</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">when</span> &#123;</span><br><span class="line">      event.monkey &gt; <span class="number">1000</span> -&gt; print(<span class="string">"College: This application is refused."</span>)</span><br><span class="line">      <span class="keyword">else</span> -&gt; print(<span class="string">"College handled application: <span class="subst">$&#123;event.title&#125;</span>."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">data class ApplyEvent(val monkey: Int, val title: String)
 
+interface ApplyHandler {
+  val successor: ApplyHandler?
+  fun handleEvent(event: ApplyEvent)
+}
+
+class GroupLeader(override val successor: ApplyHandler?): ApplyHandler {
+  override fun handleEvent(event: ApplyEvent) {
+    when {
+      event.monkey &lt;= 100 -&gt; print("Group Leader handled application: ${event.title}")
+      else -&gt; when(successor) {
+        is ApplyHandler -&gt; successor.handleEvent(event)
+        else -&gt; print("Group Leader: This application cannot be handdle")
+      }
+    }
+  }
+}
+
+class President(override val successor: ApplyHandler?) :ApplyHandler {
+  override fun handleEvent(event: ApplyEvent) {
+    when {
+      event.monkey &lt;= 500 -&gt; print("President handled application: ${event.title}")
+      else -&gt; when(successor) {
+        is ApplyHandler -&gt; successor.handleEvent(event)
+        else -&gt; print("President: This application cannot be handdle.")
+      }
+    }
+  }
+}
+
+class College(override val successor: ApplyHandler?) :ApplyHandler {
+  override fun handleEvent(event: ApplyEvent) {
+    when {
+      event.monkey &gt; 1000 -&gt; print("College: This application is refused.")
+      else -&gt; print("College handled application: ${event.title}.")
+    }
+  }
+}</code></pre>
 <p>我们声明了GroupLeader,President,College三个类来代表学生会部长，分会长，会长及学院，它们都实现了ApplyHandler接口。接口包含了一个可空的后继者对象successor，以及对申请事件的处理方法handleEvent。</p>
 <p>当我们把一个申请经费的事件传递给GroupLeader对象进行处理时，它会根据具体的经费金额来判断金额来判断是否将申请转交给successor对象，也就是President类来处理。以此类推，最终形成了一个责任链机制：</p>
 <div id="flowchart-0" class="flow-chart"></div>
 
 
 
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">val</span> College = College(<span class="literal">null</span>)</span><br><span class="line">  <span class="keyword">val</span> president = President(college)</span><br><span class="line">  <span class="keyword">val</span> groupLeader = GroupLeader(president)</span><br><span class="line">  </span><br><span class="line">  groupLeader.handleEvent(ApplyEvent(<span class="number">10</span>,<span class="string">"buy a pen"</span>))</span><br><span class="line">  groupLeader.handleEvent(ApplyEvent(<span class="number">200</span>,<span class="string">"team building"</span>))</span><br><span class="line">  groupLeader.handleEvent(ApplyEvent(<span class="number">600</span>,<span class="string">"hold a debate match"</span>))</span><br><span class="line">  groupLeader.handleEvent(ApplyEvent(<span class="number">1200</span>,<span class="string">"annual meeting of the college"</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//result</span></span><br><span class="line">Group Leader handled application: buy a pen.</span><br><span class="line">President handled application: team building.</span><br><span class="line">College handled applicatioon: hold a debate match.</span><br><span class="line">College: This application <span class="keyword">is</span> refused.</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">fun main(args: Array&lt;String&gt;) {
 
+  val College = College(null)
+  val president = President(college)
+  val groupLeader = GroupLeader(president)
+
+  groupLeader.handleEvent(ApplyEvent(10,"buy a pen"))
+  groupLeader.handleEvent(ApplyEvent(200,"team building"))
+  groupLeader.handleEvent(ApplyEvent(600,"hold a debate match"))
+  groupLeader.handleEvent(ApplyEvent(1200,"annual meeting of the college"))
+}
+
+//result
+Group Leader handled application: buy a pen.
+President handled application: team building.
+College handled applicatioon: hold a debate match.
+College: This application is refused.</code></pre>
 <p>梳理一下责任链的机制，整个链条的每个处理环节都有对其输入参数的效验标准，当输入参数处于某个责任链环节的有效接收范围之内，该环节才能对其作出正常的处理操作。在编程语言中，我们有一个专门的术语来描述这种情况，这就是“<strong>偏函数</strong>”。</p>
 <h4 id="实现偏函数类型：PartialFunction"><a href="#实现偏函数类型：PartialFunction" class="headerlink" title="实现偏函数类型：PartialFunction"></a>实现偏函数类型：PartialFunction</h4><p>那，什么是偏函数呢？</p>
 <blockquote>
 <p>偏函数是数学中的概念，指的是定义域X中可能存在某些值在值域Y中没有对应的值。</p>
 </blockquote>
 <p>为了方便理解，我们可以把偏函数与普通函数进行比较。在一个普通函数中，我们可以给指定类型的参数传入任意该类型的值，比如(Int)-&gt;Unit，可以接收任何Int值。而在一个偏函数中，指定类型的参数并不接收任意该类型的值，比如：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">mustGreaterThan5</span><span class="params">(x: <span class="type">Int</span>)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (x &gt; <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">throw</span> Exception(<span class="string">"x must be greator than 5"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; mustGreatorThan5(<span class="number">6</span>)</span><br><span class="line"><span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; mustGreatorThan5(<span class="number">1</span>)</span><br><span class="line">java.lang.Exception: x must be greatoor than <span class="number">5</span> at Line17.mustGreatorThan5(Unknow Source)</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">fun mustGreaterThan5(x: Int): Boolean {
 
+  if (x &gt; 5) {
+    return true
+  }
+  throw Exception("x must be greator than 5")
+}
+
+&gt;&gt;&gt; mustGreatorThan5(6)
+true
+
+&gt;&gt;&gt; mustGreatorThan5(1)
+java.lang.Exception: x must be greatoor than 5 at Line17.mustGreatorThan5(Unknow Source)</code></pre>
 <p>之所以提高偏函数是因为在一些函数式编程语言中，如Scala，有一种PartialFunction类型，我们可以用它来简化责任链模式的实现。由于Kotlin的语言特性足够灵活强大，虽然它的标准库没有支持PartialFunction，然而一些开源库（如<a href="https://github.com/arrow-kt/arrow" target="_blank" rel="noopener">Arrow</a>）已经实现了这个功能。我们来定义一个PartialFunction类型：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PartialFunction</span>&lt;<span class="type">in P1, out R</span>&gt; </span>(</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> definetAt: (P1) -&gt; <span class="built_in">Boolean</span>,</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">val</span> f: (P1) -&gt; R</span><br><span class="line">) : (P1) -&gt; R &#123;</span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">(p1: <span class="type">P1</span>)</span></span>: R &#123;</span><br><span class="line">    <span class="keyword">if</span> (definetAt(p1)) &#123;</span><br><span class="line">      <span class="keyword">return</span> f(p1)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> IllegalArgumentException(<span class="string">"Value: (<span class="variable">$p1</span>) isn't supported by this function"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">isDefinetAt</span><span class="params">(p1: <span class="type">P1</span>)</span></span> = definetAt(p1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class PartialFunction&lt;in P1, out R&gt; (
 
+  private val definetAt: (P1) -&gt; Boolean,
+  private val f: (P1) -&gt; R
+) : (P1) -&gt; R {
+  override fun invoke(p1: P1): R {
+    if (definetAt(p1)) {
+      return f(p1)
+    }
+    throw IllegalArgumentException("Value: ($p1) isn't supported by this function")
+  }
+
+  fun isDefinetAt(p1: P1) = definetAt(p1)
+}</code></pre>
 <p>现在来分析下PartialFunction类的具体作用：</p>
 <ul>
 <li>声明类对象时需要接收两个构造参数，definetAt为效验函数，f为处理函数</li>
@@ -219,173 +118,65 @@ var _hmt = _hmt || [];
 </ul>
 <p>如上PartialFunction类已经可以处理责任链模式中各个环节对于输入的效验及处理逻辑的问题，但是依旧有一个问题，就是如何将请求在整个链条中进行传递。</p>
 <p>接下来我们利用Kotlin的扩展函数给PartialFunction类增加一个orElse方法。在此之前，我们先注意下这个类中的isDefinedAt方法，它其实并没有什么特殊之处，仅仅只是作为拷贝definetAt的一个内部方法，为了在orElse方法中能够被调用。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">infix</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;P1, R&gt;</span> PartialFunction<span class="type">&lt;P1, R&gt;</span>.<span class="title">orElse</span><span class="params">(that: <span class="type">PartialFunction</span>&lt;<span class="type">P1</span>, R&gt;)</span></span>: PartialFunction&lt;P1, R&gt; &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> PartialFunction(&#123; <span class="keyword">this</span>.isDefinedAt(it) || that.isDefinedAt(it) &#125;) &#123;</span><br><span class="line">    <span class="keyword">when</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.isDefinedAt(it) -&gt; <span class="keyword">this</span>(it)</span><br><span class="line">      <span class="keyword">else</span> -&gt; that(it)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">infix fun &lt;P1, R&gt; PartialFunction&lt;P1, R&gt;.orElse(that: PartialFunction&lt;P1, R&gt;): PartialFunction&lt;P1, R&gt; {
 
+  return PartialFunction({ this.isDefinedAt(it) || that.isDefinedAt(it) }) {
+    when {
+      this.isDefinedAt(it) -&gt; this(it)
+      else -&gt; that(it)
+    }
+  }
+}</code></pre>
 <p>在orElse方法中可以传入另一个PartialFunction类对象that，它也就是责任链模式中的后继者。当isDefinedAt方法执行结果为false的时候，那么就调用that对象来处理申请。</p>
 <p>这里用infix关键字来让orElse成为一个中辍函数，从而让链式调用变得更加直观。</p>
 <h4 id="用orElse构建责任链"><a href="#用orElse构建责任链" class="headerlink" title="用orElse构建责任链"></a>用orElse构建责任链</h4><p>接下来我们就用设计好的PartialFunction类及扩展的orElse方法，来重新实现以下最开始的例子。首先来看看如何用PartialFunction定义groupLeader对象：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplyEvent</span></span>(<span class="keyword">val</span> money: <span class="built_in">Int</span>, <span class="keyword">val</span> title: String)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> groupLeader = &#123;</span><br><span class="line">  <span class="keyword">val</span> definetAt: (ApplyEvent) -&gt; <span class="built_in">Boolean</span> = &#123; it.money &lt;= <span class="number">200</span> &#125;</span><br><span class="line">  <span class="keyword">val</span> handler: (ApplyEvent) -&gt; <span class="built_in">Unit</span> = &#123; println(<span class="string">"Group Leader handled application: <span class="subst">$&#123;it.title&#125;</span>."</span>) &#125;</span><br><span class="line">  PartialFunction(definetAt, handler)</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">data class ApplyEvent(val money: Int, val title: String)
 
+val groupLeader = {
+  val definetAt: (ApplyEvent) -&gt; Boolean = { it.money &lt;= 200 }
+  val handler: (ApplyEvent) -&gt; Unit = { println("Group Leader handled application: ${it.title}.") }
+  PartialFunction(definetAt, handler)
+}()</code></pre>
 <p>这里我们借助了自运行Lambda的语法来构建一个PartialFunction的对象groupLeader。definetAt用于效验申请的经费金额是否在学生会部长可审批的范围之内，handler函数用来处理童年各国金额效验后的审批操作。</p>
 <p>同理，我们用类似的方法再定义剩下的president和college对象：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> president = &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">val</span> definetAt: (ApplyEvent) -&gt; <span class="built_in">Boolean</span> = &#123; it.money &lt;= <span class="number">500</span> &#125;</span><br><span class="line">  <span class="keyword">val</span> handler: (ApplyEvent) -&gt; <span class="built_in">Unit</span> = &#123; println(<span class="string">"President handled application: <span class="subst">$&#123;it.title&#125;</span>."</span>) &#125;</span><br><span class="line">  PartialFunction(definetAt, handler)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> college = &#123;</span><br><span class="line">  <span class="keyword">val</span> definetAt: (ApplyEvent) -&gt; <span class="built_in">Boolean</span> = &#123; <span class="literal">true</span> &#125;</span><br><span class="line">  <span class="keyword">val</span> handler: (ApplyEvent) -&gt; <span class="built_in">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">when</span> &#123;</span><br><span class="line">      it.money &gt; <span class="number">1000</span> -&gt; println(<span class="string">"College: This application is refused."</span>)</span><br><span class="line">      <span class="keyword">else</span> -&gt; println(<span class="string">"College handled application: <span class="subst">$&#123;it.title&#125;</span>."</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  PartialFunction(definetAt,handler)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">val president = {
 
+  val definetAt: (ApplyEvent) -&gt; Boolean = { it.money &lt;= 500 }
+  val handler: (ApplyEvent) -&gt; Unit = { println("President handled application: ${it.title}.") }
+  PartialFunction(definetAt, handler)
+}()
+
+val college = {
+  val definetAt: (ApplyEvent) -&gt; Boolean = { true }
+  val handler: (ApplyEvent) -&gt; Unit = {
+    when {
+      it.money &gt; 1000 -&gt; println("College: This application is refused.")
+      else -&gt; println("College handled application: ${it.title}.")
+    }
+  }
+  PartialFunction(definetAt,handler)
+}</code></pre>
 <p>最后我们用orElse来构建一个基于责任链模式和PartialFunction类型的中辍表达式applyChain:</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> applyChain = groupLeader orElse president orElse college</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; applyChain(ApplyEvent(<span class="number">600</span>,<span class="string">"hold a debate match"</span>))</span><br><span class="line">College handled application: hold a debate match</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">val applyChain = groupLeader orElse president orElse college
 
+&gt;&gt;&gt; applyChain(ApplyEvent(600,"hold a debate match"))
+College handled application: hold a debate match</code></pre>
 <p>借助PartialFunction类的封装，我们不仅大幅度减少了程序的代码量，而且在构建责任链时，可以用orElse获得更好的语法表达。</p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 经费申请
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=&gt;start: 经费申请
 
-op1=>operation: 学生部长
-op2=>operation: 分会长
-op3=>operation: 会长
-op4=>operation: 学院
-cond1=>condition: 是否小于100元
-cond2=>condition: 是否小于500元
-cond3=>condition: 是否小于1000元
-e1=>end: 申请成功
-e2=>end: 申请失败
-st->cond1
-cond1(yes)->op1->e1
-cond1(no)->cond2
-cond2(yes)->op2->e1
-cond2(no)->cond3
-cond3(yes)->op3->e1
-cond3(no)->e2</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script>
-            </div>
-          
-
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2020/01/19/%E7%94%A8%E5%81%8F%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F/" title="用偏函数实现责任链模式">http://hanniballol.github.io/2020/01/19/用偏函数实现责任链模式/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Kotlin/">Kotlin</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">ADT实现状态模式</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2020/01/19/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/">
-        <span class="next-text nav-default">运算符重载和迭代器模式</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+op1=&gt;operation: 学生部长
+op2=&gt;operation: 分会长
+op3=&gt;operation: 会长
+op4=&gt;operation: 学院
+cond1=&gt;condition: 是否小于100元
+cond2=&gt;condition: 是否小于500元
+cond3=&gt;condition: 是否小于1000元
+e1=&gt;end: 申请成功
+e2=&gt;end: 申请失败
+st-&gt;cond1
+cond1(yes)-&gt;op1-&gt;e1
+cond1(no)-&gt;cond2
+cond2(yes)-&gt;op2-&gt;e1
+cond2(no)-&gt;cond3
+cond3(yes)-&gt;op3-&gt;e1
+cond3(no)-&gt;e2</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script></article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-small is-default py-4" href="/2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" title="ADT实现状态模式"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: ADT实现状态模式</span></a><a class="button is-small is-default py-4" href="/2020/01/19/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" title="运算符重载和迭代器模式"><span class="has-text-weight-semibold">下一页: 运算符重载和迭代器模式</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>

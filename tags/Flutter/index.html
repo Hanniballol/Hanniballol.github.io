@@ -1,249 +1,27 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>Hanniballol's blog</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/widget-post-list.css"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><span>标签 · Flutter</span></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><article class="post-container is-flex is-justify-content-center section container is-max-widescreen pt-4 px-2"><div class="columns is-variable is-1-tablet is-3-desktop-only is-2-widescreen is-full-width"><section class="column"><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="idea_new_module.jpg" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/"><img class="post-cover-img js-img-fadeIn" src="idea_new_module.jpg" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Flutter"><i class="tag post-item-tag">Flutter</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/">将Flutter添加到已有的项目中</a></h2><time class="has-text-grey" datetime="2020-09-19T01:41:56.000Z">2020-09-19</time><p class="is-flex-grow-2 mt-2">查看了网上各种方案也包括闲鱼团队的开源flutter_boot，都各有缺点。鉴于各种方案都需要制定相应的Flutter版本，考虑到Flutter更新速度，于是决定依靠官方的产物集成方式解决混合开发的问题，并进行远程SDK管理。
+##Flutter构建模式
+你可以在官方DOCS中看到详细介绍，下文打包命令都会产出对应三种模式的包以便满足各场景需要，我们简单记录下来：
+DebugDebug模式下，app可以被安装在物理设备、仿真器或者模拟器上进行调试。
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+热重载仅能在Debug模式下运行
+仿真器、模拟器仅能在Debug模式下运行
+Debug模式下，APP性能可能会掉帧或者卡顿
 
+ProfileProfile模式下，一些调试能力是被保留的——足够分析你的app性能。在仿真器和模拟器上，Profile模式是不可用的..</p><a class="tag read-more-btn is-medium mt-2" href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/">Read more</a></section></article><article class="post-item-card"><header class="is-relative is-flex"><div class="post-cover-backdrop is-hidden"><img src="/images/dive_into_flutter_screen_scan.png" alt="loading.."></div><a class="post-cover-link has-text-centered skeleton" href="/2019/08/09/Dive-Into-Flutter/"><img class="post-cover-img js-img-fadeIn" src="/images/dive_into_flutter_screen_scan.png" alt="loading.." data-backdrop="true"></a></header><section class="content post-card-content p-4 pb-5"><header><a href="/tags/Flutter"><i class="tag post-item-tag">Flutter</i></a></header><h2 class="mt-4 mb-0 is-family-serif"><a href="/2019/08/09/Dive-Into-Flutter/">Dive Into Flutter</a></h2><time class="has-text-grey" datetime="2019-08-09T09:14:10.000Z">2019-08-09</time><p class="is-flex-grow-2 mt-2">
+首先从过去的CRT显示器原理说起。CRT的电子枪按照上面方式，从上到下一行行扫描，扫描完成后显示器就呈现一帧画面，随后电子枪回到初始位置继续下一次扫描。为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或其他硬件）会用硬件时钟产生一系列的定时信号。当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号（horizonal synchronization），简称HSync；而当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号（vertial synchronization），简称VSync。显示器通常以固定频率进行刷新，这个刷新率就是VSync信号产生的频率。尽管现在的设备大都是液晶显示屏了，但原理仍然没有变。
+</p><a class="tag read-more-btn is-medium mt-2" href="/2019/08/09/Dive-Into-Flutter/">Read more</a></section></article></section><aside class="column is-hidden-mobile is-4-tablet is-3-widescreen"><div style="position: sticky; top: 50px;"><main class="aside-card-container tag-widget is-in-tag-page"><h3>标签</h3><section><a href="/tags/Kotlin"><span class="tag post-item-tag" style="margin-bottom: 5px;">Kotlin</span></a><a href="/tags/Test%20automation"><span class="tag post-item-tag" style="margin-bottom: 5px;">Test automation</span></a><a href="/tags/Flutter"><span class="tag post-item-tag" style="margin-bottom: 5px;">Flutter</span></a><a href="/tags/adb"><span class="tag post-item-tag" style="margin-bottom: 5px;">adb</span></a><a href="/tags/Android%20Studio"><span class="tag post-item-tag" style="margin-bottom: 5px;">Android Studio</span></a><a href="/tags/dart"><span class="tag post-item-tag" style="margin-bottom: 5px;">dart</span></a><a href="/tags/gradle"><span class="tag post-item-tag" style="margin-bottom: 5px;">gradle</span></a><a href="/tags/View"><span class="tag post-item-tag" style="margin-bottom: 5px;">View</span></a><a href="/tags/system"><span class="tag post-item-tag" style="margin-bottom: 5px;">system</span></a><a href="/tags/cocoaPods"><span class="tag post-item-tag" style="margin-bottom: 5px;">cocoaPods</span></a><a href="/tags/life"><span class="tag post-item-tag" style="margin-bottom: 5px;">life</span></a><a href="/tags/syntactic%20sugar"><span class="tag post-item-tag" style="margin-bottom: 5px;">syntactic sugar</span></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">设计模式</span></a><a href="/tags/%E9%9A%8F%E6%84%8F"><span class="tag post-item-tag" style="margin-bottom: 5px;">随意</span></a><a href="/tags/git"><span class="tag post-item-tag" style="margin-bottom: 5px;">git</span></a></section></main></div></aside></div></article><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
 
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script>$claudia.fadeInImage(null, $claudia.blurBackdropImg)
 
+window.addEventListener('resize', $claudia.throttle(function () {
+    var images = document.querySelectorAll('.js-img-fadeIn')
 
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/tags/Flutter/"/>
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hanniballol&#39;s Blog">
-<meta property="og:url" content="http://hanniballol.github.io/tags/Flutter/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="8MilesRD Hanniballol Hannibal Android Flutter">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title>
-  
-    Flutter - Hanniballol's Blog
-  
-</title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-  
-<div id="primary">
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <h2 class="archive-name">Flutter</h2>
-        </div>
-      
-    
-
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2020-09-19
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/" class="archive-post-link">
-            将Flutter添加到已有的项目中
-          </a>
-        </span>
-      </div>
-    
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            2019-08-09
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/08/09/Dive-Into-Flutter/" class="archive-post-link">
-            Dive Into Flutter
-          </a>
-        </span>
-      </div>
-    
-  </section>
- </div>
-
-  
-  <nav class="pagination">
-    
-    
-  </nav>
-
-
-
-      </div>
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+    images.forEach($claudia.blurBackdropImg)
+}, 150))</script></body></html>

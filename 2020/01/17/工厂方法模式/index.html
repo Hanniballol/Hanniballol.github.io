@@ -1,183 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    
-<meta name="google-site-verification" content="DwDg4EuywHWNZUkTC7sG0WGv_UQekM4uRtOoaGuDJHc" />
-<meta name="baidu-site-verification" content="hkLiBHH93D" />
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<!DOCTYPE html><html class="appearance-dark" lang="zh-Hans"><head><meta charset="UTF-8"><title>工厂方法模式</title><meta name="description" content="All work and no play makes jack a dull boy"><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><link rel="icon" href="/images/favicon.png"><link rel="stylesheet" href="/style/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/highlight-theme-light.css"><script src="/jslib/highlight.pack.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="description" content="工厂方法模式"/>
-
-
-
-
-  <meta name="keywords" content="设计模式," />
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Hanniballol's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
-
-
-
-<link rel="canonical" href="http://hanniballol.github.io/2020/01/17/工厂方法模式/"/>
-
-
-<meta name="description" content="利用Kotlin中的伴生对象增强工厂模式">
-<meta property="og:type" content="article">
-<meta property="og:title" content="工厂方法模式">
-<meta property="og:url" content="http://hanniballol.github.io/2020/01/17/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/index.html">
-<meta property="og:site_name" content="Hanniballol&#39;s Blog">
-<meta property="og:description" content="利用Kotlin中的伴生对象增强工厂模式">
-<meta property="article:published_time" content="2020-01-17T05:12:01.000Z">
-<meta property="article:modified_time" content="2020-09-17T08:41:23.925Z">
-<meta property="article:author" content="8MilesRD">
-<meta property="article:tag" content="设计模式">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
-
-
-
-
-  
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-<!--百度统计-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?b733e1eaeacbf8f87d3be047f28c3973";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-    <title> 工厂方法模式 - Hanniballol's Blog </title>
-  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Hanniballol's Blog" type="application/atom+xml">
-</head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Hanniballol's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/archives">
-                            
-                            
-                                归档
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/about">
-                            
-                            
-                                关于
-                            
-                        </a>
-                    </li>
-                
-                    
-                        <li class="menu-item">
-                    
-                        <a href="/atom.xml">
-                            
-                            
-                                订阅
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          工厂方法模式
-        
-      </h1>
-
-      <time class="post-time">
-          2020-01-17
-      </time>
-    </header>
-
-
-
-    
-            
-  <div class="toc-container">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂"><span class="toc-text">简单工厂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用单例代替工厂类"><span class="toc-text">用单例代替工厂类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#伴生对象创建静态工厂方法"><span class="toc-text">伴生对象创建静态工厂方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展伴生对象方法"><span class="toc-text">扩展伴生对象方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联函数简化抽象工厂"><span class="toc-text">内联函数简化抽象工厂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象工厂模式"><span class="toc-text">抽象工厂模式</span></a></li></ol></li></ol>
-  </div> 
-
-
-            <div class="post-content">
-                <div class="excerpt">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-flex is-flex-direction-column"><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-space-between is-hidden-mobile"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">Hanniballol's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">工厂方法模式</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">点击返回顶部</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></aside></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">首页</a></h3><h3 class="is-inline-block"><a href="/about">关于</a></h3><h3 class="is-inline-block"><a href="/archives">归档</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单工厂"><span class="toc-text">简单工厂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用单例代替工厂类"><span class="toc-text">用单例代替工厂类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#伴生对象创建静态工厂方法"><span class="toc-text">伴生对象创建静态工厂方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展伴生对象方法"><span class="toc-text">扩展伴生对象方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联函数简化抽象工厂"><span class="toc-text">内联函数简化抽象工厂</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#抽象工厂模式"><span class="toc-text">抽象工厂模式</span></a></li></ol></li></ol></div><div class="column is-9"><header class="my-4"><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><i class="tag post-item-tag">设计模式</i></a></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">工厂方法模式</h1><time class="has-text-grey" datetime="2020-01-17T05:12:01.000Z">2020-01-17</time><article class="mt-2 post-content"><div class="excerpt">
     利用Kotlin中的伴生对象增强工厂模式
 </div>
 <a id="more"></a>
@@ -185,184 +9,132 @@ var _hmt = _hmt || [];
 <p>一些地方会把工厂模式细分为<strong>简单工厂</strong>、<strong>工厂方法模式</strong>以及<strong>抽象工厂</strong>,一下分类说明：</p>
 <h3 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h3><p>简单工厂的核心作用就是通过一个工厂类隐藏对象实例的创建逻辑，而不是暴露给客户端。典型的使用场景就是当拥有一个父类与多个子类的时候，我们可以通过这种模式来创建子类对象。</p>
 <p>例如现在有一个电脑加工厂，同时生产个人电脑和服务器主机。用java中的思维逻辑来实现工厂模式</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Computer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> cpu: String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PC</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> cpu: String = <span class="string">"Core"</span>): Computer</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span>(<span class="keyword">override</span> <span class="keyword">val</span> cpu: String = <span class="string">"Xeon"</span>): Computer</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">ComputerType</span> </span>&#123;</span><br><span class="line">  PC,Server</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComputerFactory</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">(type: <span class="type">ComputerType</span>)</span></span>: Computer &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">when</span>(type) &#123;</span><br><span class="line">      ComputerType.PC -&gt; PC()</span><br><span class="line">      ComputerType.Server -&gt; Server()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">interface Computer {
+  val cpu: String
+}
 
+class PC(override val cpu: String = "Core"): Computer
+
+class Server(override val cpu: String = "Xeon"): Computer
+
+enum class ComputerType {
+  PC,Server
+}
+
+class ComputerFactory {
+  fun produce(type: ComputerType): Computer {
+    return when(type) {
+      ComputerType.PC -&gt; PC()
+      ComputerType.Server -&gt; Server()
+    }
+  }
+}</code></pre>
 <p>以上代码通过调用ComputerFactory类的produce方法来创建不同的Computer子类对象，这样我们就把创建实例的逻辑与客户端之间实现解耦，当对象创建的逻辑发生变化时，该模式只需要修改produce函数内部的代码即可，相比直接创建对象的方法更加利于维护。</p>
 <p>虽然它改善了程序的可维护性，但创建对象的的表达上却显得不够简洁。当我们在不同的地方创建Computer的子类对象时，我们都需要先创建一个ComputerFactory类对象，而Kotlin天生支持了单例，接下来我们就用object关键字以及相关的特性来进一步简化以上的代码设计。</p>
 <h4 id="用单例代替工厂类"><a href="#用单例代替工厂类" class="headerlink" title="用单例代替工厂类"></a>用单例代替工厂类</h4><p>Kotlin支持用object来实现Java中的单例模式，所以我们可以实现一个ComputerFactory单例，而不是一个工厂类。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> ComputerFatory &#123;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">(type: <span class="type">ComputerType</span>)</span></span>: Computer &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">when</span>(type) &#123;</span><br><span class="line">      ComputerType.PC -&gt; PC()</span><br><span class="line">      ComputerType.Server -&gt; Server()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">ComputerFactory.produce(ComputerType.PC)</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">object ComputerFatory {
 
+  fun produce(type: ComputerType): Computer {
+    return when(type) {
+      ComputerType.PC -&gt; PC()
+      ComputerType.Server -&gt; Server()
+    }
+  }
+}
+
+//调用
+ComputerFactory.produce(ComputerType.PC)</code></pre>
 <p>此外，由于我们通过传入Computer类型来创建不同的对象，所以这里的produce又显得多余，而Kotlin支持运算符重载，因此我们可以通过operator操作符重载invoke方法来代替produce，从而进一步简化表达：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> ComputerFactory &#123;</span><br><span class="line">  <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">(type: <span class="type">ComputerType</span>)</span></span>: Computer &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">when</span>(type) &#123;</span><br><span class="line">      ComputerType.PC -&gt; PC()</span><br><span class="line">      ComputerType.Server -&gt; Server()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">ComputerFactory(ComputerType.PC)</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">object ComputerFactory {
+  operator fun invoke(type: ComputerType): Computer {
+    return when(type) {
+      ComputerType.PC -&gt; PC()
+      ComputerType.Server -&gt; Server()
+    }
+  }
+}
 
+//调用
+ComputerFactory(ComputerType.PC)</code></pre>
 <p>依靠Kotlin这一特性，我们再创建一个Computer对象就显得非常简洁，与直接创建一个具体类实例显得没有太大区别。</p>
 <h4 id="伴生对象创建静态工厂方法"><a href="#伴生对象创建静态工厂方法" class="headerlink" title="伴生对象创建静态工厂方法"></a>伴生对象创建静态工厂方法</h4><p>当前的工厂模式实现已经足够优雅，而你依旧觉得不够完美：我们是否可以直接通过Computer()而不是ComputerFactory()来创建一个实例呢？</p>
 <blockquote>
 <p>《Effective Java》一书的第一条指导原则：考虑用静态工厂方法代替构造器。</p>
 </blockquote>
 <p>Kotlin中的伴生对象，代替了Java中的static，同时在功能和表达上拥有更强的能力。通过在Computer接口中定义一个伴生对象，我们就能实现以上的需求：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Computer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">val</span> cpu: String</span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> Factory &#123;</span><br><span class="line">    <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">(type: <span class="type">ComputerType</span>)</span></span>: Computer &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">when</span>(type) &#123;</span><br><span class="line">        ComputerType.PC -&gt; PC()</span><br><span class="line">        ComputerType.Server -&gt; Server()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">Computer.Factory(ComputerType.PC)</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">interface Computer {
+  val cpu: String
+  companion object Factory {
+    operator fun invoke(type: ComputerType): Computer {
+      return when(type) {
+        ComputerType.PC -&gt; PC()
+        ComputerType.Server -&gt; Server()
+      }
+    }
+  }
+}
 
-
-
+//调用
+Computer.Factory(ComputerType.PC)</code></pre>
 <h4 id="扩展伴生对象方法"><a href="#扩展伴生对象方法" class="headerlink" title="扩展伴生对象方法"></a>扩展伴生对象方法</h4><p>依赖伴生对象的特性，已经实现了经典的工厂模式。同时这种方式还有一个优势，它比原有Java中的设计更加强大。假如实际业务中我们是Computer借口的使用者，比如它是工程引入的第三方类库，所有类的实现细节都得到了很好地隐藏。那么，如果希望进一步改造其中的逻辑，Kotlin中伴生对象的方式同样可以依靠其扩展函数的特性，很好地实现这一需求。</p>
 <p>比如我们需要给Computer添加一种功能，通过CPU型号来判断电脑类型，那么久可以如下实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Computer.Companion.<span class="title">fromCPU</span><span class="params">(cpu: <span class="type">String</span>)</span></span>: ComputerType? &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">when</span> (cpu) &#123;</span><br><span class="line">    <span class="string">"Core"</span> -&gt; ComputerType.PC</span><br><span class="line">    <span class="string">"Xeon"</span> -&gt; ComputerType.Server</span><br><span class="line">    <span class="keyword">else</span> -&gt; <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">fun Computer.Companion.fromCPU(cpu: String): ComputerType? {
 
+  return when (cpu) {
+    "Core" -&gt; ComputerType.PC
+    "Xeon" -&gt; ComputerType.Server
+    else -&gt; null
+  }
+}</code></pre>
 <p>如果指定了伴生对象的名字为Factory,那么就可以如下实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Computer.Factory.<span class="title">fromCPU</span><span class="params">(cpu: <span class="type">String</span>)</span></span>: ComputerType? = ...</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code class="kotlin">fun Computer.Factory.fromCPU(cpu: String): ComputerType? = ...</code></pre>
 <h3 id="内联函数简化抽象工厂"><a href="#内联函数简化抽象工厂" class="headerlink" title="内联函数简化抽象工厂"></a>内联函数简化抽象工厂</h3><p>工厂模式已经能够很好地处理一个产品等级结构的问题，上述简单工厂已经解决了电脑厂商生产服务器、PC机的问题。进一步思考，当问题上升到多个产品等级结构的时候，比如现在引入了品牌商的概念，我们有好几个不同的电脑品牌，比如Dell,Asus,Acer，那么就有必要再增加一个工厂类。然而，我们并不希望对每个模型都建立一个工厂，这会让代码变得难以维护，所以这时候需要引入抽象工厂模式。</p>
 <h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><p>为创建一组相关或相互依赖的对象提供一个接口，而且无须指定它们的具体类。</p>
 <p>在抽象工厂的定义中，我们也可以把“一组相关或相互依赖的对象”称作“产品族”，在上述的例子中，我们就提到了3个代表不同电脑品牌的产品族。下面我们就利用抽象工厂，来实现具体需求：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Computer</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dell</span>: <span class="type">Computer</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Asus</span>: <span class="type">Computer</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Acer</span>: <span class="type">Computer</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DellFactory</span>: <span class="type">AbstractFactory</span></span>() &#123;</span><br><span class="line">  	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">()</span></span> = Dell()</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AsusFactory</span>: <span class="type">AbstractFactory</span></span>() &#123;</span><br><span class="line">  	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">()</span></span> = Asus()</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AcerFactory</span>: <span class="type">AbstractFactory</span></span>() &#123;</span><br><span class="line">  	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">()</span></span> = Acer()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">  	<span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">()</span></span>: Computer</span><br><span class="line">  	<span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">      <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">(factory: <span class="type">AbstractFactory</span>)</span></span> = factory</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">AbstractFactory(DellFactory()).produce()</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">interface Computer
+class Dell: Computer
+class Asus: Computer
+class Acer: Computer
 
+class DellFactory: AbstractFactory() {
+      override fun produce() = Dell()
+}
+class AsusFactory: AbstractFactory() {
+      override fun produce() = Asus()
+}
+class AcerFactory: AbstractFactory() {
+      override fun produce() = Acer()
+}
+
+abstract class AbstractFactory {
+      abstract fun produce(): Computer
+      companion object {
+      operator fun invoke(factory: AbstractFactory) = factory
+    }
+}
+
+//调用
+AbstractFactory(DellFactory()).produce()</code></pre>
 <p>每个电脑品牌拥有一个代表电脑产品的类，它们都实现了Computer接口。此外每个品牌也还有一个用于生产电脑的AbstractFactory子类，可通过AbstractFactory类的伴生对象中的invoke方法，来构造具体品牌的工厂类对象。</p>
 <p>由于Kotlin语法的简洁，以上例子的抽象工厂类的设计也比较直观。然而，当你每次创建具体的工厂类时，都需要传入一个具体的工厂类对象作为参数进行构造，这个在语法上显然不是很优雅。所以，我们可以用内联函数来改善这一情况：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFactory</span> </span>&#123;</span><br><span class="line">  <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">produce</span><span class="params">()</span></span>: Computer</span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">    <span class="keyword">inline</span> <span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;<span class="keyword">reified</span> T : Computer&gt;</span> <span class="title">invoke</span><span class="params">()</span></span> = </span><br><span class="line">    <span class="keyword">when</span>(T::<span class="class"><span class="keyword">class</span>) </span>&#123;</span><br><span class="line">      Dell::<span class="class"><span class="keyword">class</span> -&gt; <span class="title">DellFactory</span></span>()</span><br><span class="line">      Asus::<span class="class"><span class="keyword">class</span> -&gt; <span class="title">AsusFactory</span></span>()</span><br><span class="line">      Acer::<span class="class"><span class="keyword">class</span> -&gt; <span class="title">AcerFactory</span></span>()</span><br><span class="line">      <span class="keyword">else</span> -&gt; <span class="keyword">throw</span> IllegalArgumentException()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">AbstractFactory&lt;Dell&gt;().produce()</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">abstract class AbstractFactory {
+  abstract fun produce(): Computer
+  companion object {
+    inline operator fun &lt;reified T : Computer&gt; invoke() = 
+    when(T::class) {
+      Dell::class -&gt; DellFactory()
+      Asus::class -&gt; AsusFactory()
+      Acer::class -&gt; AcerFactory()
+      else -&gt; throw IllegalArgumentException()
+    }
+  }
+}
 
+//调用
+AbstractFactory&lt;Dell&gt;().produce()</code></pre>
 <ul>
 <li>通过将invoke方法定义为内联函数，我们就可以引入reified关键字，使用具体化参数类型的语法特性</li>
 <li>要具体化的参数类型为Computer,在invoke方法中我们通过判断它的具体类型，来返回对于的工厂类对象</li>
 </ul>
 <p>参考: Dive in Kotlin</p>
-
-            </div>
-          
-
-    
-      <footer class="post-footer">
-      <ul class="post-copyright">
-        <li class="post-copyright-author">
-            <span>本文作者：</span>8MilesRD
-        </li>
-        <li class="post-copyright-link">
-          <span>本文链接：</span>
-          <a href="http://hanniballol.github.io//2020/01/17/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="工厂方法模式">http://hanniballol.github.io/2020/01/17/工厂方法模式/</a>
-        </li>
-        <li class="post-copyright-license">
-          <span>版权： </span>
-          本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
-        </li>
-      </ul>
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-		  
-		</div>
-		
-
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2020/01/17/%E5%88%A9%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%AE%80%E5%8C%96%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">利用高阶函数简化策略模式、模板方法模式</span>
-        <span class="prev-text nav-mobile">Prev</span>
-      </a>
-    
-    
-      <a class="next" href="/2019/11/18/kotlin-inline/">
-        <span class="next-text nav-default">kotlin inline</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-        
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-      </footer>
-    
-  </article>
-
-    </div>
-
-      </div>
-      
-        
-
-
-
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-    
-    
-    
-    
-    
-    
-
-    <div id="gitalk-container"></div>
-
-    <script>
-        var gitalk = new Gitalk({
-            clientID: '21dfb40fcf733354c90d',
-            clientSecret: 'fc575cdd9f5549a0267e8b20a99e5c77c8f4ae15',
-            repo: 'hanniballol.github.io',
-            owner: 'Hanniballol',
-            admin: 'hanniballol',
-            id: location.pathname,      // Ensure uniqueness and length less than 50
-            distractionFreeMode: 'false'  // Facebook-like distraction free mode
-        })
-
-        gitalk.render('gitalk-container')
-    </script>
-
-
-      
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2017 -
-    
-    2020
-    <span class="footer-author">8MilesRD.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear" target="_blank" rel="noopener">Polar Bear</a>
-    </span>
-</span>
-
-      </footer>
-
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
-      </div>
-    </div>
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-<!--prettify代码高亮脚本引入-->
-
-
-  </body>
-</html>
+</article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><a class="button is-small is-default py-4" href="/2020/01/17/%E5%88%A9%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%AE%80%E5%8C%96%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="利用高阶函数简化策略模式、模板方法模式"><i class="iconfont icon-prev mr-2 has-text-grey"></i><span class="has-text-weight-semibold">上一页: 利用高阶函数简化策略模式、模板方法模式</span></a><a class="button is-small is-default py-4" href="/2019/11/18/kotlin-inline/" title="kotlin inline"><span class="has-text-weight-semibold">下一页: kotlin inline</span><i class="iconfont icon-next ml-2 has-text-grey"></i></a></section><article class="mt-6 comment-container"><script async repo="Hanniballol/Hanniballol.github.io" src="https://utteranc.es/client.js" issue-term="pathname" theme="github-dark"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/Hanniballol"><i class="iconfont icon-github"></i></a><!-- Ins--><!-- RSS--><!-- 知乎--><a title="zhihu" target="_blank" rel="noopener nofollow" href="//zhihu.com/people/bu-shi-xian-yu"><i class="iconfont icon-zhihu"></i></a><!-- 领英--><!-- 脸书--></section><p><span>Copyright ©</span><span> Hanniballol 2021</span></p><div class="is-flex"><p>Powered by Hexo｜</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" href="//github.com/haojen" target="_blank" rel="noopener">Theme by &nbspHaojen&nbsp</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" href="https://github.com/haojen/hexo-theme-Claudia" target="_blank" rel="noopener" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/post.js"></script></body></html>
