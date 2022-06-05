@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>利用高阶函数简化策略模式、模板方法模式 - Hanniballol&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hanniballol&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hanniballol&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。"><meta property="og:type" content="blog"><meta property="og:title" content="利用高阶函数简化策略模式、模板方法模式"><meta property="og:url" content="http://hanniballol.github.io/2020/01/17/%E5%88%A9%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%AE%80%E5%8C%96%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"><meta property="og:site_name" content="Hanniballol&#039;s Blog"><meta property="og:description" content="策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://hanniballol.github.io/img/og_image.png"><meta property="article:published_time" content="2020-01-17T08:49:58.000Z"><meta property="article:modified_time" content="2020-01-19T05:01:41.000Z"><meta property="article:author" content="8MilesRD"><meta property="article:tag" content="Kotlin"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://hanniballol.github.io/2020/01/17/%E5%88%A9%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%AE%80%E5%8C%96%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"},"headline":"利用高阶函数简化策略模式、模板方法模式","image":["http://hanniballol.github.io/img/og_image.png"],"datePublished":"2020-01-17T08:49:58.000Z","dateModified":"2020-01-19T05:01:41.000Z","author":{"@type":"Person","name":"8MilesRD"},"publisher":{"@type":"Organization","name":"Hanniballol's Blog","logo":{"@type":"ImageObject","url":"http://hanniballol.github.io/img/logo.svg"}},"description":"策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。"}</script><link rel="canonical" href="http://hanniballol.github.io/2020/01/17/%E5%88%A9%E7%94%A8%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E7%AE%80%E5%8C%96%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hanniballol&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-01-17T08:49:58.000Z" title="2020/1/17 16:49:58">2020-01-17</time>发表</span><span class="level-item"><time dateTime="2020-01-19T05:01:41.000Z" title="2020/1/19 13:01:41">2020-01-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Android/">Android</a></span><span class="level-item">11 分钟读完 (大约1678个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">利用高阶函数简化策略模式、模板方法模式</h1><div class="content"><div class="excerpt">
+      策略模式、模板方法模式解决的问题比较类似，并且都可以依靠Kotlin中的高阶函数特性进行改良。
+</div>
+
+<span id="more"></span>
+
+<h3 id="遵循开闭原则：策略模式"><a href="#遵循开闭原则：策略模式" class="headerlink" title="遵循开闭原则：策略模式"></a>遵循开闭原则：策略模式</h3><p>假设有一个表示游泳运动员的抽象类Swimmer，有一个游泳的方法swim：</p>
+<pre><code class="kotlin">class Swimmer &#123;
+  
+  fun swim() &#123;
+    println(&quot;I am swimming...&quot;)
+  &#125;
+&#125;
+
+//invoke
+&gt;&gt;&gt; Swimmer().swim()
+I am swimming...
+</code></pre>
+<p>由于这位运动员在游泳方面很有天赋，他很快掌握了蛙泳、仰泳、自由泳多种姿势。所以我将对Swimmer进行改造：</p>
+<pre><code class="kotlin">class Swimmer &#123;
+  fun breaststroke() &#123;
+    println(&quot;I am breaststroke...&quot;)
+  &#125;
+  fun backstroke() &#123;
+    println(&quot;I am backstroke...&quot;)
+  &#125;
+  fun freestyle() &#123;
+    println(&quot;I am freestyling...&quot;)
+  &#125;
+&#125;
+</code></pre>
+<p>然而这并不是一个很好的设计。首先，并不是所有的游泳运动员都掌握了这3种游泳姿势，如果每个Swimmer类对象都可以调用所有方法，显得比较危险。其次，后续难免会有新的行为方法加入，通过修改Swimmer类的方式违背了<strong>开放封闭原则</strong>(open for extension,closed for modification。面向扩展开放，面向修改关闭)。</p>
+<p>所以呢，更好的做法是将游泳这个行为封装成接口，根据不同的场景我们可以调用不同的游泳方法。比如这位游泳运动员计划周末游自由泳，其他时间则游蛙泳。策略模式就是一种解决这种场景很好的思路。</p>
+<blockquote>
+<p>策略模式定义了算法族，分别封装起来，让他们之间可以相互替换，此模式让算法的变化独立于使用算法的用户</p>
+</blockquote>
+<p>本质上，策略模式做的事情就是将不同的行为策略（Strategy）进行独立封装，与类的逻辑上解耦。然后根据不同的上下文（Context）切换选择不同的策略，然后用类对象进行调用：</p>
+<pre><code class="kotlin">interface SwimStrategy &#123;
+  
+  fun swim()
+&#125;
+
+class Breaststroke: SwimStrategy &#123;
+  override fun swim() &#123;
+    println(&quot;I am breaststroking...&quot;)
+  &#125;
+&#125;
+
+class Backstroke: SwimStrategy &#123;
+  override fun swim() &#123;
+    println(&quot;I am Backstroke...&quot;)
+  &#125;
+&#125;
+
+class Freestyle: SwimStrategy &#123;
+  override fun swim() &#123;
+    println(&quot;I am freestyling...&quot;)
+  &#125;
+&#125;
+
+class Swimmer(val strategy: SwimStrategy) &#123;
+  fun swim() &#123;
+    strategy.swim()
+  &#125;
+&#125;
+
+//invoke
+Swimmer(Freestyle()).swim()
+Swimmer(Breaststroke()).swim()
+</code></pre>
+<p>这个方案实现了解耦和复用的目的，且很好实现了在不同场景切换采用不同的策略。然而，该版本的代码量也比之前多了很多。</p>
+<h3 id="高阶函数抽象算法"><a href="#高阶函数抽象算法" class="headerlink" title="高阶函数抽象算法"></a>高阶函数抽象算法</h3><p>如果用高阶函数的思路来重新思考下策略类，显然将策略封装成一个函数然后作为参数传递给Swimmer类会更加的简洁。由于策略类的目的非常明确，仅仅是针对行为算法的一种抽象，所以高阶函数式是一种很好的替代思路。</p>
+<pre><code class="kotlin">fun breaststroke() &#123; ...&#125;
+
+fun Backstroke() &#123; ...&#125;
+fun freestyle()&#123; ...&#125;
+
+class Swimmer(val swimming: () -&gt; Unit) &#123;
+  fun swim() &#123;
+    swimming()
+  &#125;
+&#125;
+
+//invoke
+Swimmer(::freestyle).swim
+</code></pre>
+<p>代码量一下子变少，而且结构上也更加容易阅读。由于策略算法都封装成了一个个函数，我们在初始化Swimmer类对象时，可以用函数引用的语法传递构造参数。当然，我们也可以把函数用val声明成Lambda表达式，那么在传递参数时会变得更加简洁直观。</p>
+<h3 id="模板方法模式：高阶函数代替继承"><a href="#模板方法模式：高阶函数代替继承" class="headerlink" title="模板方法模式：高阶函数代替继承"></a>模板方法模式：高阶函数代替继承</h3><p>另一个可用高阶函数改良的设计模式，就是<strong>模板方法模式</strong>。某种程度上，模板方法模式和策略模式要解决的问题是相似的，它们都可以分离通用的算法和具体的上下文。然而，如果说策略模式采用的思路是将酸奶法进行委托，那么传统的模板方法模式更多是基于继承的方法实现的。现在来看看模板方法模式的定义：</p>
+<p>定义一个算法中的操作框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可定义该算法的某些特定步骤。</p>
+<p>与策略模式不同，模板方法模式的行为算法具有更明晰的大纲结构，其中完全相同的步骤会在抽象类中实现，可个性化的某些步骤则在某子类中进行定义。举个例子，如果我们去市民事务中心办事时，一般都会有以下几个具体的步骤：</p>
+<p>1） 排队区号等待</p>
+<p>2）根据自己的需求办理个性化的业务，如获取社保清单、申请市民卡、办理房产证</p>
+<p>3）对服务人员的态度进行评价</p>
+<p>这是一个典型的适用模板方法模式的场景，办事步骤整体是一个算法大纲，其中步骤1）和3）都是相同的算法，而步骤2）则可以根据实际需求个性化选择。接下来我们就用代码实现一个抽象类，它定义了这个例子的操作框架：</p>
+<pre><code class="kotlin">abstract class CivicCenterTask &#123;
+  
+  fun execute() &#123;
+    this.lineup()
+    this.askForHelp()
+    this.evaluate()
+  &#125;
+  private fun lineup() &#123;
+    println(&quot;line up to take a number&quot;)
+  &#125;
+  private fun evaluate() &#123;
+    println(&quot;evaluaten service attitude&quot;)
+  &#125;
+  abstract fun askForHelp()
+&#125;
+</code></pre>
+<p>其中askForHelp方法是一个抽象方法。接下来我们再定义具体的子类来继承CivicCenter-Task类，然后对抽象的步骤进行实现。</p>
+<pre><code class="kotlin">class PullSocialSecurity: CivicCenterTask &#123;
+  
+  override fun askForHelp() &#123;
+    println(&quot;ask for pulling teh social security&quot;)
+  &#125;
+&#125;
+
+class ApplyForCitizenCard: CiviCenterTask &#123;
+  override fun askForHelp() &#123;
+    println(&quot;apply for a citizen card&quot;)
+  &#125;
+&#125;
+
+//invoke
+&gt;&gt;&gt; PullSocialSecurity().execute()
+line up to take a number
+ask for pulling the social security
+evaluation service attitude
+
+&gt;&gt;&gt; ApplyForCitizenCard().execute()
+line up to take a number
+apply for a citizen card
+evaluaten service attitude
+</code></pre>
+<p>不出意料，两者的步骤2）的执行结果是不一样的。</p>
+<p>不得不说，模板方法模式的代码复用性已经非常高了，但是我们还是得根据不同的业务场景都定义一个具体的子类。幸运的是，在Kotlin中我们同样可以用改造策略模式的类似思想，来简化模板方法模式。依靠高阶函数，我们可以在只需一个CivicCenterTask类的情况下，代替继承实现相同的效果。</p>
+<pre><code class="kotlin">class CivicCenterTask &#123;
+  fun execute(askForHelp: ()-&gt;Unit) &#123;
+    this.lineUp()
+    askForHelp()
+    this.evaluate()
+  &#125;
+  private fun lineup()&#123; ... &#125;
+  private fun evaluate()&#123; ... &#125;
+  
+  fun pullSocialSecurity() &#123; ... &#125;
+  fun applyForCitizenCard() &#123; ... &#125;
+&#125;
+
+//invoke
+&gt;&gt;&gt; CivicCenterTask().execute(::pullSocialSecurity)
+live up to take a number
+ask for pulling the social security
+evaluaten service attitude
+
+&gt;&gt;&gt; CivicCenterTask().excute(::applyForCitizenCard)
+line up to take number
+apply for a citizen card
+evaluaten service attitude
+</code></pre>
+<p>如你所见，在高阶函数的帮助下，我们可以更加轻松地实现模板方法模式。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>利用高阶函数简化策略模式、模板方法模式</p><p><a href="http://hanniballol.github.io/2020/01/17/利用高阶函数简化策略模式、模板方法模式/">http://hanniballol.github.io/2020/01/17/利用高阶函数简化策略模式、模板方法模式/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>8MilesRD</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-01-19</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Kotlin/">Kotlin</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/01/19/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">运算符重载和迭代器模式</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/01/17/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"><span class="level-item">工厂方法模式</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">30</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">16</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/Flutter/"><span class="level-start"><span class="level-item">Flutter</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Kotlin/"><span class="level-start"><span class="level-item">Kotlin</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/MediaPipe/"><span class="level-start"><span class="level-item">MediaPipe</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Tools/"><span class="level-start"><span class="level-item">Tools</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/iOS/"><span class="level-start"><span class="level-item">iOS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/life/"><span class="level-start"><span class="level-item">life</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-18T13:21:06.000Z">2022-01-18</time></p><p class="title"><a href="/2022/01/18/%E6%9C%AD%E8%AE%B0/">札记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-04-28T09:34:03.000Z">2021-04-28</time></p><p class="title"><a href="/2021/04/28/MediaPipe%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E4%B8%8A%E6%9E%84%E5%BB%BAAAR/">MediaPipe在Android平台上构建AAR</a></p><p class="categories"><a href="/categories/MediaPipe/">MediaPipe</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-09-19T01:41:56.000Z">2020-09-19</time></p><p class="title"><a href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/">将Flutter添加到已有的项目中</a></p><p class="categories"><a href="/categories/Flutter/">Flutter</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-02-25T15:55:30.000Z">2020-02-25</time></p><p class="title"><a href="/2020/02/25/%E6%97%A0%E9%A2%98/">无题</a></p><p class="categories"><a href="/categories/life/">life</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-01-21T07:06:20.000Z">2020-01-21</time></p><p class="title"><a href="/2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">ADT实现状态模式</a></p><p class="categories"><a href="/categories/Android/">Android</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/11/"><span class="level-start"><span class="level-item">十一月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/07/"><span class="level-start"><span class="level-item">七月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/02/"><span class="level-start"><span class="level-item">二月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/11/"><span class="level-start"><span class="level-item">十一月 2017</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Android-Studio/"><span class="tag">Android Studio</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Flutter/"><span class="tag">Flutter</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Kotlin/"><span class="tag">Kotlin</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tensorflow/"><span class="tag">Tensorflow</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Test-automation/"><span class="tag">Test automation</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/View/"><span class="tag">View</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adb/"><span class="tag">adb</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/cocoaPods/"><span class="tag">cocoaPods</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/dart/"><span class="tag">dart</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/gradle/"><span class="tag">gradle</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/life/"><span class="tag">life</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/syntactic-sugar/"><span class="tag">syntactic sugar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/system/"><span class="tag">system</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9A%8F%E6%84%8F/"><span class="tag">随意</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hanniballol&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2022 8MilesRD</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

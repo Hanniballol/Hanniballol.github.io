@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>kotlin inline - Hanniballol&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hanniballol&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hanniballol&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭包。即那些在函数体内会访问到的变量。内存分配和虚拟调用会引入运行时间开销。"><meta property="og:type" content="blog"><meta property="og:title" content="kotlin inline"><meta property="og:url" content="http://hanniballol.github.io/2019/11/18/kotlin-inline/"><meta property="og:site_name" content="Hanniballol&#039;s Blog"><meta property="og:description" content="使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭包。即那些在函数体内会访问到的变量。内存分配和虚拟调用会引入运行时间开销。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://hanniballol.github.io/img/og_image.png"><meta property="article:published_time" content="2019-11-18T06:08:11.000Z"><meta property="article:modified_time" content="2019-11-19T01:11:09.000Z"><meta property="article:author" content="8MilesRD"><meta property="article:tag" content="syntactic sugar"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://hanniballol.github.io/2019/11/18/kotlin-inline/"},"headline":"kotlin inline","image":["http://hanniballol.github.io/img/og_image.png"],"datePublished":"2019-11-18T06:08:11.000Z","dateModified":"2019-11-19T01:11:09.000Z","author":{"@type":"Person","name":"8MilesRD"},"publisher":{"@type":"Organization","name":"Hanniballol's Blog","logo":{"@type":"ImageObject","url":"http://hanniballol.github.io/img/logo.svg"}},"description":"使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭包。即那些在函数体内会访问到的变量。内存分配和虚拟调用会引入运行时间开销。"}</script><link rel="canonical" href="http://hanniballol.github.io/2019/11/18/kotlin-inline/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hanniballol&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-11-18T06:08:11.000Z" title="2019/11/18 14:08:11">2019-11-18</time>发表</span><span class="level-item"><time dateTime="2019-11-19T01:11:09.000Z" title="2019/11/19 09:11:09">2019-11-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Kotlin/">Kotlin</a></span><span class="level-item">14 分钟读完 (大约2046个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">kotlin inline</h1><div class="content"><div class="excerpt">
+    使用高阶函数会带来一些运行时的效率损失：每一个函数都是一个对象，并且会捕获一个闭包。即那些在函数体内会访问到的变量。内存分配和虚拟调用会引入运行时间开销。
+</div>
+
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Kotlin在集合API中大量使用了Lambda，这使得我们在对集合进行操作的时候优雅了许多。但是这种方式的代价就是，在Kotlin中使用Lambda表达式会带来一些额外的开销，而内联函数应运而生，用来解决优化Kotlin支持Lambda表达式之后所带来的开销。</p>
+<h2 id="优化Lambda开销"><a href="#优化Lambda开销" class="headerlink" title="优化Lambda开销"></a>优化Lambda开销</h2><p>Kotlin默认面向JDK6，而JDK8才引入Lambda表达式支持。在Kotlin中每申明一个Lambda表达式，就会在字节码中产生一个匿名类，该匿名类包含了一个invoke方法，作为Lambda的调用方法，每次调用都会创建一个新的对象，必须采用某种方法来优化Lambda带来的额外开销，也就是内联函数。</p>
+<h4 id="invokedynamic"><a href="#invokedynamic" class="headerlink" title="invokedynamic"></a>invokedynamic</h4><p>与Kotlin这种在编译期通过硬编码生成Lambda转换类的机制不同，Java在<strong>SE 7</strong>之后通过invokedynamic技术实现了在运行期才产生相应的翻译代码。在invokedynamic被首次调用的时候，就会触发产生一个匿名类来替换中间码invokedynamic，后续的调用会直接采用这个匿名类的代码，这样做的好处主要体现在：</p>
+<ul>
+<li>由于具体的转换实现是在<strong>运行时</strong>产生的，在字节码中能看到的只有一个固定的invokedynamic，所以需要静态生成的类的个数及字节码大小都显著减少。</li>
+<li>与<strong>编译时</strong>写死在字节码中的策略不同，利用invokedynamic可以把实际的翻译策略隐藏在JDK库的实现，这极大提高了灵活性，在确保向后兼容性的同时，后期可以继续对翻译策略不断优化升级。</li>
+<li>JVM天然支持了针对该方式的Lambda表达式的翻译和优化，这也意味着开发者在书写Lambda表达式的同时，可以完全不用关心这个问题，这极大的提高了开发体验（<strong>体验很重要</strong>）。</li>
+</ul>
+<h4 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h4><p>invokedynamic固然不错，但Kotlin不支持它的理由也很充分。我们有足够的理由相信，其最大的原因是Kotlin在一开始就需要兼容Android最主流的Java版本<strong>SE 6</strong>，这导致无法通过invokedynamic来解决Android平台的Lambda开销问题。因此作为另外一种主流的解决方案，Kotlin拥抱了内联函数，在C++、C#等语言中也支持这种特性。简单来说，我们可以用inline关键字来修饰函数，这些函数就成了内联函数。它们的函数体在编译期被嵌入每一个被调用的地方，以减少额外生成的匿名类数，以及函数执行的时间开销。</p>
+<h3 id="inline语法"><a href="#inline语法" class="headerlink" title="inline语法"></a>inline语法</h3><p>我们看一下内联函数如何操作</p>
+<pre><code class="kotlin">    fun main(args:Array&lt;String&gt;) &#123;
+
+        foo &#123;
+            println(&quot;dive into kotlin...&quot;)
+        &#125;
+    &#125;
+
+    fun foo(block: () -&gt; Unit) &#123;
+        block()
+    &#125;
+</code></pre>
+<p>申明一个高阶函数foo，接收一个类型为()-&gt;Unit的Lambda，并在main函数中调用它。以下是通过字节码反编译得到的Java代码:</p>
+<pre><code class="java"> public static final void foo(@NotNull Function0 block) &#123;
+
+      Intrinsics.checkParameterIsNotNull(block, &quot;block&quot;);
+      block.invoke();
+   &#125;
+
+   public static final void main(@NotNull String[] args) &#123;
+      Intrinsics.checkParameterIsNotNull(args, &quot;args&quot;);
+      foo((Function0)null.INSTANCE);
+   &#125;
+</code></pre>
+<p>调用foo就会产生一个Function0类型的block类，然后通过invoke方法来执行，这会增加额外的生成类和调用开销，现在我们给foo函数加上inline修饰符，如下:</p>
+<pre><code class="kotlin">   inline fun foo(block:() -&gt; Unit) &#123;
+        
+        block()
+   &#125;
+</code></pre>
+<pre><code class="java">    public static final void main(@NotNull String[] args) &#123;
+      
+        Intrinsics.checkParameterIsNotNull(args, &quot;args&quot;);
+        int $i$f$foo = false;
+        int var2 = false;
+        String var3 = &quot;xxxx&quot;;
+        boolean var4 = false;
+        System.out.print(var3);
+   &#125;
+</code></pre>
+<p>果然，foo函数体代码及被调用的Lambda代码都粘贴到了相应调用的位置，如果这是一个工程中的公共的方法，或者被嵌套在一个循环调用的逻辑体中，通过inline语法糖，我们可以彻底消除这种额外调用，从而节约开销。</p>
+<h3 id="一些情况下应该避免使用inline"><a href="#一些情况下应该避免使用inline" class="headerlink" title="一些情况下应该避免使用inline"></a>一些情况下应该避免使用inline</h3><ul>
+<li>JVM对普通的函数已经能够根据实际情况智能地判断是否进行内联优化，所以我们并不需要对其使用Kotlin的inline语法，那只会让字节码变得更加复杂</li>
+<li>尽量避免对具有大量函数体的函数进行内联，这样会导致过多的字节码数量</li>
+<li>一旦一个函数被定义为内联函数，便不能获取闭包类的私有成员，除非被声明为internal</li>
+</ul>
+<h3 id="避免参数被内联noinline"><a href="#避免参数被内联noinline" class="headerlink" title="避免参数被内联noinline"></a>避免参数被内联noinline</h3><p>现实中情况往往十分复杂，可能多个参数时，我们只想对部分Lambda参数内联，其他不内联，这个时候就需要<strong>noinline</strong>关键字</p>
+<pre><code class="kotlin">    inline fun foo (block1 () -&gt; Unit,noinline block2:()-&gt;Unit) &#123;
+        
+        block1()
+        block2()
+    &#125;
+</code></pre>
+<h3 id="非局部返回"><a href="#非局部返回" class="headerlink" title="非局部返回"></a>非局部返回</h3><p>Kotlin中的内联函数除了优化Lambda开销之外，还带来了其他方面的特效，典型的就是非局部返回和具体化参数类型。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre><code class="kotlin">    fun main(args: Array&lt;String&gt;) &#123;
+
+        foo()
+    &#125;
+
+    fun localReturn() &#123;
+        return
+    &#125;
+
+    fun foo() &#123;
+        println(&quot;before local return&quot;)
+        localReturn()
+        println(&quot;after local return&quot;)
+        return
+    &#125;
+//运行结果
+//before local return
+//after local return
+</code></pre>
+<p>localReturn执行后，<strong>其函数体中的return只会在该函数的局部生效</strong>，所以localReturn()之后的println函数依旧生效。换成Lambda表达式的版本:</p>
+<pre><code class="kotlin">    fun main(args: Array&lt;String&gt;) &#123;
+
+        foo &#123;return&#125;
+    &#125;
+
+    fun foo (returning: () -&gt; Unit) &#123;
+        println(&quot;before local return&quot;)
+        returning()
+        println(&quot;after local return&quot;)
+        return
+    &#125;
+
+//运行结果
+// Error:(2,11) Kotlin: &#39;return&#39; is not allowed here
+</code></pre>
+<p>编译报错，正常情况下Lambda表达式不允许存在return关键字，这时候内联函数就派上用场了，foo函数进行内联后：</p>
+<pre><code class="kotlin">//运行结果
+
+//before local return
+</code></pre>
+<p>内联函数foo的函数体及参数Lambda会直接替代具体的调用，所以实际产生的代码中，return相当于直接暴露在main函数中，所以returning()之后的代码自然不会被执行。这个就是所谓的<strong>非局部返回</strong>。</p>
+<h4 id="使用标签实现Lambda非局部返回"><a href="#使用标签实现Lambda非局部返回" class="headerlink" title="使用标签实现Lambda非局部返回"></a>使用标签实现Lambda非局部返回</h4><p>另外一种等效的方式，是通过标签利用@符号来实现Lambda非局部返回，我们可以在不申明inline的情况下，实现同样的效果：</p>
+<pre><code class="kotlin">    fun main(args: Array&lt;String&gt;) &#123;
+
+        foo (return@foo)
+    &#125;
+
+    fun foo(returning: () -&gt; Unit) &#123;
+        println(&quot;before local return&quot;)
+        returning()
+        println(&quot;after local return&quot;)
+        return
+    &#125;
+//运行结果
+//before local return
+</code></pre>
+<h4 id="crossinline"><a href="#crossinline" class="headerlink" title="crossinline"></a>crossinline</h4><p>我们内联函数所接收的Lambda参数常常来自于上下文其他地方，为了避免带有return的Lambda参数产生破坏，我们可以是<strong>crossinline</strong>来修饰该参数，从而杜绝该问题的发生。</p>
+<pre><code class="kotlin">    fun main(args:Array&lt;String&gt;) &#123;
+        foo &#123;return&#125;//return会有下滑波浪线，IDEA会报错
+    &#125;
+    inline fun foo(crossinline returning:()-&gt;Unit) &#123;
+        println(&quot;before&quot;)
+        returning()
+        println(&quot;after&quot;)
+        return
+    &#125;
+</code></pre>
+<h3 id="具体化参数类型"><a href="#具体化参数类型" class="headerlink" title="具体化参数类型"></a>具体化参数类型</h3><p>除了非局部返回之外，内联函数还可以帮助Kotlin实现具体化参数类型，Kotlin与Java一样，由于运行时的<strong>类型擦拭</strong>，我们并不能直接获取一个参数的类型。然而，由于内联函数会直接在字节码中生成相应的函数体实现，这种情况下我们反而可以获得参数的具体类型，可以用<strong>reified</strong>修饰符来实现这一效果</p>
+<pre><code class="kotlin">    fun main(args:Array&lt;String&gt;)&#123;
+
+        getType&lt;Int&gt;()
+    &#125;
+
+    inline fun &lt;reified T&gt;getType() &#123;
+        print(T::class)
+    &#125;
+//运行结果
+//class Kotlin.Int
+</code></pre>
+<p>这一特性在Android中格外有用。比如，当我们要调用startActivity时，通常需要把具体的目标视图类作为参数传递，而在Kotlin中:</p>
+<pre><code class="kotlin">    inline fun &lt;reified T : Activity&gt; Activity.startActivity() &#123;
+
+        startActivity(Intent(this,T::class.java))
+    &#125;
+
+    //usage
+    startActivity&lt;LoginActivity&gt;()
+</code></pre>
+<p>END</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>kotlin inline</p><p><a href="http://hanniballol.github.io/2019/11/18/kotlin-inline/">http://hanniballol.github.io/2019/11/18/kotlin-inline/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>8MilesRD</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-11-18</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2019-11-19</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/syntactic-sugar/">syntactic sugar</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/01/17/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">工厂方法模式</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2019/08/09/Dive-Into-Flutter/"><span class="level-item">Dive Into Flutter</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">30</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">16</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Android/"><span class="level-start"><span class="level-item">Android</span></span><span class="level-end"><span class="level-item tag">12</span></span></a></li><li><a class="level is-mobile" href="/categories/Flutter/"><span class="level-start"><span class="level-item">Flutter</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Kotlin/"><span class="level-start"><span class="level-item">Kotlin</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/MediaPipe/"><span class="level-start"><span class="level-item">MediaPipe</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Tools/"><span class="level-start"><span class="level-item">Tools</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/iOS/"><span class="level-start"><span class="level-item">iOS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/life/"><span class="level-start"><span class="level-item">life</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="level-start"><span class="level-item">随笔</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-18T13:21:06.000Z">2022-01-18</time></p><p class="title"><a href="/2022/01/18/%E6%9C%AD%E8%AE%B0/">札记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-04-28T09:34:03.000Z">2021-04-28</time></p><p class="title"><a href="/2021/04/28/MediaPipe%E5%9C%A8Android%E5%B9%B3%E5%8F%B0%E4%B8%8A%E6%9E%84%E5%BB%BAAAR/">MediaPipe在Android平台上构建AAR</a></p><p class="categories"><a href="/categories/MediaPipe/">MediaPipe</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-09-19T01:41:56.000Z">2020-09-19</time></p><p class="title"><a href="/2020/09/19/%E5%B0%86Flutter%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%B7%B2%E6%9C%89%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD/">将Flutter添加到已有的项目中</a></p><p class="categories"><a href="/categories/Flutter/">Flutter</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-02-25T15:55:30.000Z">2020-02-25</time></p><p class="title"><a href="/2020/02/25/%E6%97%A0%E9%A2%98/">无题</a></p><p class="categories"><a href="/categories/life/">life</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-01-21T07:06:20.000Z">2020-01-21</time></p><p class="title"><a href="/2020/01/21/ADT%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">ADT实现状态模式</a></p><p class="categories"><a href="/categories/Android/">Android</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/11/"><span class="level-start"><span class="level-item">十一月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/07/"><span class="level-start"><span class="level-item">七月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/02/"><span class="level-start"><span class="level-item">二月 2018</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2017/11/"><span class="level-start"><span class="level-item">十一月 2017</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Android-Studio/"><span class="tag">Android Studio</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Flutter/"><span class="tag">Flutter</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Kotlin/"><span class="tag">Kotlin</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tensorflow/"><span class="tag">Tensorflow</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Test-automation/"><span class="tag">Test automation</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/View/"><span class="tag">View</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adb/"><span class="tag">adb</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/cocoaPods/"><span class="tag">cocoaPods</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/dart/"><span class="tag">dart</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/gradle/"><span class="tag">gradle</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/life/"><span class="tag">life</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/syntactic-sugar/"><span class="tag">syntactic sugar</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/system/"><span class="tag">system</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9A%8F%E6%84%8F/"><span class="tag">随意</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hanniballol&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2022 8MilesRD</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
