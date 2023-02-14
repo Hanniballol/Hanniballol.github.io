@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>静默安装、自启动实践 - Hanniballol&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hanniballol&#039;s Blog"><meta name="msapplication-TileImage" content="/images/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hanniballol&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为     ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要"><meta property="og:type" content="blog"><meta property="og:title" content="静默安装、自启动实践"><meta property="og:url" content="http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/"><meta property="og:site_name" content="Hanniballol&#039;s Blog"><meta property="og:description" content="最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为     ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://hanniballol.github.io/img/og_image.png"><meta property="article:published_time" content="2018-05-26T01:41:39.000Z"><meta property="article:modified_time" content="2022-10-17T01:16:28.747Z"><meta property="article:author" content="8MilesRD"><meta property="article:tag" content="system"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://hanniballol.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/"},"headline":"静默安装、自启动实践","image":["http://hanniballol.github.io/img/og_image.png"],"datePublished":"2018-05-26T01:41:39.000Z","dateModified":"2022-10-17T01:16:28.747Z","author":{"@type":"Person","name":"8MilesRD"},"publisher":{"@type":"Organization","name":"Hanniballol's Blog","logo":{"@type":"ImageObject","url":"http://hanniballol.github.io/images/favicon.ico"}},"description":"最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。 静默安装    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为     ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要"}</script><link rel="canonical" href="http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/"><link rel="icon" href="/images/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Blade Runner - Hanniballol&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Hanniballol&#039;s Blog"><meta name="msapplication-TileImage" content="/images/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hanniballol&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content=""><meta property="og:type" content="blog"><meta property="og:title" content="Blade Runner"><meta property="og:url" content="http://hanniballol.github.io/2023/02/14/Blade-Runner/"><meta property="og:site_name" content="Hanniballol&#039;s Blog"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://hanniballol.github.io/images/Blade-Runner-1982.webp"><meta property="article:published_time" content="2023-02-14T06:32:52.000Z"><meta property="article:modified_time" content="2023-02-14T06:47:26.542Z"><meta property="article:author" content="8MilesRD"><meta property="article:tag" content="life"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://hanniballol.github.io/images/Blade-Runner-1982.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://hanniballol.github.io/2023/02/14/Blade-Runner/"},"headline":"Blade Runner","image":["http://hanniballol.github.io/images/Blade-Runner-1982.webp"],"datePublished":"2023-02-14T06:32:52.000Z","dateModified":"2023-02-14T06:47:26.542Z","author":{"@type":"Person","name":"8MilesRD"},"publisher":{"@type":"Organization","name":"Hanniballol's Blog","logo":{"@type":"ImageObject","url":"http://hanniballol.github.io/images/favicon.ico"}},"description":""}</script><link rel="canonical" href="http://hanniballol.github.io/2023/02/14/Blade-Runner/"><link rel="icon" href="/images/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "//hm.baidu.com/hm.js?3ac5fec66a25a7e2f71b2fe8b0ba53df";
@@ -34,90 +34,19 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/favicon.ico" alt="Hanniballol&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-05-26T01:41:39.000Z" title="2018/5/26 09:41:39">2018-05-26</time>发表</span><span class="level-item"><time dateTime="2022-10-17T01:16:28.747Z" title="2022/10/17 09:16:28">2022-10-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Android/">Android</a></span><span class="level-item">5 分钟读完 (大约697个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">静默安装、自启动实践</h1><div class="content"><p>最近在做门禁机内嵌app，门禁机基于api22原生系统，涉及到的技术点包括静默安装、自启动。翻阅大量源码、blog以后得到解决方案，因此记录下来。</p>
-<h2 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h2><pre><code>    静默安装，即不弹窗系统安装界面的情况下，完成安装动作，在用户不知情的情况下完成安装动作显然是非常危险的行为
-    ，因此静默安装不会开发给开发者，不过在Google Play商店已经自定义Rom上都有开发此权限，充分说明拥有权限的重要
-    性，自家的系统想咋样就咋样。
-</code></pre>
-<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><pre><code>    &lt;uses-permission android:name=&quot;android.permission.INSTALL_PACKAGES&quot; /&gt;
-</code></pre>
-<h3 id="安装代码"><a href="#安装代码" class="headerlink" title="安装代码"></a>安装代码</h3><p>有用push到system&#x2F;app去调用@hide实现的，有用doc命令实现的，对项目需求而言二者皆可，考虑到项目包含过多.so文件，而.so文件需要push到&#x2F;system&#x2F;lib赋予权限，故直接采用了第二种策略使用doc命令搞定，即（在子线程安装，避免ANR，需要root权限）：</p>
-<pre><code>        pm install -r
-</code></pre>
-<p>实现代码</p>
-<pre><code>/**
-* install slient
-* 
-* @param context
-* @param filePath
-* @return 0 means normal, 1 means file not exist, 2 means other exception error
-*/
-public static int installSlient(Context context, String filePath) &#123;
-    File file = new File(filePath);
-    if (filePath == null || filePath.length() == 0 || (file = new File(filePath)) == null || file.length() &lt;= 0
-    || !file.exists() || !file.isFile()) &#123;
-        return 1;
-    &#125;
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/images/favicon.ico" alt="Hanniballol&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/images/Blade-Runner-1982.webp" alt="Blade Runner"></span></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-02-14T06:32:52.000Z" title="2023/2/14 14:32:52">2023-02-14</time>发表</span><span class="level-item"><time dateTime="2023-02-14T06:47:26.542Z" title="2023/2/14 14:47:26">2023-02-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span><span class="level-item">几秒读完 (大约52个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Blade Runner</h1><div class="content"><div class="excerpt">
+</div>
 
-    String[] args = &#123; &quot;pm&quot;, &quot;install&quot;, &quot;-r&quot;, filePath &#125;;
-    ProcessBuilder processBuilder = new ProcessBuilder(args);
+<span id="more"></span>
 
-    Process process = null;
-    BufferedReader successResult = null;
-    BufferedReader errorResult = null;
-    StringBuilder successMsg = new StringBuilder();
-    StringBuilder errorMsg = new StringBuilder();
-    int result;
-    try &#123;
-        process = processBuilder.start();
-        successResult = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        errorResult = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        String s;
-
-        while ((s = successResult.readLine()) != null) &#123;
-        successMsg.append(s);
-        &#125;
-
-        while ((s = errorResult.readLine()) != null) &#123;
-        errorMsg.append(s);
-        &#125;
-    &#125; catch (IOException e) &#123;
-        e.printStackTrace();
-        result = 2;
-    &#125; catch (Exception e) &#123;
-        e.printStackTrace();
-        result = 2;
-    &#125; finally &#123;
-        try &#123;
-        if (successResult != null) &#123;
-            successResult.close();
-            &#125;
-            if (errorResult != null) &#123;
-            errorResult.close();
-            &#125;
-        &#125; catch (IOException e) &#123;
-            e.printStackTrace();
-        &#125;
-        if (process != null) &#123;
-        process.destroy();
-        &#125;
-    &#125;
-
-    // TODO should add memory is not enough here
-    if (successMsg.toString().contains(&quot;Success&quot;) || successMsg.toString().contains(&quot;success&quot;)) &#123;
-        result = 0;
-    &#125; else &#123;
-        result = 2;
-    &#125;
-    Log.d(&quot;installSlient&quot;, &quot;successMsg:&quot; + successMsg + &quot;, ErrorMsg:&quot; + errorMsg);
-    return result;
-&#125;
-</code></pre>
-<h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><p>无非就是静态广播拉起laucherActivity,不过这里需要注意的问题是，但静默安装成功后，app进程会被杀死，这个过程中自身无法接收到广播,这时候就需要辅助app了，这个app用来处理接收android.intent.action.PACKAGE_ADDED广播，并发送广播给宿主app从而实现自启动，这个过程代码是很简单的。<br>如果想要优化的话可以去做定时轮询相互检查进程是否存活，并相互拉起。如何定时轮询，如何检查，整个策略，会在后续中编写…</p>
-<p>参考:<br><a target="_blank" rel="noopener" href="http://www.trinea.cn/android/android-install-silent/">Trinea-Android常用代码之普通及系统权限静默安装APK</a><br><a target="_blank" rel="noopener" href="https://github.com/aosp-mirror/platform_frameworks_base/blob/master/cmds/pm/src/com/android/commands/pm/Pm.java">pm.java</a></p>
-</div><div class="article-licensing box"><div class="licensing-title"><p>静默安装、自启动实践</p><p><a href="http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/">http://hanniballol.github.io/2018/05/26/静默安装、自启动实践/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>8MilesRD</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2018-05-26</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-10-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/system/">system</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/aliPay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/images/wechatPay.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2018/05/29/MAC-adb%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5Android%E7%9C%9F%E6%9C%BA/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">MAC adb无线连接Android真机</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2018/05/21/android-studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D/"><span class="level-item">android studio支持系统签名</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
-            this.page.url = 'http://hanniballol.github.io/2018/05/26/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85%E3%80%81%E8%87%AA%E5%90%AF%E5%8A%A8%E5%AE%9E%E8%B7%B5/';
-            this.page.identifier = '2018/05/26/静默安装、自启动实践/';
+<p>　I’ve seen things you people wouldn’t believe.</p>
+<p>　Attack ships on fire off the shoulder of Orion.</p>
+<p>　I’ve watched c-beams glitter in the dark near the Tannhauser Gate.</p>
+<p>　All those … moments will be lost in time, like tears…in rain.</p>
+<p>　Time to die………</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Blade Runner</p><p><a href="http://hanniballol.github.io/2023/02/14/Blade-Runner/">http://hanniballol.github.io/2023/02/14/Blade-Runner/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>8MilesRD</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-02-14</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-02-14</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/life/">life</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/images/aliPay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/images/wechatPay.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/11/11/%E4%BA%91%E6%89%8B%E6%9C%BAopenvmi%E6%90%AD%E5%BB%BA/"><span class="level-item">云手机openvmi搭建</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="disqus_thread"><noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div><script>var disqus_config = function () {
+            this.page.url = 'http://hanniballol.github.io/2023/02/14/Blade-Runner/';
+            this.page.identifier = '2023/02/14/Blade-Runner/';
         };
         (function() {
             var d = document, s = d.createElement('script');  
